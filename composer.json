@@ -13,5 +13,7 @@
             "App\\": "src/"
         }
     },
-    "require": {}
+    "require": {
+        "pierregaimard/climb": "^1.0"
+    }
 }
