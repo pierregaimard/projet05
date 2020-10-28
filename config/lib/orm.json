@@ -1,0 +1,32 @@
+{
+  "GLOBALS": {
+    "BASE_ENTITY_NAMESPACE": "App\\Model",
+    "ENTITY_SUB_DIR": "Entity",
+    "REPOSITORY_SUB_DIR": "Repository",
+    "REPOSITORY_SUFFIX": "Repository",
+    "DEFAULTS": {
+      "PRIMARY": {
+        "NAME": "id",
+        "TYPE": "int"
+      }
+    }
+  },
+  "DB": {
+    "App": {
+      "CONNECTION": {
+        "DRIVER": "$env(APP_DB_DRIVER)",
+        "HOST": "$env(APP_DB_HOST)",
+        "PORT": "$env(APP_DB_PORT)",
+        "DBNAME": "$env(APP_DB_DBNAME)",
+        "USERNAME": "$env(APP_DB_USERNAME)",
+        "PASSWORD": "$env(APP_DB_PASSWORD)",
+        "OPTIONS": {
+          "CHARSET": "utf8mb4"
+        }
+      },
+      "PATH": {
+        "ENTITY": "App"
+      }
+    }
+  }
+}
