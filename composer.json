@@ -1,0 +1,12 @@
+{
+    "name": "pierregaimard/projet05",
+    "description": "Study php blog project",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Pierre Gaimard",
+            "email": "pierre@gaimard-family.fr"
+        }
+    ],
+    "require": {}
+}
