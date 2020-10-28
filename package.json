@@ -3,6 +3,7 @@
     "webpack": "^5.3.0"
   },
   "dependencies": {
+    "animejs": "^3.2.1",
     "jquery": "^3.5.1",
     "uikit": "^3.5.9"
   }
