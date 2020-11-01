@@ -200,6 +200,9 @@ class User implements UserInterface
         $this->status = $status;
     }
 
+    /**
+     * @return UserRole[]
+     */
     public function getRoles()
     {
         return $this->roles->getAll();
@@ -211,5 +214,21 @@ class User implements UserInterface
     public function setRoles(array $roles): void
     {
         $this->roles->setAll($roles);
+    }
+
+    /**
+     * @param UserRole $role
+     */
+    public function addRole(UserRole $role): void
+    {
+        $this->roles->add($role->getKey(), $role);
+    }
+
+    /**
+     * @param UserRole $role
+     */
+    public function removeRole(UserRole $role): void
+    {
+        $this->roles->remove($role->getKey());
     }
 }
