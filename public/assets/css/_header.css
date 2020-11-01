@@ -1,0 +1,25 @@
+/* Navbar buttons customization */
+.uk-navbar-container .app-navbar-button {
+    border-radius: 10px;
+    line-height: 34px;
+    padding: 0 22px;
+}
+
+.uk-navbar-container .app-navbar-inverse-button {
+    background-color: unset;
+    border: 1px solid white;
+}
+
+/* Navbar: user menu button customization */
+.uk-navbar-container .app-user-dropdown-button {
+    border: 1px solid #f8f8f8;
+    background-color: unset;
+    border-radius: 20px;
+    width: 38px;
+    padding-left: unset;
+    padding-right: unset;
+}
+
+.uk-navbar-container .app-user-dropdown-button:hover {
+    border-color: white;
+}
