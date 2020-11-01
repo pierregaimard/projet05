@@ -1,6 +1,6 @@
 <?php
 
-namespace Model\Entity;
+namespace App\Model\Entity;
 
 /**
  * @Table(name="blog_post_comment_status")
