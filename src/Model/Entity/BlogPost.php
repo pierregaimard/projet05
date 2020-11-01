@@ -60,7 +60,7 @@ class BlogPost
     /**
      * @var EntityBag
      *
-     * @Relation(type="collection", entity="App\Model\Entity\BlogPostComment")
+     * @Relation(type="collection", entity="App\Model\Entity\BlogPostComment", invertedBy="blogPost")
      */
     private EntityBag $comments;
 
