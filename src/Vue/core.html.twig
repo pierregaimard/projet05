@@ -1,20 +1,24 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
     <head>
         <base href="/">
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="node_modules/uikit/dist/css/uikit.min.css" />
+        <link href="https://fonts.googleapis.com/css2?family=Encode+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="public/assets/css/site.css" />
+        <link rel="stylesheet" href="public/assets/css/_header.css" />
         <title>{% block Title %}App{% endblock %}</title>
     </head>
 
     <body>
+        {% include "header/_header.html.twig" %}
         {% block Body %}{% endblock %}
-        <script src="node_modules/jquery/dist/jquery.min.js" type="application/javascript"></script>
-        <script src="node_modules/uikit/dist/js/uikit.min.js" type="application/javascript"></script>
-        <script src="node_modules/uikit/dist/js/uikit-icons.min.js" type="application/javascript"></script>
-        <script src="node_modules/animejs/lib/anime.min.js" type="application/javascript"></script>
-        <script src="node_modules/list.js/dist/list.min.js" type="application/javascript"></script>
+        {% include "footer/_footer.html.twig" %}
+        <script src="node_modules/jquery/dist/jquery.min.js"></script>
+        <script src="node_modules/uikit/dist/js/uikit.min.js"></script>
+        <script src="node_modules/uikit/dist/js/uikit-icons.min.js"></script>
+        <script src="node_modules/animejs/lib/anime.min.js"></script>
+        <script src="node_modules/list.js/dist/list.min.js"></script>
         {% block Javascript %}{% endblock %}
     </body>
 </html>
