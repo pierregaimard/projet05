@@ -15,7 +15,7 @@ SET lc_time_names = 'fr_FR';
 -- ----------------- --
 -- Table user_status --
 -- ----------------- --
-CREATE TABLE `user_status` (
+CREATE TABLE user_status (
     `id`     TINYINT      UNSIGNED NOT NULL AUTO_INCREMENT,
     `status` VARCHAR(10),
     PRIMARY KEY (`id`)
@@ -27,7 +27,7 @@ CREATE TABLE `user_status` (
 -- ---------- --
 -- Table user --
 -- ---------- --
-CREATE TABLE `user` (
+CREATE TABLE user (
     `id`              SMALLINT         UNSIGNED NOT NULL AUTO_INCREMENT,
     `first_name`      VARCHAR(30)      NOT NULL,
     `last_name`       VARCHAR(30)      NOT NULL,
@@ -47,7 +47,7 @@ CREATE TABLE `user` (
 -- --------------- --
 -- Table user_role --
 -- --------------- --
-CREATE TABLE `user_role` (
+CREATE TABLE user_role (
     `id`   TINYINT    UNSIGNED NOT NULL AUTO_INCREMENT,
     `role` VARCHAR(6) NOT NULL,
     PRIMARY KEY (`id`)
@@ -59,7 +59,7 @@ CREATE TABLE `user_role` (
 -- ------------------ --
 -- Table as_user_role --
 -- ------------------ --
-CREATE TABLE `as_user_role` (
+CREATE TABLE as_user_role (
     `id_user`      SMALLINT UNSIGNED NOT NULL,
     `id_user_role` TINYINT  UNSIGNED NOT NULL,
     PRIMARY KEY (`id_user`, `id_user_role`),
@@ -73,7 +73,7 @@ CREATE TABLE `as_user_role` (
 -- --------------- --
 -- Table blog_post --
 -- --------------- --
-CREATE TABLE `blog_post` (
+CREATE TABLE blog_post (
     `id`               SMALLINT     UNSIGNED NOT NULL AUTO_INCREMENT,
     `title`            VARCHAR(50)  NOT NULL,
     `chapo`            VARCHAR(100) NOT NULL,
@@ -91,7 +91,7 @@ CREATE TABLE `blog_post` (
 -- ------------------------------ --
 -- Table blog_post_comment_status --
 -- ------------------------------ --
-CREATE TABLE `blog_post_comment_status` (
+CREATE TABLE blog_post_comment_status (
     `id`     TINYINT     UNSIGNED NOT NULL AUTO_INCREMENT,
     `status` VARCHAR(10),
     PRIMARY KEY (`id`)
@@ -103,7 +103,7 @@ CREATE TABLE `blog_post_comment_status` (
 -- ----------------------- --
 -- Table blog_post_comment --
 -- ----------------------- --
-CREATE TABLE `blog_post_comment` (
+CREATE TABLE blog_post_comment (
     `id`                          INT      UNSIGNED NOT NULL AUTO_INCREMENT,
     `comment`                     TINYTEXT NOT NULL,
     `time`                        DATETIME NOT NULL,
