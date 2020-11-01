@@ -1,0 +1,53 @@
+<!-- toggle menu button -->
+<a class="uk-navbar-toggle" uk-navbar-toggle-icon uk-toggle href="#offcanvas-nav"></a>
+<!-- toggle menu -->
+<div id="offcanvas-nav" class="uk-background-default" uk-offcanvas>
+    <div class="uk-offcanvas-bar">
+        <button class="uk-offcanvas-close" type="button" uk-close></button>
+        <h3>Menu</h3>
+        <ul class="uk-nav">
+            <li>
+                <a href="/">
+                    blog
+                </a>
+            </li>
+            <li>
+                <a href="/">
+                    admin
+                </a>
+            </li>
+            {% if user is not null %}
+                <hr>
+                <li class="uk-nav-header">
+                    Pierre gaimard
+                </li>
+                <li>
+                    <a href="/">
+                        My account
+                    </a>
+                </li>
+                <li>
+                    <a href="/">
+                        logout
+                    </a>
+                </li>
+                <!-- menu for visitors -->
+            {% else %}
+                <hr>
+                <li class="uk-nav-header">
+                    Account
+                </li>
+                <li>
+                    <a href="/">
+                        login
+                    </a>
+                </li>
+                <li>
+                    <a href="/">
+                        Sign-Up
+                    </a>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+</div>
