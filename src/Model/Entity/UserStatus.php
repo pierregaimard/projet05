@@ -1,6 +1,6 @@
 <?php
 
-namespace Model\Entity;
+namespace App\Model\Entity;
 
 /**
  * @Table(name="user_status")
