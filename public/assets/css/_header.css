@@ -20,4 +20,6 @@
   padding-right: unset;
 }
 
-.uk-navbar-container .app-user-dropdown-button:hover {border-color: white;}
+.uk-navbar-container .app-user-dropdown-button:hover {
+    border-color: white
+}
