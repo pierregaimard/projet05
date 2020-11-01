@@ -2,6 +2,8 @@
 
 namespace App\Model\Entity;
 
+use Climb\Orm\EntityBag;
+
 /**
  * @Table(name="blog_post")
  */
@@ -54,6 +56,18 @@ class BlogPost
      * @Relation(type="entity", entity="App\Model\Entity\User")
      */
     private User $user;
+
+    /**
+     * @var EntityBag
+     *
+     * @Relation(type="collection", entity="App\Model\Entity\BlogPostComment")
+     */
+    private EntityBag $comments;
+
+    public function __construct()
+    {
+        $this->comments = new EntityBag();
+    }
 
     /**
      * @return int
@@ -165,5 +179,37 @@ class BlogPost
     public function setUser(User $user): void
     {
         $this->user = $user;
+    }
+
+    /**
+     * @return BlogPostComment[]
+     */
+    public function getComments(): array
+    {
+        return $this->comments->getAll();
+    }
+
+    /**
+     * @param array $comments
+     */
+    public function setComments(array $comments): void
+    {
+        $this->comments->setAll($comments);
+    }
+
+    /**
+     * @param BlogPostComment $comment
+     */
+    public function addComment(BlogPostComment $comment): void
+    {
+        $this->comments->add($comment->getKey(), $comment);
+    }
+
+    /**
+     * @param BlogPostComment $comment
+     */
+    public function removeComment(BlogPostComment $comment): void
+    {
+        $this->comments->remove($comment->getKey());
     }
 }
