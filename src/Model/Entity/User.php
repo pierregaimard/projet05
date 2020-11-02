@@ -46,11 +46,11 @@ class User implements UserInterface
     private string $password;
 
     /**
-     * @var string
+     * @var string|null
      *
      * @Column(name="last_login_date")
      */
-    private string $lastLoginDate;
+    private ?string $lastLoginDate;
 
     /**
      * @var UserStatus
@@ -169,17 +169,17 @@ class User implements UserInterface
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getLastLoginDate(): string
+    public function getLastLoginDate(): ?string
     {
         return $this->lastLoginDate;
     }
 
     /**
-     * @param string $lastLoginDate
+     * @param string|null $lastLoginDate
      */
-    public function setLastLoginDate(string $lastLoginDate): void
+    public function setLastLoginDate(?string $lastLoginDate): void
     {
         $this->lastLoginDate = $lastLoginDate;
     }
