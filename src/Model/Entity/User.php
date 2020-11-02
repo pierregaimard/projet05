@@ -53,6 +53,13 @@ class User implements UserInterface
     private ?string $lastLoginDate;
 
     /**
+     * @var int
+     *
+     * @Column(name="bad_credentials")
+     */
+    private int $badCredentials;
+
+    /**
      * @var UserStatus
      *
      * @Relation(type="entity", entity="App\Model\Entity\UserStatus")
@@ -68,7 +75,8 @@ class User implements UserInterface
 
     public function __construct()
     {
-        $this->roles = new EntityBag();
+        $this->roles          = new EntityBag();
+        $this->badCredentials = 0;
     }
 
     public function isGranted(string $role): bool
@@ -182,6 +190,22 @@ class User implements UserInterface
     public function setLastLoginDate(?string $lastLoginDate): void
     {
         $this->lastLoginDate = $lastLoginDate;
+    }
+
+    /**
+     * @return int
+     */
+    public function getBadCredentials(): int
+    {
+        return $this->badCredentials;
+    }
+
+    /**
+     * @param int $badCredentials
+     */
+    public function setBadCredentials(int $badCredentials): void
+    {
+        $this->badCredentials = $badCredentials;
     }
 
     /**
