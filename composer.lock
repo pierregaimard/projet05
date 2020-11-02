@@ -88,16 +88,16 @@
         },
         {
             "name": "egulias/email-validator",
-            "version": "2.1.22",
+            "version": "2.1.23",
             "source": {
                 "type": "git",
                 "url": "https://github.com/egulias/EmailValidator.git",
-                "reference": "68e418ec08fbfc6f58f6fd2eea70ca8efc8cc7d5"
+                "reference": "5fa792ad1853ae2bc60528dd3e5cbf4542d3c1df"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/egulias/EmailValidator/zipball/68e418ec08fbfc6f58f6fd2eea70ca8efc8cc7d5",
-                "reference": "68e418ec08fbfc6f58f6fd2eea70ca8efc8cc7d5",
+                "url": "https://api.github.com/repos/egulias/EmailValidator/zipball/5fa792ad1853ae2bc60528dd3e5cbf4542d3c1df",
+                "reference": "5fa792ad1853ae2bc60528dd3e5cbf4542d3c1df",
                 "shasum": ""
             },
             "require": {
@@ -144,22 +144,22 @@
             ],
             "support": {
                 "issues": "https://github.com/egulias/EmailValidator/issues",
-                "source": "https://github.com/egulias/EmailValidator/tree/2.1.22"
+                "source": "https://github.com/egulias/EmailValidator/tree/2.1.23"
             },
-            "time": "2020-09-26T15:48:38+00:00"
+            "time": "2020-10-31T20:37:35+00:00"
         },
         {
             "name": "pierregaimard/climb",
-            "version": "1.0.0",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/pierregaimard/climb.git",
-                "reference": "85541096ff59b7640e830cdb59e6669c093b8236"
+                "reference": "ef5315b0c730f2cf20e5ded7b50ddb9944a0d277"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pierregaimard/climb/zipball/85541096ff59b7640e830cdb59e6669c093b8236",
-                "reference": "85541096ff59b7640e830cdb59e6669c093b8236",
+                "url": "https://api.github.com/repos/pierregaimard/climb/zipball/ef5315b0c730f2cf20e5ded7b50ddb9944a0d277",
+                "reference": "ef5315b0c730f2cf20e5ded7b50ddb9944a0d277",
                 "shasum": ""
             },
             "require": {
@@ -189,9 +189,9 @@
             "description": "Php framework project",
             "support": {
                 "issues": "https://github.com/pierregaimard/climb/issues",
-                "source": "https://github.com/pierregaimard/climb/tree/v1.0.0"
+                "source": "https://github.com/pierregaimard/climb/tree/v1.0.1"
             },
-            "time": "2020-10-19T19:07:04+00:00"
+            "time": "2020-11-02T13:58:17+00:00"
         },
         {
             "name": "psr/container",

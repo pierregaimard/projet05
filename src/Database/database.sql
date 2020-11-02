@@ -33,11 +33,11 @@ CREATE TABLE user (
     last_name       VARCHAR(30)      NOT NULL,
     email           VARCHAR(50)      NOT NULL,
     password        VARCHAR(120)     NOT NULL,
-    id_user_status  TINYINT UNSIGNED NOT NULL,
+    id_status       TINYINT UNSIGNED NOT NULL,
     last_login_date DATE,
     bad_credentials TINYINT          UNSIGNED,
     PRIMARY KEY (id),
-    CONSTRAINT fk_user_id_user_status FOREIGN KEY (id_user_status) REFERENCES user_status (id),
+    CONSTRAINT fk_user_id_status FOREIGN KEY (id_status) REFERENCES user_status (id),
     CONSTRAINT UNIQUE INDEX ind_uni_email (email) -- user email is used for login so it must be unique
 )
     ENGINE=INNODB
