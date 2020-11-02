@@ -5,7 +5,7 @@
         </a>
     </li>
     <!-- menu for logged users -->
-    {% if user is null %}
+    {% if user is not null %}
         <li>
             <a href="/">
                 admin
@@ -28,7 +28,7 @@
         <!-- menu for visitors -->
     {% else %}
         <li>
-            <a href="/">
+            <a href="{{ getRoutePath("login") }}">
                 <span class="uk-button uk-border-rounded app-navbar-button app-navbar-inverse-button">
                     login
                 </span>
