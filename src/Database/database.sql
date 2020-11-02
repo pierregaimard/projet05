@@ -16,8 +16,8 @@ SET lc_time_names = 'fr_FR';
 -- Table user_status --
 -- ----------------- --
 CREATE TABLE user_status (
-    id     TINYINT      UNSIGNED NOT NULL AUTO_INCREMENT,
-    status VARCHAR(10),
+    id     TINYINT     UNSIGNED NOT NULL AUTO_INCREMENT,
+    status VARCHAR(10) NOT NULL,
     PRIMARY KEY (id)
 )
     ENGINE=INNODB
@@ -35,7 +35,7 @@ CREATE TABLE user (
     password        VARCHAR(120)     NOT NULL,
     id_status       TINYINT UNSIGNED NOT NULL,
     last_login_date DATE,
-    bad_credentials TINYINT          UNSIGNED,
+    bad_credentials TINYINT          UNSIGNED NOT NULL,
     PRIMARY KEY (id),
     CONSTRAINT fk_user_id_status FOREIGN KEY (id_status) REFERENCES user_status (id),
     CONSTRAINT UNIQUE INDEX ind_uni_email (email) -- user email is used for login so it must be unique
@@ -93,7 +93,7 @@ CREATE TABLE blog_post (
 -- ------------------------------ --
 CREATE TABLE blog_post_comment_status (
     id     TINYINT     UNSIGNED NOT NULL AUTO_INCREMENT,
-    status VARCHAR(10),
+    status VARCHAR(10) NOT NULL,
     PRIMARY KEY (id)
 )
     ENGINE=INNODB
