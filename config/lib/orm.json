@@ -6,7 +6,8 @@
     "REPOSITORY_SUFFIX": "Repository",
     "DEFAULTS": {
       "PRIMARY": {
-        "NAME": "id",
+        "DB_NAME": "id",
+        "ENTITY_NAME": "key",
         "TYPE": "int"
       }
     }
