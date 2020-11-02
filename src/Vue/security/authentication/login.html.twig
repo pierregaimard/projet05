@@ -1,0 +1,42 @@
+{% extends "core.html.twig" %}
+
+{% block Stylesheet %}
+    <link rel="stylesheet" href="public/assets/css/login.css" />
+{% endblock %}
+
+{% block Body %}
+    <div class="uk-container app-login-container uk-background-muted" uk-height-viewport="expand: true">
+        <!-- robot drawing -->
+        <div class="uk-text-center uk-margin-top">
+            <img class="uk-visible@s" src="public/assets/img/line-robot-black.svg" width="200" alt="robot-drawing">
+            <img class="uk-hidden@s" src="public/assets/img/line-robot-black.svg" width="150" alt="robot-drawing">
+        </div>
+        <!-- form box -->
+        <div class="app-login-box uk-padding-small uk-box-shadow-small">
+            <h1 class="uk-text-center">Login</h1>
+            <form method="post" action="{{ getRoutePath('login') }}">
+                <!-- login -->
+                <div class="uk-margin">
+                    <div class="uk-form-controls">
+                        <input type="text" name="login" class="uk-input uk-border-rounded" placeholder="e-mail">
+                    </div>
+                </div>
+                <!-- password -->
+                <div class="uk-margin">
+                    <div class="uk-form-controls">
+                        <input type="text" name="password" class="uk-input uk-border-rounded" placeholder="password">
+                    </div>
+                </div>
+                <!-- token -->
+                <input type="hidden" name="token" value="{{ token }}">
+                <!-- submit -->
+                <div class="uk-margin">
+                    <button type="submit" class="uk-button uk-button-default uk-border-rounded uk-width-1-1" >
+                        login
+                    </button>
+                </div>
+            </form>
+        </div>
+        <a href="/" class="uk-button uk-button-text uk-width-1-1 uk-text-center uk-margin">forgot password</a>
+    </div>
+{% endblock %}
