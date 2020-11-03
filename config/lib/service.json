@@ -1,0 +1,7 @@
+{
+  "App\\Controller\\Security\\AuthenticationController": {
+    "argument": [
+      "@Climb\\Security\\TokenManager"
+    ]
+  }
+}
