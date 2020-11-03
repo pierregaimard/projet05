@@ -46,6 +46,7 @@ class BlogPost
 
     /**
      * @var string
+     *
      * @Column(name="last_update_time")
      */
     private string $lastUpdateTime;
