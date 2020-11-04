@@ -1,0 +1,7 @@
+{
+  "ANNOTATIONS": {
+    "Field": {
+      "class": "App\\Service\\Form\\Annotation\\Field"
+    }
+  }
+}
