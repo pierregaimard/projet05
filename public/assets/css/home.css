@@ -1,0 +1,19 @@
+.app-home-title {
+  padding-top: 50px;
+}
+
+@media all and (max-width: 640px) {
+    .app-home-title {
+        padding-top: 0;
+    }
+}
+
+@media all and (min-width: 1200px) {
+    .app-home-title {
+        padding-top: 0;
+    }
+}
+
+.app-navbar-title {
+    display: none;
+}
