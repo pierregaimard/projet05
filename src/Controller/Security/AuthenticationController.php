@@ -8,7 +8,6 @@ use App\Service\Security\FormTokenManager;
 use App\Service\Security\UserAuthenticationChecker;
 use Climb\Controller\AbstractController;
 use Climb\Http\Response;
-use Climb\Security\TokenManager;
 
 class AuthenticationController extends AbstractController
 {
