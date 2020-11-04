@@ -11,6 +11,10 @@ use App\Service\Form\Annotation\Field;
  */
 class User implements UserInterface
 {
+    public const STATUS_VALIDATION = 'VALIDATION';
+    public const STATUS_ACTIVE     = 'ACTIVE';
+    public const STATUS_LOCKED     = 'LOCKED';
+
     /**
      * @var int
      *
