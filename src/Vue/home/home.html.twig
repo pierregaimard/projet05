@@ -15,17 +15,22 @@
     </div>
     <div class="uk-container" uk-height-viewport="expand: true">
         <section class="uk-section uk-padding-large uk-margin">
-            <div class="uk-grid-divider uk-child-width-expand@s" uk-grid>
+            <div class="uk-grid-divider uk-child-width-expand@m" uk-grid>
                 <div>
                     <h1 class="uk-h1 uk-text-bolder uk-margin-remove-bottom">Pierre Gaimard</h1>
                     <h2 class="uk-h3 uk-text-lighter uk-margin-remove-top">Full stack web developer & graphic designer</h2>
-                    <h3 class="uk-h2 uk-text-bolder">Send me a message!</h3>
+                    <hr>
+                    <h3 class="uk-h2 uk-text-bolder">Last blog posts</h3>
                 </div>
                 <div>
-                    <a href="/">
-                        <img src="public/assets/img/resume.svg" alt="resume-link" width="200">
-                    </a>
-                    <h3 class="uk-h2 uk-text-bolder">Last blog posts</h3>
+                    <div class="uk-text-center uk-margin-large">
+                        <a href="/">
+                            <img class="uk-visible@s" src="public/assets/img/resume.svg" alt="resume-link" width="200">
+                            <img class="uk-hidden@s" src="public/assets/img/resume.svg" alt="resume-link" width="100">
+                        </a>
+                    </div>
+                    <h3 class="uk-h2 uk-text-bolder">Send me a message!</h3>
+                    {% include 'home/_contact_form.html.twig' %}
                 </div>
             </div>
         </section>
