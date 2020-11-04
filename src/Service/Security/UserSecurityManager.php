@@ -7,6 +7,7 @@ use Climb\Orm\EntityManager;
 use Climb\Orm\Orm;
 use Climb\Exception\AppException;
 use App\Model\Entity\User;
+use Climb\Security\UserManager;
 
 class UserSecurityManager
 {
@@ -21,16 +22,23 @@ class UserSecurityManager
     private EntityManager $manager;
 
     /**
+     * @var UserManager
+     */
+    private UserManager $userManager;
+
+    /**
      * UserSecurityManager constructor.
      *
-     * @param Orm $orm
+     * @param Orm         $orm
+     * @param UserManager $userManager
      *
      * @throws AppException
      */
-    public function __construct(Orm $orm)
+    public function __construct(Orm $orm, UserManager $userManager)
     {
-        $this->orm     = $orm;
-        $this->manager = $orm->getManager('App');
+        $this->orm         = $orm;
+        $this->manager     = $orm->getManager('App');
+        $this->userManager = $userManager;
     }
 
     /**
@@ -69,6 +77,27 @@ class UserSecurityManager
         $lockedStatus = $this->getUserStatus(User::STATUS_LOCKED);
         $user->setStatus($lockedStatus);
         $this->manager->updateOne($user);
+    }
+
+    /**
+     * @param User $user
+     */
+    public function setUser(User $user): void
+    {
+        $this->userManager->setUser($user);
+    }
+
+    public function unsetUser(): void
+    {
+        $this->userManager->unsetUser();
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasUser(): bool
+    {
+        return $this->userManager->hasUser();
     }
 
     /**
