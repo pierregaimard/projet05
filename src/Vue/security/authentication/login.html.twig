@@ -14,7 +14,7 @@
         <!-- form box -->
         <div class="app-login-box uk-padding-small uk-box-shadow-small">
             <h1 class="uk-text-center">Login</h1>
-            <form method="post" action="{{ getRoutePath('login') }}">
+            {% include "security/authentication/_form_message.html.twig" %}
             <form method="post" action="{{ getRoutePath('login_check') }}">
                 <!-- login -->
                 {% include "security/authentication/_form_field_email.html.twig" %}
