@@ -10,6 +10,7 @@ use App\Service\Security\UserSecurityManager;
 use Climb\Controller\AbstractController;
 use Climb\Exception\AppException;
 use Climb\Http\Response;
+use Climb\Routing\Annotation\Route;
 
 class AuthenticationController extends AbstractController
 {
@@ -96,5 +97,15 @@ class AuthenticationController extends AbstractController
         $this->securityManager->setUser($userAuthCheck);
 
         return $this->redirectToRoute('home');
+    }
+
+    /**
+     * @Route(path="/logout", name="logout")
+     */
+    public function logout()
+    {
+        $this->securityManager->unsetUser();
+
+        $this->redirectToRoute('home');
     }
 }
