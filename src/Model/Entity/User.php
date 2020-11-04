@@ -217,6 +217,16 @@ class User implements UserInterface
         $this->badCredentials = $badCredentials;
     }
 
+    public function increaseBadCredentials(): void
+    {
+        $this->badCredentials += 1;
+    }
+
+    public function resetBadCredentials(): void
+    {
+        $this->badCredentials = 0;
+    }
+
     /**
      * @return UserStatus
      */
