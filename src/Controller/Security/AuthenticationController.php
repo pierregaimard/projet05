@@ -2,6 +2,7 @@
 
 namespace App\Controller\Security;
 
+use App\Service\Form\EntityFormDataManager;
 use Climb\Controller\AbstractController;
 use Climb\Http\Response;
 use Climb\Security\TokenManager;
@@ -13,9 +14,15 @@ class AuthenticationController extends AbstractController
      */
     private TokenManager $tokenManager;
 
-    public function __construct(TokenManager $tokenManager)
+    /**
+     * @var EntityFormDataManager
+     */
+    private EntityFormDataManager $formManager;
+
+    public function __construct(TokenManager $tokenManager, EntityFormDataManager $formManager)
     {
         $this->tokenManager = $tokenManager;
+        $this->formManager  = $formManager;
     }
 
     /**
@@ -36,6 +43,6 @@ class AuthenticationController extends AbstractController
      */
     public function loginCheck()
     {
-        
+
     }
 }
