@@ -3,8 +3,6 @@
 namespace App\Service\Security;
 
 use App\Model\Entity\User;
-use Climb\Orm\EntityManager;
-use Climb\Orm\EntityRepository;
 use Climb\Orm\Orm;
 use Climb\Security\UserPasswordManager;
 use Climb\Bag\Bag;
