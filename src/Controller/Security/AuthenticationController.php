@@ -4,27 +4,37 @@ namespace App\Controller\Security;
 
 use App\Model\Entity\User;
 use App\Service\Form\EntityFormDataManager;
+use App\Service\Security\FormTokenManager;
+use App\Service\Security\UserAuthenticationChecker;
 use Climb\Controller\AbstractController;
-use Climb\Exception\AppException;
 use Climb\Http\Response;
 use Climb\Security\TokenManager;
 
 class AuthenticationController extends AbstractController
 {
     /**
-     * @var TokenManager
+     * @var FormTokenManager
      */
-    private TokenManager $tokenManager;
+    private FormTokenManager $tokenManager;
 
     /**
      * @var EntityFormDataManager
      */
     private EntityFormDataManager $formManager;
 
-    public function __construct(TokenManager $tokenManager, EntityFormDataManager $formManager)
-    {
-        $this->tokenManager = $tokenManager;
-        $this->formManager  = $formManager;
+    /**
+     * @var UserAuthenticationChecker
+     */
+    private UserAuthenticationChecker $authenticator;
+
+    public function __construct(
+        FormTokenManager $tokenManager,
+        EntityFormDataManager $formManager,
+        UserAuthenticationChecker $authenticator
+    ) {
+        $this->tokenManager  = $tokenManager;
+        $this->formManager   = $formManager;
+        $this->authenticator = $authenticator;
     }
 
     /**
@@ -41,6 +51,7 @@ class AuthenticationController extends AbstractController
                 'token' => $token,
                 'formCheck' => $this->getRequestData()->get('formCheck'),
                 'formData' => $this->getRequestData()->get('formData'),
+                'message' => $this->getRequestData()->get('message'),
             ]
         ));
 
@@ -59,10 +70,16 @@ class AuthenticationController extends AbstractController
             return $this->redirectToRoute(
                 'login',
                 null,
-                [
-                    'formCheck' => $formCheck,
-                    'formData' => $data->getAll(),
-                ]
+                ['formCheck' => $formCheck, 'formData' => $data->getAll()]
+            );
+        }
+
+        $userAuthCheck = $this->authenticator->check($data);
+        if (is_array($userAuthCheck)) {
+            return $this->redirectToRoute(
+                'login',
+                null,
+                ['message' => $userAuthCheck, 'formData' => $data->getAll()]
             );
         }
     }
