@@ -2,7 +2,6 @@
 
 namespace App\Service\Security;
 
-use App\Model\Entity\User;
 use Climb\Security\TokenManager;
 
 class FormTokenManager
