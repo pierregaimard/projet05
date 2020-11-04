@@ -4,12 +4,17 @@ namespace App\Model\Entity;
 
 use Climb\Orm\EntityBag;
 use Climb\Security\UserInterface;
+use App\Service\Form\Annotation\Field;
 
 /**
  * @Table(name="user")
  */
 class User implements UserInterface
 {
+    public const STATUS_VALIDATION = 'VALIDATION';
+    public const STATUS_ACTIVE     = 'ACTIVE';
+    public const STATUS_LOCKED     = 'LOCKED';
+
     /**
      * @var int
      *
@@ -21,6 +26,7 @@ class User implements UserInterface
      * @var string
      *
      * @Column(name="first_name")
+     * @Field(type="name", nullable=false)
      */
     private string $firstName;
 
@@ -28,6 +34,7 @@ class User implements UserInterface
      * @var string
      *
      * @Column(name="last_name")
+     * @Field(type="name", nullable=false)
      */
     private string $lastName;
 
@@ -35,6 +42,7 @@ class User implements UserInterface
      * @var string
      *
      * @Column(name="email")
+     * @Field(type="email", nullable=false)
      */
     private string $email;
 
@@ -42,6 +50,7 @@ class User implements UserInterface
      * @var string
      *
      * @Column(name="password")
+     * @Field(type="password", nullable=false)
      */
     private string $password;
 
@@ -208,6 +217,16 @@ class User implements UserInterface
         $this->badCredentials = $badCredentials;
     }
 
+    public function increaseBadCredentials(): void
+    {
+        $this->badCredentials += 1;
+    }
+
+    public function resetBadCredentials(): void
+    {
+        $this->badCredentials = 0;
+    }
+
     /**
      * @return UserStatus
      */
@@ -254,5 +273,13 @@ class User implements UserInterface
     public function removeRole(UserRole $role): void
     {
         $this->roles->remove($role->getKey());
+    }
+
+    /**
+     * @return bool
+     */
+    public function isLocked(): bool
+    {
+        return $this->getStatus()->getStatus() === self::STATUS_LOCKED;
     }
 }

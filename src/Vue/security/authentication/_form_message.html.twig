@@ -1,0 +1,6 @@
+{% if message != false %}
+    <div class="uk-alert-{{ message["type"] }} uk-border-rounded" uk-alert>
+        <a class="uk-alert-close" uk-close></a>
+        <p>{{ message["message"] }}</p>
+    </div>
+{% endif %}

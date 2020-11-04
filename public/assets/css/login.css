@@ -14,6 +14,10 @@
   background-color: white;
 }
 
+.app-login-box input.uk-form-danger {
+  border-color: #f0506e;
+}
+
 .app-login-box input:focus {
   background-color: #444242;
   color: white;

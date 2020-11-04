@@ -83,12 +83,15 @@ class DataChecker
     {
         $messages = [];
 
-        foreach ($annotations as $attribute => $field) {
+        foreach ($data as $attribute => $fieldData) {
+            if (!array_key_exists($attribute, $annotations)) {
+                continue;
+            }
             $check = $this->checkField(
-                $field->getType(),
-                $data[$attribute],
-                $field->isNullable(),
-                $field->getMessage()
+                $annotations[$attribute]->getType(),
+                $fieldData,
+                $annotations[$attribute]->isNullable(),
+                $annotations[$attribute]->getMessage()
             );
 
             if ($check !== true) {
