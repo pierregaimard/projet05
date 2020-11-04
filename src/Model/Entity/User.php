@@ -282,4 +282,22 @@ class User implements UserInterface
     {
         return $this->getStatus()->getStatus() === self::STATUS_LOCKED;
     }
+
+    /**
+     * @param string|null $type
+     *
+     * @return string
+     */
+    public function getFormattedName(string $type = null)
+    {
+        switch ($type) {
+            case 'navbar':
+                return ucfirst(substr($this->firstName, 0, 1));
+            case 'short':
+                return ucfirst(substr($this->firstName, 0, 1)) . ' ' . ucfirst(strtolower($this->lastName));
+            case 'long':
+            default:
+                return $this->firstName . ' ' . $this->lastName;
+        }
+    }
 }
