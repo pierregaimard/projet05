@@ -17,17 +17,9 @@
             <form method="post" action="{{ getRoutePath('login') }}">
             <form method="post" action="{{ getRoutePath('login_check') }}">
                 <!-- login -->
-                <div class="uk-margin">
-                    <div class="uk-form-controls">
-                        <input type="text" name="login" class="uk-input uk-border-rounded" placeholder="e-mail">
-                    </div>
-                </div>
+                {% include "security/authentication/_form_field_email.html.twig" %}
                 <!-- password -->
-                <div class="uk-margin">
-                    <div class="uk-form-controls">
-                        <input type="text" name="password" class="uk-input uk-border-rounded" placeholder="password">
-                    </div>
-                </div>
+                {% include "security/authentication/_form_field_password.html.twig" %}
                 <!-- token -->
                 <input type="hidden" name="token" value="{{ token }}">
                 <!-- submit -->
