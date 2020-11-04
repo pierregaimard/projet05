@@ -6,7 +6,9 @@ use App\Model\Entity\User;
 use App\Service\Form\EntityFormDataManager;
 use App\Service\Security\FormTokenManager;
 use App\Service\Security\UserAuthenticationChecker;
+use App\Service\Security\UserSecurityManager;
 use Climb\Controller\AbstractController;
+use Climb\Exception\AppException;
 use Climb\Http\Response;
 
 class AuthenticationController extends AbstractController
@@ -26,14 +28,21 @@ class AuthenticationController extends AbstractController
      */
     private UserAuthenticationChecker $authenticator;
 
+    /**
+     * @var UserSecurityManager
+     */
+    private UserSecurityManager $securityManager;
+
     public function __construct(
         FormTokenManager $tokenManager,
         EntityFormDataManager $formManager,
-        UserAuthenticationChecker $authenticator
+        UserAuthenticationChecker $authenticator,
+        UserSecurityManager $securityManager
     ) {
-        $this->tokenManager  = $tokenManager;
-        $this->formManager   = $formManager;
-        $this->authenticator = $authenticator;
+        $this->tokenManager    = $tokenManager;
+        $this->formManager     = $formManager;
+        $this->authenticator   = $authenticator;
+        $this->securityManager = $securityManager;
     }
 
     /**
@@ -59,6 +68,8 @@ class AuthenticationController extends AbstractController
 
     /**
      * @Route(path="/loginCheck", name="login_check")
+     *
+     * @throws AppException
      */
     public function loginCheck()
     {
@@ -81,5 +92,9 @@ class AuthenticationController extends AbstractController
                 ['message' => $userAuthCheck, 'formData' => $data->getAll()]
             );
         }
+
+        $this->securityManager->setUser($userAuthCheck);
+
+        return $this->redirectToRoute('home');
     }
 }
