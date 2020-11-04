@@ -106,6 +106,6 @@ class AuthenticationController extends AbstractController
     {
         $this->securityManager->unsetUser();
 
-        $this->redirectToRoute('home');
+        return $this->redirectToRoute('home');
     }
 }
