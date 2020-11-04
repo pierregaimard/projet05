@@ -14,12 +14,12 @@
         <li>
             <a href="/">
                 <span class="uk-button uk-text-large app-user-dropdown-button">
-                    P
+                    {{ user.formattedName('navbar') }}
                 </span>
             </a>
             <div class="uk-navbar-dropdown">
                 <ul class="uk-nav uk-navbar-dropdown-nav">
-                    <li class="uk-nav-header">Pierre gaimard</li>
+                    <li class="uk-nav-header">{{ user.formattedName() }}</li>
                     <li><a href="/">My account</a></li>
                     <li><a href="/">logout</a></li>
                 </ul>
