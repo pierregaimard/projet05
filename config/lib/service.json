@@ -1,4 +1,11 @@
 {
+  "App\\Service\\Form\\EntityFormDataManager": {
+    "argument": [
+      "@Climb\\Annotation\\ReaderManager",
+      "@App\\Service\\Form\\DataChecker\\DataChecker",
+      "@App\\Service\\Form\\DataFilter\\DataFilter"
+    ]
+  },
   "App\\Controller\\Security\\AuthenticationController": {
     "argument": [
       "@Climb\\Security\\TokenManager"
