@@ -8,7 +8,8 @@
   },
   "App\\Controller\\Security\\AuthenticationController": {
     "argument": [
-      "@Climb\\Security\\TokenManager"
+      "@Climb\\Security\\TokenManager",
+      "@App\\Service\\Form\\EntityFormDataManager"
     ]
   }
 }
