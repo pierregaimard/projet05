@@ -30,4 +30,12 @@ class AuthenticationController extends AbstractController
 
         return $response;
     }
+
+    /**
+     * @Route(path="/loginCheck", name="login_check")
+     */
+    public function loginCheck()
+    {
+        
+    }
 }
