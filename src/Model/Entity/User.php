@@ -274,4 +274,12 @@ class User implements UserInterface
     {
         $this->roles->remove($role->getKey());
     }
+
+    /**
+     * @return bool
+     */
+    public function isLocked(): bool
+    {
+        return $this->getStatus()->getStatus() === self::STATUS_LOCKED;
+    }
 }
