@@ -25,6 +25,22 @@
       "@Climb\\Security\\UserManager"
     ]
   },
+  "App\\Service\\Email\\MailerManager": {
+    "argument": [
+      "$env(APP_EMAIL_SERVER)",
+      "$env(APP_EMAIL_PORT)",
+      "$env(APP_EMAIL_PROTOCOLE)",
+      "$env(APP_EMAIL_USERNAME)",
+      "$env(APP_EMAIL_PASSWORD)"
+    ]
+  },
+  "App\\Service\\Email\\EmailManager": {
+    "argument": [
+      "@App\\Service\\Email\\MailerManager",
+      "@Climb\\Templating\\Twig\\TemplatingManager",
+      "$env(APP_EMAIL_ADDRESS)"
+    ]
+  },
   "App\\Controller\\Security\\AuthenticationController": {
     "argument": [
       "@App\\Service\\Security\\FormTokenManager",
