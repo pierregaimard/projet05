@@ -1,19 +1,41 @@
-.app-home-title {
-  padding-top: 50px;
-}
+.app-home-title { padding-top: 50px; }
 
 @media all and (max-width: 640px) {
-    .app-home-title {
-        padding-top: 0;
-    }
+  .app-home-title { padding-top: 0; }
 }
 
 @media all and (min-width: 1200px) {
-    .app-home-title {
-        padding-top: 0;
-    }
+  .app-home-title { padding-top: 0; }
 }
 
-.app-navbar-title {
-    display: none;
+.app-navbar-title { display: none; }
+
+a.app-card-blog-post {
+  color: #818081;
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+  border-top-right-radius: 30px;
 }
+
+.uk-badge { background-color: #706f6f }
+
+a.app-card-blog-post:hover {
+  background-color: #393939;
+  color: #b0aeae;
+}
+
+.app-contact-form input.uk-form-danger, .app-contact-form textarea.uk-form-danger { border-color: #f0506e; }
+
+.app-contact-form input:focus, .app-contact-form textarea:focus {
+  background-color: #444242;
+  color: white;
+}
+
+.app-contact-form textarea { resize: none; }
+
+.app-contact-form button[type="submit"] {
+    background-color: #444242;
+    color: white;
+}
+
+.app-contact-form button[type="submit"]:hover { background-color: #2b2929; }
