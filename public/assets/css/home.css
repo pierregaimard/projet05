@@ -17,25 +17,27 @@ a.app-card-blog-post {
   border-top-right-radius: 30px;
 }
 
-.uk-badge { background-color: #706f6f }
+.uk-badge { background-color: #706f6f; }
 
 a.app-card-blog-post:hover {
   background-color: #393939;
   color: #b0aeae;
 }
 
-.app-contact-form input.uk-form-danger, .app-contact-form textarea.uk-form-danger { border-color: #f0506e; }
+.app-contact-form input.uk-form-danger,
+.app-contact-form textarea.uk-form-danger { border-color: #f0506e; }
 
-.app-contact-form input:focus, .app-contact-form textarea:focus {
+.app-contact-form textarea { resize: none; }
+
+.app-contact-form input:focus,
+.app-contact-form textarea:focus {
   background-color: #444242;
   color: white;
 }
 
-.app-contact-form textarea { resize: none; }
-
 .app-contact-form button[type="submit"] {
-    background-color: #444242;
-    color: white;
+  background-color: #444242;
+  color: white;
 }
 
 .app-contact-form button[type="submit"]:hover { background-color: #2b2929; }
