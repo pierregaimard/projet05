@@ -49,6 +49,11 @@
       "$env(APP_EMAIL_ADDRESS)"
     ]
   },
+  "App\\Service\\Templating\\TemplatingManager": {
+    "argument": [
+      "@Climb\\Templating\\Twig\\TemplatingManager"
+    ]
+  },
   "App\\Controller\\Security\\AuthenticationController": {
     "argument": [
       "@App\\Service\\Security\\FormTokenManager",
