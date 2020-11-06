@@ -93,7 +93,7 @@ class UserAuthenticationChecker
      *
      * @throws AppException
      */
-    private function checkUser(string $email)
+    public function checkUser(string $email)
     {
         $entityManager = $this->orm->getManager('App');
         $user          = $entityManager->getRepository(User::class)->findOneBy(['email' => $email]);
