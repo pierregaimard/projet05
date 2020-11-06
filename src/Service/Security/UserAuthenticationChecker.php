@@ -164,7 +164,7 @@ class UserAuthenticationChecker
      *
      * @return string
      */
-    private function getTriesMessage(int $badCredentials)
+    private function getTriesMessage(int $badCredentials): string
     {
         switch (3 - $badCredentials) {
             case 2:
