@@ -33,7 +33,7 @@ class AuthenticationController extends AbstractController
     /**
      * @var UserSecurityManager
      */
-    private UserSecurityManager $securityManager;
+    private UserSecurityManager $userManager;
 
     /**
      * @var UserAuthenticationCodeManager
@@ -45,20 +45,20 @@ class AuthenticationController extends AbstractController
      * @param EntityFormDataManager         $formManager
      * @param UserAuthenticationChecker     $authenticator
      * @param UserAuthenticationCodeManager $codeManager
-     * @param UserSecurityManager           $securityManager
+     * @param UserSecurityManager           $userManager
      */
     public function __construct(
         FormTokenManager $tokenManager,
         EntityFormDataManager $formManager,
         UserAuthenticationChecker $authenticator,
         UserAuthenticationCodeManager $codeManager,
-        UserSecurityManager $securityManager
+        UserSecurityManager $userManager
     ) {
         $this->tokenManager    = $tokenManager;
         $this->formManager     = $formManager;
         $this->authenticator   = $authenticator;
         $this->codeManager     = $codeManager;
-        $this->securityManager = $securityManager;
+        $this->userManager     = $userManager;
     }
 
     /**
@@ -76,6 +76,7 @@ class AuthenticationController extends AbstractController
                 'formCheck' => $this->getRequestData()->get('formCheck'),
                 'formData' => $this->getRequestData()->get('formData'),
                 'message' => $this->getRequestData()->get('message'),
+                'securityCode' => $this->getRequestData()->get('securityCode'),
             ]
         ));
 
@@ -109,7 +110,64 @@ class AuthenticationController extends AbstractController
             );
         }
 
-        $this->securityManager->setUser($userAuthCheck);
+        if ($this->codeManager->needSecurityCode($userAuthCheck)) {
+            $this->codeManager->dispatchSecurityCode($userAuthCheck);
+            $this->userManager->setSessionLogin($userAuthCheck->getEmail());
+
+            return $this->redirectToRoute(
+                'login',
+                null,
+                ['securityCode' => true, 'message' => $this->codeManager->getMessage($userAuthCheck)]
+            );
+        }
+
+        $this->userManager->setUser($userAuthCheck);
+
+        return $this->redirectToRoute('home');
+    }
+
+    /**
+     * @Route(path="/login/securityCode", name="login_code_check")
+     *
+     * @throws AppException
+     */
+    public function codeCheck()
+    {
+        $code = $this->getRequest()->getPost()->get('code');
+        $checkCode = $this->formManager->checkFormField('number', $code, false);
+
+        if ($checkCode !== true) {
+            return $this->redirectToRoute(
+                'login',
+                null,
+                ['securityCode' => true, 'message' => ['type' => 'danger', 'message' => $checkCode]]
+            );
+        }
+
+        $code = $this->formManager->filterField('number', $code);
+
+        if (!$this->codeManager->isCodeValid($code)) {
+            return $this->redirectToRoute(
+                'login',
+                null,
+                ['securityCode' => true, 'message' => $this->codeManager->getInvalidMessage()]
+            );
+        }
+
+        $user = $this->authenticator->checkUser($this->userManager->getSessionLogin());
+        $this->userManager->unsetSessionLogin();
+        $this->codeManager->unsetSessionHash();
+
+        if (!is_object($user)) {
+            return $this->redirectToRoute(
+                'login',
+                null,
+                ['message' => ['type' => 'danger', 'message' => 'Sorry, a problem occurred. Please try again']]
+            );
+        }
+
+        $this->userManager->setUser($user);
+        $this->userManager->updateLastSecurityCode($user);
 
         return $this->redirectToRoute('home');
     }
@@ -119,7 +177,7 @@ class AuthenticationController extends AbstractController
      */
     public function logout()
     {
-        $this->securityManager->unsetUser();
+        $this->userManager->unsetUser();
 
         return $this->redirectToRoute('home');
     }
