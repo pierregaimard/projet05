@@ -8,6 +8,7 @@ use Climb\Orm\Orm;
 use Climb\Exception\AppException;
 use App\Model\Entity\User;
 use Climb\Security\UserManager;
+use DateTime;
 
 class UserSecurityManager
 {
@@ -98,6 +99,18 @@ class UserSecurityManager
     public function hasUser(): bool
     {
         return $this->userManager->hasUser();
+    }
+
+    /**
+     * @param User $user
+     *
+     * @throws AppException
+     */
+    public function updateLastSecurityCode(User $user)
+    {
+        $date = new DateTime('NOW');
+        $user->setLastSecurityCode($date->format('Y-m-d'));
+        $this->manager->updateOne($user);
     }
 
     /**
