@@ -57,9 +57,9 @@ class User implements UserInterface
     /**
      * @var string|null
      *
-     * @Column(name="last_login_date")
+     * @Column(name="last_security_code")
      */
-    private ?string $lastLoginDate;
+    private ?string $lastSecurityCode;
 
     /**
      * @var int
@@ -188,17 +188,17 @@ class User implements UserInterface
     /**
      * @return string|null
      */
-    public function getLastLoginDate(): ?string
+    public function getLastSecurityCode(): ?string
     {
-        return $this->lastLoginDate;
+        return $this->lastSecurityCode;
     }
 
     /**
-     * @param string|null $lastLoginDate
+     * @param string|null $lastSecurityCode
      */
-    public function setLastLoginDate(?string $lastLoginDate): void
+    public function setLastSecurityCode(?string $lastSecurityCode): void
     {
-        $this->lastLoginDate = $lastLoginDate;
+        $this->lastSecurityCode = $lastSecurityCode;
     }
 
     /**

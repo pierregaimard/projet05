@@ -6,6 +6,7 @@ use App\Model\Entity\User;
 use App\Service\Form\EntityFormDataManager;
 use App\Service\Security\FormTokenManager;
 use App\Service\Security\UserAuthenticationChecker;
+use App\Service\Security\UserAuthenticationCodeManager;
 use App\Service\Security\UserSecurityManager;
 use Climb\Controller\AbstractController;
 use Climb\Exception\AppException;
@@ -34,15 +35,29 @@ class AuthenticationController extends AbstractController
      */
     private UserSecurityManager $securityManager;
 
+    /**
+     * @var UserAuthenticationCodeManager
+     */
+    private UserAuthenticationCodeManager $codeManager;
+
+    /**
+     * @param FormTokenManager              $tokenManager
+     * @param EntityFormDataManager         $formManager
+     * @param UserAuthenticationChecker     $authenticator
+     * @param UserAuthenticationCodeManager $codeManager
+     * @param UserSecurityManager           $securityManager
+     */
     public function __construct(
         FormTokenManager $tokenManager,
         EntityFormDataManager $formManager,
         UserAuthenticationChecker $authenticator,
+        UserAuthenticationCodeManager $codeManager,
         UserSecurityManager $securityManager
     ) {
         $this->tokenManager    = $tokenManager;
         $this->formManager     = $formManager;
         $this->authenticator   = $authenticator;
+        $this->codeManager     = $codeManager;
         $this->securityManager = $securityManager;
     }
 
