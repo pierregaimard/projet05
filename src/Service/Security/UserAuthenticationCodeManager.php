@@ -4,10 +4,9 @@ namespace App\Service\Security;
 
 use App\Model\Entity\User;
 use App\Service\Email\EmailManager;
-use Climb\Templating\Twig\TemplatingManager;
+use App\Service\Templating\TemplatingManager;
 use DateTime;
 use Exception;
-use Twig\Environment;
 use Climb\Exception\AppException;
 
 class UserAuthenticationCodeManager
@@ -28,30 +27,26 @@ class UserAuthenticationCodeManager
     private UserSecurityManager $userManager;
 
     /**
-     * @var Environment
+     * @var TemplatingManager
      */
-    private Environment $templating;
+    private TemplatingManager $templating;
 
     /**
-     * UserAuthenticationCodeManager constructor.
-     *
      * @param EmailManager        $emailManager
      * @param SecurityCodeManager $codeManager
      * @param UserSecurityManager $userManager
-     * @param TemplatingManager   $templatingManager
-     *
-     * @throws AppException
+     * @param TemplatingManager   $templating
      */
     public function __construct(
         EmailManager $emailManager,
         SecurityCodeManager $codeManager,
         UserSecurityManager $userManager,
-        TemplatingManager $templatingManager
+        TemplatingManager $templating
     ) {
         $this->emailManager = $emailManager;
         $this->codeManager  = $codeManager;
         $this->userManager  = $userManager;
-        $this->templating   = $templatingManager->getEnvironment([]);
+        $this->templating   = $templating;
     }
 
     /**
@@ -81,6 +76,8 @@ class UserAuthenticationCodeManager
      * @param User $user
      *
      * @return int
+     *
+     * @throws AppException
      */
     public function sendSecurityCode(User $user)
     {
