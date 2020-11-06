@@ -61,7 +61,7 @@ class UserAuthenticationCodeManager
      */
     public function needSecurityCode(User $user)
     {
-        $now          = new DateTime('NOW');
+        $now = new DateTime('NOW');
 
         try {
             $lastCodeDate = new DateTime($user->getLastSecurityCode());
@@ -69,7 +69,7 @@ class UserAuthenticationCodeManager
             return (int)$exception->getCode();
         }
 
-        $newCodeDate  = $lastCodeDate->modify('+15 day');
+        $newCodeDate = $lastCodeDate->modify('+15 day');
 
         if ($now >= $newCodeDate) {
             return true;
@@ -84,8 +84,7 @@ class UserAuthenticationCodeManager
      */
     public function sendSecurityCode(User $user)
     {
-        $code = $this->codeManager->generateCode();
-
+        $code    = $this->codeManager->generateCode();
         $message = $this->templating->render(
             'security/authentication/_email_security_code.html.twig',
             ['code' => $code]
