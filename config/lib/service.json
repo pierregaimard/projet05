@@ -22,7 +22,8 @@
   "App\\Service\\Security\\UserSecurityManager": {
     "argument": [
       "@Climb\\Orm\\Orm",
-      "@Climb\\Security\\UserManager"
+      "@Climb\\Security\\UserManager",
+      "@Climb\\Http\\Session\\Session"
     ]
   },
   "App\\Service\\Security\\UserAuthenticationCodeManager": {
@@ -30,7 +31,9 @@
       "@App\\Service\\Email\\EmailManager",
       "@App\\Service\\Security\\SecurityCodeManager",
       "@App\\Service\\Security\\UserSecurityManager",
-      "@App\\Service\\Templating\\TemplatingManager"
+      "@App\\Service\\Templating\\TemplatingManager",
+      "@Climb\\Security\\TokenManager",
+      "@Climb\\Http\\Session\\Session"
     ]
   },
   "App\\Service\\Email\\MailerManager": {
