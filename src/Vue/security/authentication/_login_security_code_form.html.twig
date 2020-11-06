@@ -1,0 +1,12 @@
+<form method="post" action="{{ getRoutePath('login_code_check') }}">
+    <!-- security code -->
+    {% include "security/authentication/_form_field_security_code.html.twig" %}
+    <!-- token -->
+    <input type="hidden" name="token" value="{{ token }}">
+    <!-- submit -->
+    <div class="uk-margin">
+        <button type="submit" class="uk-button uk-button-default uk-border-rounded uk-width-1-1" >
+            validate
+        </button>
+    </div>
+</form>
