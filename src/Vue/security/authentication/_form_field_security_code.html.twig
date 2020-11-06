@@ -1,0 +1,20 @@
+<div class="uk-margin">
+    <div class="uk-form-controls">
+        {% if formCheck["code"] is not null %}
+            <label class="uk-form-label uk-form-danger">
+                {{ formCheck["code"] }}
+            </label>
+        {% endif %}
+        <input
+                type="number"
+                name="code"
+                class="
+                    uk-input uk-border-rounded
+                    {% if formCheck["code"] is not null %}
+                        uk-form-danger
+                    {% endif %}
+                "
+                placeholder="Security code"
+        >
+    </div>
+</div>
