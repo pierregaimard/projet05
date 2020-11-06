@@ -2,12 +2,7 @@
 
 namespace App\Service\Email;
 
-use Climb\Exception\AppException;
-use Climb\Templating\Twig\TemplatingManager;
-use Twig\Environment;
-use Twig\Error\LoaderError;
-use Twig\Error\RuntimeError;
-use Twig\Error\SyntaxError;
+use App\Service\Templating\TemplatingManager;
 use Swift_Mailer;
 use Swift_Message;
 
@@ -19,9 +14,9 @@ class EmailManager
     private Swift_Mailer $mailer;
 
     /**
-     * @var Environment
+     * @var TemplatingManager
      */
-    private Environment $templating;
+    private TemplatingManager $templating;
 
     /**
      * @var string
@@ -29,18 +24,14 @@ class EmailManager
     private string $email;
 
     /**
-     * EmailManager constructor.
-     *
      * @param MailerManager     $manager
      * @param TemplatingManager $templating
      * @param string            $email
-     *
-     * @throws AppException
      */
     public function __construct(MailerManager $manager, TemplatingManager $templating, string $email)
     {
         $this->mailer     = $manager->getMailer();
-        $this->templating = $templating->getEnvironment([]);
+        $this->templating = $templating;
         $this->email      = $email;
     }
 
@@ -50,10 +41,6 @@ class EmailManager
      * @param string      $content
      *
      * @return int
-     *
-     * @throws LoaderError
-     * @throws RuntimeError
-     * @throws SyntaxError
      */
     public function send(string $email, string $subject, string $content): int
     {
