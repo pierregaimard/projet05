@@ -123,4 +123,24 @@ class SecurityCodeController extends AbstractController
 
         return $this->redirectToRoute('home');
     }
+
+    /**
+     * @Route(path="/newSecurityCode", name="login_code_new")
+     *
+     * @throws AppException
+     */
+    public function sendNewCode()
+    {
+        // Get user entity
+        $user = $this->authenticator->checkUser($this->userManager->getSessionLogin());
+
+        // Dispatch new code
+        $this->codeManager->dispatchSecurityCode($user);
+
+        return $this->redirectToRoute(
+            'login',
+            null,
+            ['securityCode' => true, 'message' => $this->codeManager->getMessage($user)]
+        );
+    }
 }
