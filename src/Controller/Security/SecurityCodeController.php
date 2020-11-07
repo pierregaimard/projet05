@@ -2,7 +2,6 @@
 
 namespace App\Controller\Security;
 
-use App\Model\Entity\User;
 use App\Service\Form\EntityFormDataManager;
 use App\Service\Security\FormTokenManager;
 use App\Service\Security\UserAuthenticationChecker;
@@ -10,10 +9,8 @@ use App\Service\Security\UserAuthenticationCodeManager;
 use App\Service\Security\UserSecurityManager;
 use Climb\Controller\AbstractController;
 use Climb\Exception\AppException;
-use Climb\Http\Response;
-use Climb\Routing\Annotation\Route;
 
-class AuthenticationController extends AbstractController
+class SecurityCodeController extends AbstractController
 {
     /**
      * @var FormTokenManager
@@ -62,91 +59,89 @@ class AuthenticationController extends AbstractController
     }
 
     /**
-     * @Route(path="/login", name="login")
-     */
-    public function login()
-    {
-        $token = $this->tokenManager->getToken('authentication');
-
-        $response = new Response();
-        $response->setContent($this->render(
-            'security/authentication/login.html.twig',
-            [
-                'token' => $token,
-                'formCheck' => $this->getRequestData()->get('formCheck'),
-                'formData' => $this->getRequestData()->get('formData'),
-                'message' => $this->getRequestData()->get('message'),
-                'securityCode' => $this->getRequestData()->get('securityCode'),
-            ]
-        ));
-
-        return $response;
-    }
-
-    /**
-     * @Route(path="/loginCheck", name="login_check")
+     * @Route(path="/login/securityCode", name="login_code_check")
      *
      * @throws AppException
      */
-    public function loginCheck()
+    public function codeCheck()
     {
         $data = $this->getRequest()->getPost();
 
-        // Checks security token
+        // Check form token
         $tokenCheck = $this->tokenManager->isValid('authentication', $data->get('token'));
         if ($tokenCheck !== true) {
             return $this->redirectToRoute(
                 'login',
                 null,
-                ['message' => $tokenCheck, 'formData' => $data->getAll()]
+                ['securityCode' => true, 'message' => $tokenCheck]
             );
         }
 
         // Check form data
-        $formCheck = $this->formManager->checkFormData(User::class, $data->getAll());
-        if (is_array($formCheck)) {
+        $code      = $data->get('code');
+        $checkCode = $this->formManager->checkFormField('number', $code, false);
+
+        if ($checkCode !== true) {
             return $this->redirectToRoute(
                 'login',
                 null,
-                ['formCheck' => $formCheck, 'formData' => $data->getAll()]
+                ['securityCode' => true, 'message' => ['type' => 'danger', 'message' => $checkCode]]
             );
         }
 
-        // Check credentials
-        $userAuthCheck = $this->authenticator->check($data);
-        if (is_array($userAuthCheck)) {
+        // Filter form data
+        $code = $this->formManager->filterField('number', $code);
+
+        // Get user entity
+        $user = $this->authenticator->checkUser($this->userManager->getSessionLogin());
+
+        // Check user
+        if (!is_object($user)) {
             return $this->redirectToRoute(
                 'login',
                 null,
-                ['message' => $userAuthCheck, 'formData' => $data->getAll()]
+                ['message' => ['type' => 'danger', 'message' => 'Sorry, a problem occurred. Please try again']]
             );
         }
 
-        // Check security code needs
-        if ($this->codeManager->needSecurityCode($userAuthCheck)) {
-            $this->codeManager->dispatchSecurityCode($userAuthCheck);
-            $this->userManager->setSessionLogin($userAuthCheck->getEmail());
-
+        // Check security code
+        if (!$this->codeManager->isCodeValid($code)) {
+            $this->codeManager->dispatchSecurityCode($user);
             return $this->redirectToRoute(
                 'login',
                 null,
-                ['securityCode' => true, 'message' => $this->codeManager->getMessage($userAuthCheck)]
+                ['securityCode' => true, 'message' => $this->codeManager->getInvalidMessage()]
             );
         }
+
+        // Unset security code data in session
+        $this->userManager->unsetSessionLogin();
+        $this->codeManager->unsetSessionHash();
 
         // Set user session
-        $this->userManager->setUser($userAuthCheck);
+        $this->userManager->setUser($user);
+        $this->userManager->updateLastSecurityCode($user);
 
         return $this->redirectToRoute('home');
     }
 
     /**
-     * @Route(path="/logout", name="logout")
+     * @Route(path="/newSecurityCode", name="login_code_new")
+     *
+     * @throws AppException
      */
-    public function logout()
+    public function sendNewCode()
     {
-        $this->userManager->unsetUser();
+        // Get user entity
+        $user = $this->authenticator->checkUser($this->userManager->getSessionLogin());
 
-        return $this->redirectToRoute('home');
+        // Dispatch new code
+        $this->codeManager->dispatchSecurityCode($user);
+
+        return $this->redirectToRoute(
+            'login',
+            null,
+            ['securityCode' => true, 'message' => $this->codeManager->getMessage($user)]
+        );
     }
 }

@@ -22,7 +22,8 @@
   "App\\Service\\Security\\UserSecurityManager": {
     "argument": [
       "@Climb\\Orm\\Orm",
-      "@Climb\\Security\\UserManager"
+      "@Climb\\Security\\UserManager",
+      "@Climb\\Http\\Session\\Session"
     ]
   },
   "App\\Service\\Security\\UserAuthenticationCodeManager": {
@@ -30,7 +31,9 @@
       "@App\\Service\\Email\\EmailManager",
       "@App\\Service\\Security\\SecurityCodeManager",
       "@App\\Service\\Security\\UserSecurityManager",
-      "@Climb\\Templating\\Twig\\TemplatingManager"
+      "@App\\Service\\Templating\\TemplatingManager",
+      "@Climb\\Security\\TokenManager",
+      "@Climb\\Http\\Session\\Session"
     ]
   },
   "App\\Service\\Email\\MailerManager": {
@@ -45,7 +48,7 @@
   "App\\Service\\Email\\EmailManager": {
     "argument": [
       "@App\\Service\\Email\\MailerManager",
-      "@Climb\\Templating\\Twig\\TemplatingManager",
+      "@App\\Service\\Templating\\TemplatingManager",
       "$env(APP_EMAIL_ADDRESS)"
     ]
   },
@@ -55,6 +58,15 @@
     ]
   },
   "App\\Controller\\Security\\AuthenticationController": {
+    "argument": [
+      "@App\\Service\\Security\\FormTokenManager",
+      "@App\\Service\\Form\\EntityFormDataManager",
+      "@App\\Service\\Security\\UserAuthenticationChecker",
+      "@App\\Service\\Security\\UserAuthenticationCodeManager",
+      "@App\\Service\\Security\\UserSecurityManager"
+    ]
+  },
+  "App\\Controller\\Security\\SecurityCodeController": {
     "argument": [
       "@App\\Service\\Security\\FormTokenManager",
       "@App\\Service\\Form\\EntityFormDataManager",

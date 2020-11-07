@@ -13,6 +13,7 @@ class DataChecker
     public const TYPE_NAME     = 'name';
     public const TYPE_TITLE    = 'title';
     public const TYPE_COMMENT  = 'comment';
+    public const TYPE_NUMBER   = 'number';
 
     /**
      * @var Bag

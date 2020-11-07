@@ -3,6 +3,7 @@
 namespace App\Service\Security;
 
 use App\Model\Entity\UserStatus;
+use Climb\Http\Session\SessionInterface;
 use Climb\Orm\EntityManager;
 use Climb\Orm\Orm;
 use Climb\Exception\AppException;
@@ -12,6 +13,8 @@ use DateTime;
 
 class UserSecurityManager
 {
+    private const SESSION_LOGIN_KEY = 'login';
+
     /**
      * @var Orm
      */
@@ -28,18 +31,25 @@ class UserSecurityManager
     private UserManager $userManager;
 
     /**
+     * @var SessionInterface
+     */
+    private SessionInterface $session;
+
+    /**
      * UserSecurityManager constructor.
      *
-     * @param Orm         $orm
-     * @param UserManager $userManager
+     * @param Orm              $orm
+     * @param UserManager      $userManager
+     * @param SessionInterface $session
      *
      * @throws AppException
      */
-    public function __construct(Orm $orm, UserManager $userManager)
+    public function __construct(Orm $orm, UserManager $userManager, SessionInterface $session)
     {
         $this->orm         = $orm;
         $this->manager     = $orm->getManager('App');
         $this->userManager = $userManager;
+        $this->session     = $session;
     }
 
     /**
@@ -111,6 +121,27 @@ class UserSecurityManager
         $date = new DateTime('NOW');
         $user->setLastSecurityCode($date->format('Y-m-d'));
         $this->manager->updateOne($user);
+    }
+
+    /**
+     * @param string $email
+     */
+    public function setSessionLogin(string $email): void
+    {
+        $this->session->add(self::SESSION_LOGIN_KEY, $email);
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getSessionLogin(): ?string
+    {
+        return $this->session->get(self::SESSION_LOGIN_KEY);
+    }
+
+    public function unsetSessionLogin(): void
+    {
+        $this->session->remove(self::SESSION_LOGIN_KEY);
     }
 
     /**

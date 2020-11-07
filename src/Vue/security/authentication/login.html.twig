@@ -15,20 +15,11 @@
         <div class="app-login-box uk-padding-small uk-box-shadow-small">
             <h1 class="uk-text-center">Login</h1>
             {% include "security/authentication/_form_message.html.twig" %}
-            <form method="post" action="{{ getRoutePath('login_check') }}">
-                <!-- login -->
-                {% include "security/authentication/_form_field_email.html.twig" %}
-                <!-- password -->
-                {% include "security/authentication/_form_field_password.html.twig" %}
-                <!-- token -->
-                <input type="hidden" name="token" value="{{ token }}">
-                <!-- submit -->
-                <div class="uk-margin">
-                    <button type="submit" class="uk-button uk-button-default uk-border-rounded uk-width-1-1" >
-                        login
-                    </button>
-                </div>
-            </form>
+            {% if securityCode == true %}
+                {% include "security/authentication/_login_security_code_form.html.twig" %}
+            {% else %}
+                {% include "security/authentication/_login_form.html.twig" %}
+            {% endif %}
         </div>
         <a href="/" class="uk-button uk-button-text uk-width-1-1 uk-text-center uk-margin">forgot password</a>
     </div>

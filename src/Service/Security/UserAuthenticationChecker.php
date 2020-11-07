@@ -59,25 +59,19 @@ class UserAuthenticationChecker
      */
     public function check(Bag $loginData)
     {
-        // Step1: checks security token
-        $tokenCheck = $this->tokenManager->isValid('authentication', $loginData->get('token'));
-        if ($tokenCheck !== true) {
-            return $tokenCheck;
-        }
-
-        // Step2: search user
+        // Step1: search user
         $userCheck = $this->checkUser($loginData->get('email'));
         if (is_array($userCheck)) {
             return $userCheck;
         }
 
-        // Step3: checks locked user.
+        // Step2: checks locked user.
         $userActiveCheck = $this->checkUserActive($userCheck);
         if ($userActiveCheck !== true) {
             return $userActiveCheck;
         }
 
-        // Step4: checks user password
+        // Step3: checks user password
         $userPasswordCheck = $this->checkUserPassword($userCheck, $loginData->get('password'));
         if ($userPasswordCheck !== true) {
             return $userPasswordCheck;
@@ -93,7 +87,7 @@ class UserAuthenticationChecker
      *
      * @throws AppException
      */
-    private function checkUser(string $email)
+    public function checkUser(string $email)
     {
         $entityManager = $this->orm->getManager('App');
         $user          = $entityManager->getRepository(User::class)->findOneBy(['email' => $email]);
@@ -164,7 +158,7 @@ class UserAuthenticationChecker
      *
      * @return string
      */
-    private function getTriesMessage(int $badCredentials)
+    private function getTriesMessage(int $badCredentials): string
     {
         switch (3 - $badCredentials) {
             case 2:
