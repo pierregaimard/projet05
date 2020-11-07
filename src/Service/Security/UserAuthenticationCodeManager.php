@@ -144,7 +144,10 @@ class UserAuthenticationCodeManager
     {
         return [
             'type' => 'danger',
-            'message' => 'invalid security code. Please try again.'
+            'message' =>
+                'invalid security code. A new code have been sent to ' .
+                $this->userManager->getSessionLogin() .
+                '. Please enter this code here.'
         ];
     }
 
