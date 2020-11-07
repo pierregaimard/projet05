@@ -65,5 +65,14 @@
       "@App\\Service\\Security\\UserAuthenticationCodeManager",
       "@App\\Service\\Security\\UserSecurityManager"
     ]
+  },
+  "App\\Controller\\Security\\SecurityCodeController": {
+    "argument": [
+      "@App\\Service\\Security\\FormTokenManager",
+      "@App\\Service\\Form\\EntityFormDataManager",
+      "@App\\Service\\Security\\UserAuthenticationChecker",
+      "@App\\Service\\Security\\UserAuthenticationCodeManager",
+      "@App\\Service\\Security\\UserSecurityManager"
+    ]
   }
 }
