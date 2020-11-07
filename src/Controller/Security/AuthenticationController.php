@@ -54,11 +54,11 @@ class AuthenticationController extends AbstractController
         UserAuthenticationCodeManager $codeManager,
         UserSecurityManager $userManager
     ) {
-        $this->tokenManager    = $tokenManager;
-        $this->formManager     = $formManager;
-        $this->authenticator   = $authenticator;
-        $this->codeManager     = $codeManager;
-        $this->userManager     = $userManager;
+        $this->tokenManager  = $tokenManager;
+        $this->formManager   = $formManager;
+        $this->authenticator = $authenticator;
+        $this->codeManager   = $codeManager;
+        $this->userManager   = $userManager;
     }
 
     /**
@@ -133,7 +133,7 @@ class AuthenticationController extends AbstractController
      */
     public function codeCheck()
     {
-        $code = $this->getRequest()->getPost()->get('code');
+        $code      = $this->getRequest()->getPost()->get('code');
         $checkCode = $this->formManager->checkFormField('number', $code, false);
 
         if ($checkCode !== true) {
