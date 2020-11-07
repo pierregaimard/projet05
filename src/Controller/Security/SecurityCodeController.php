@@ -92,21 +92,8 @@ class SecurityCodeController extends AbstractController
         // Filter form data
         $code = $this->formManager->filterField('number', $code);
 
-        // Check security code
-        if (!$this->codeManager->isCodeValid($code)) {
-            return $this->redirectToRoute(
-                'login',
-                null,
-                ['securityCode' => true, 'message' => $this->codeManager->getInvalidMessage()]
-            );
-        }
-
         // Get user entity
         $user = $this->authenticator->checkUser($this->userManager->getSessionLogin());
-
-        // Unset security code data in session
-        $this->userManager->unsetSessionLogin();
-        $this->codeManager->unsetSessionHash();
 
         // Check user
         if (!is_object($user)) {
@@ -116,6 +103,20 @@ class SecurityCodeController extends AbstractController
                 ['message' => ['type' => 'danger', 'message' => 'Sorry, a problem occurred. Please try again']]
             );
         }
+
+        // Check security code
+        if (!$this->codeManager->isCodeValid($code)) {
+            $this->codeManager->dispatchSecurityCode($user);
+            return $this->redirectToRoute(
+                'login',
+                null,
+                ['securityCode' => true, 'message' => $this->codeManager->getInvalidMessage()]
+            );
+        }
+
+        // Unset security code data in session
+        $this->userManager->unsetSessionLogin();
+        $this->codeManager->unsetSessionHash();
 
         // Set user session
         $this->userManager->setUser($user);
