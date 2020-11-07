@@ -23,7 +23,7 @@
 
 try {
     $frontController = new FrontController();
-    $response = $frontController->getResponse();
+    $response        = $frontController->getResponse();
     $response->send();
 } catch (AppException $exception) {
     echo $exception;
