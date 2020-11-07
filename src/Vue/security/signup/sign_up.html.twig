@@ -1,0 +1,13 @@
+{% extends "core.html.twig" %}
+
+{% block Stylesheet %}
+    <link rel="stylesheet" href="public/assets/css/sign_up.css" />
+{% endblock %}
+
+{% block Body %}
+    <div class="uk-container app-signup-container" uk-height-viewport="expand: true">
+        <h1 class="uk-text-center uk-margin-large-top uk-margin-remove-bottom">Sign-Up</h1>
+        <h4 class="uk-text-center uk-margin-small-top">Please enter your account informations</h4>
+        {% include "security/signup/_sign_up_form.html.twig" %}
+    </div>
+{% endblock %}
