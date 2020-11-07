@@ -12,7 +12,7 @@ use Exception;
 
 class UserAuthenticationCodeManager
 {
-    private const HASH_KEYWORD = 'tSYDgd548s5$dks';
+    private const HASH_KEYWORD     = 'tSYDgd548s5$dks';
     private const SESSION_CODE_KEY = 'HYsgdycHSGtdg54$GHF';
 
     /**
