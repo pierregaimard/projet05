@@ -90,9 +90,20 @@ class AuthenticationController extends AbstractController
      */
     public function loginCheck()
     {
-        $data      = $this->getRequest()->getPost();
-        $formCheck = $this->formManager->checkFormData(User::class, $data->getAll());
+        $data = $this->getRequest()->getPost();
 
+        // Checks security token
+        $tokenCheck = $this->tokenManager->isValid('authentication', $data->get('token'));
+        if ($tokenCheck !== true) {
+            return $this->redirectToRoute(
+                'login',
+                null,
+                ['message' => $tokenCheck, 'formData' => $data->getAll()]
+            );
+        }
+
+        // Check form data
+        $formCheck = $this->formManager->checkFormData(User::class, $data->getAll());
         if (is_array($formCheck)) {
             return $this->redirectToRoute(
                 'login',
@@ -101,6 +112,7 @@ class AuthenticationController extends AbstractController
             );
         }
 
+        // Check credentials
         $userAuthCheck = $this->authenticator->check($data);
         if (is_array($userAuthCheck)) {
             return $this->redirectToRoute(
@@ -110,6 +122,7 @@ class AuthenticationController extends AbstractController
             );
         }
 
+        // Check security code needs
         if ($this->codeManager->needSecurityCode($userAuthCheck)) {
             $this->codeManager->dispatchSecurityCode($userAuthCheck);
             $this->userManager->setSessionLogin($userAuthCheck->getEmail());
@@ -121,6 +134,7 @@ class AuthenticationController extends AbstractController
             );
         }
 
+        // Set user session
         $this->userManager->setUser($userAuthCheck);
 
         return $this->redirectToRoute('home');
