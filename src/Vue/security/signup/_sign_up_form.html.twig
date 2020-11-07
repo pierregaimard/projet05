@@ -1,0 +1,41 @@
+<form method="post" action="/">
+    <div class="uk-fieldset uk-margin-large-top">
+        <!-- first name -->
+        {%
+            include 'form/_form_input.html.twig'
+            with {'type': 'text', 'id': 'firstName', 'name': 'firstName', 'label': 'First Name', 'error': 'Invalid info'}
+        %}
+        <!-- last name -->
+        {%
+            include 'form/_form_input.html.twig'
+            with {'type': 'text', 'id': 'lastName', 'name': 'firstName', 'label': 'Last Name'}
+        %}
+        <!-- email -->
+        {%
+            include 'form/_form_input.html.twig'
+            with {'type': 'email', 'id': 'email', 'name': 'email', 'label': 'E-mail'}
+        %}
+    </div>
+    <div class="uk-fieldset uk-margin-large-top">
+        <!-- password -->
+        {%
+            include 'form/_form_input.html.twig'
+            with {'type': 'password', 'id': 'password', 'name': 'password', 'label': 'Password'}
+        %}
+        <!-- password confirm-->
+        {%
+            include 'form/_form_input.html.twig'
+            with {'type': 'passwordConfirm', 'id': 'passwordConfirm', 'name': 'passwordConfirm', 'label': 'Confirm password'}
+        %}
+    </div>
+    <div class="uk-fieldset uk-margin-large-top">
+        <!-- token -->
+        <input type="hidden" name="token" value="{{ token }}">
+        <!-- submit -->
+        <div class="uk-margin">
+            <button type="submit" class="uk-button uk-button-secondary uk-button-large uk-border-rounded uk-width-1-1" >
+                Sign-up
+            </button>
+        </div>
+    </div>
+</form>
