@@ -127,52 +127,6 @@ class AuthenticationController extends AbstractController
     }
 
     /**
-     * @Route(path="/login/securityCode", name="login_code_check")
-     *
-     * @throws AppException
-     */
-    public function codeCheck()
-    {
-        $code      = $this->getRequest()->getPost()->get('code');
-        $checkCode = $this->formManager->checkFormField('number', $code, false);
-
-        if ($checkCode !== true) {
-            return $this->redirectToRoute(
-                'login',
-                null,
-                ['securityCode' => true, 'message' => ['type' => 'danger', 'message' => $checkCode]]
-            );
-        }
-
-        $code = $this->formManager->filterField('number', $code);
-
-        if (!$this->codeManager->isCodeValid($code)) {
-            return $this->redirectToRoute(
-                'login',
-                null,
-                ['securityCode' => true, 'message' => $this->codeManager->getInvalidMessage()]
-            );
-        }
-
-        $user = $this->authenticator->checkUser($this->userManager->getSessionLogin());
-        $this->userManager->unsetSessionLogin();
-        $this->codeManager->unsetSessionHash();
-
-        if (!is_object($user)) {
-            return $this->redirectToRoute(
-                'login',
-                null,
-                ['message' => ['type' => 'danger', 'message' => 'Sorry, a problem occurred. Please try again']]
-            );
-        }
-
-        $this->userManager->setUser($user);
-        $this->userManager->updateLastSecurityCode($user);
-
-        return $this->redirectToRoute('home');
-    }
-
-    /**
      * @Route(path="/logout", name="logout")
      */
     public function logout()
