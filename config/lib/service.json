@@ -33,7 +33,7 @@
       "@Climb\\Http\\Session\\Session"
     ]
   },
-  "App\\Service\\Security\\UserAuthenticationCodeManager": {
+  "App\\Service\\Security\\UserSecurityCodeManager": {
     "argument": [
       "@App\\Service\\Email\\EmailManager",
       "@App\\Service\\Security\\SecurityCodeManager",
@@ -41,6 +41,19 @@
       "@App\\Service\\Templating\\TemplatingManager",
       "@Climb\\Security\\TokenManager",
       "@Climb\\Http\\Session\\Session"
+    ]
+  },
+  "App\\Service\\Security\\SecurityFormDataManager": {
+    "argument": [
+      "@App\\Service\\Form\\EntityFormDataManager"
+    ]
+  },
+  "App\\Service\\Security\\UserSignUpManager": {
+    "argument": [
+      "@Climb\\Orm\\Orm",
+      "@Climb\\Http\\Session\\Session",
+      "@Climb\\Security\\UserPasswordManager",
+      "@App\\Service\\Email\\EmailManager"
     ]
   },
   "App\\Service\\Email\\MailerManager": {
@@ -69,23 +82,28 @@
       "@App\\Service\\Security\\FormTokenManager",
       "@App\\Service\\Form\\EntityFormDataManager",
       "@App\\Service\\Security\\UserAuthenticationChecker",
-      "@App\\Service\\Security\\UserAuthenticationCodeManager",
+      "@App\\Service\\Security\\UserSecurityCodeManager",
       "@App\\Service\\Security\\UserSecurityManager"
     ]
   },
   "App\\Controller\\Security\\SecurityCodeController": {
     "argument": [
       "@App\\Service\\Security\\FormTokenManager",
-      "@App\\Service\\Form\\EntityFormDataManager",
       "@App\\Service\\Security\\UserAuthenticationChecker",
-      "@App\\Service\\Security\\UserAuthenticationCodeManager",
-      "@App\\Service\\Security\\UserSecurityManager"
+      "@App\\Service\\Security\\UserSecurityCodeManager",
+      "@App\\Service\\Security\\UserSecurityManager",
+      "@App\\Service\\Security\\SecurityFormDataManager",
+      "@App\\Service\\Security\\UserSignUpManager"
     ]
   },
   "App\\Controller\\Security\\SignUpController": {
     "argument": [
       "@App\\Service\\Security\\FormTokenManager",
-      "@App\\Service\\Form\\EntityFormDataManager"
+      "@App\\Service\\Form\\EntityFormDataManager",
+      "@App\\Service\\Security\\UserSignUpManager",
+      "@App\\Service\\Security\\UserSecurityCodeManager",
+      "@App\\Service\\Security\\SecurityFormDataManager",
+      "@App\\Service\\Security\\UserPasswordChecker"
     ]
   }
 }
