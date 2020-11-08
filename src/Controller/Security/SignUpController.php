@@ -216,8 +216,8 @@ class SignUpController extends AbstractController
         }
 
         // Check form data
-        $pass = $data->get('password');
-        $passConfirm = $data->get('passwordConfirm');
+        $pass          = $data->get('password');
+        $passConfirm   = $data->get('passwordConfirm');
         $passwordCheck = $this->securityFormData->checkPasswordsData($pass, $passConfirm);
         if ($passwordCheck !== true) {
             return $this->redirectToRoute(
