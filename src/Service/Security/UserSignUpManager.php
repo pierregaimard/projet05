@@ -6,6 +6,7 @@ use App\Model\Entity\User;
 use App\Model\Entity\UserRole;
 use App\Model\Entity\UserStatus;
 use App\Service\Email\EmailManager;
+use App\Service\Templating\TemplatingManager;
 use Climb\Http\Session\SessionInterface;
 use Climb\Orm\EntityManager;
 use Climb\Orm\Orm;
@@ -36,11 +37,14 @@ class UserSignUpManager
      */
     private EmailManager $emailManager;
 
+    private TemplatingManager $templating;
+
     /**
      * @param Orm                 $orm
      * @param SessionInterface    $session
      * @param UserPasswordManager $passwordManager
      * @param EmailManager        $emailManager
+     * @param TemplatingManager   $templating
      *
      * @throws AppException
      */
@@ -48,12 +52,14 @@ class UserSignUpManager
         Orm $orm,
         SessionInterface $session,
         UserPasswordManager $passwordManager,
-        EmailManager $emailManager
+        EmailManager $emailManager,
+        TemplatingManager $templating
     ) {
         $this->entityManager   = $orm->getManager('App');
         $this->session         = $session;
         $this->passwordManager = $passwordManager;
         $this->emailManager    = $emailManager;
+        $this->templating      = $templating;
     }
 
     /**
@@ -126,5 +132,23 @@ class UserSignUpManager
         $this->entityManager->insertOne($user);
 
         return $user;
+    }
+
+    /**
+     * @param string $name
+     *
+     * @throws AppException
+     */
+    public function sendNewUserNotificationToAdmin(string $name): void
+    {
+        $roleRepository = $this->entityManager->getRepository(UserRole::class);
+        $role           = $roleRepository->findOneBy(['role' => User::ROLE_ADMIN]);
+        $admin          = $role->getUsers()[array_key_first($role->getUsers())];
+        
+        $this->emailManager->send(
+            $admin->getEmail(),
+            'New member subscription',
+            $this->templating->render('security/signup/_email_admin_notification.html.twig', ['name' => $name])
+        );
     }
 }
