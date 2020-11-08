@@ -6,13 +6,13 @@ use Climb\Annotation\AnnotationInterface;
 
 class Field implements AnnotationInterface
 {
-    public const TAG              = 'Field';
-    public const TYPE_EMAIL       = 'email';
-    public const TYPE_PASSWORD    = 'password';
-    public const TYPE_NAME        = 'name';
-    public const TYPE_TITLE       = 'title';
-    public const TYPE_COMMENT     = 'comment';
-    public const TYPE_NUMBER      = 'number';
+    public const TAG           = 'Field';
+    public const TYPE_EMAIL    = 'email';
+    public const TYPE_PASSWORD = 'password';
+    public const TYPE_NAME     = 'name';
+    public const TYPE_TITLE    = 'title';
+    public const TYPE_COMMENT  = 'comment';
+    public const TYPE_NUMBER   = 'number';
 
     /**
      * @var string
