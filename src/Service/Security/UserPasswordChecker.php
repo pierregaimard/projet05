@@ -32,7 +32,7 @@ class UserPasswordChecker
 
         foreach ($checks as $check) {
             $checkerName = 'check' . ucfirst($check);
-            $result = $this->$checkerName($password);
+            $result      = $this->$checkerName($password);
 
             if ($result !== true) {
                 $message[$check] = $result;
