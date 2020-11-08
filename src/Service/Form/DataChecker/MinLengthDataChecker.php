@@ -12,7 +12,7 @@ class MinLengthDataChecker
      */
     public function check(string $data, int $length = null)
     {
-        if ($length === null || strlen($data) > $length) {
+        if ($length === null || strlen($data) >= $length) {
             return true;
         }
 
