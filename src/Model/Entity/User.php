@@ -26,7 +26,7 @@ class User implements UserInterface
      * @var string
      *
      * @Column(name="first_name")
-     * @Field(type="name", nullable=false)
+     * @Field(type="name", nullable=false, minLength=3)
      */
     private string $firstName;
 
@@ -34,7 +34,7 @@ class User implements UserInterface
      * @var string
      *
      * @Column(name="last_name")
-     * @Field(type="name", nullable=false)
+     * @Field(type="name", nullable=false, minLength=3)
      */
     private string $lastName;
 
@@ -50,7 +50,7 @@ class User implements UserInterface
      * @var string
      *
      * @Column(name="password")
-     * @Field(type="password", nullable=false)
+     * @Field(type="password", nullable=false, minLength=8)
      */
     private string $password;
 
