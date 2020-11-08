@@ -15,10 +15,18 @@
         <div class="app-login-box uk-padding-small uk-box-shadow-small">
             <h1 class="uk-text-center">Login</h1>
             {% include "form/_form_message.html.twig" %}
-            {% if securityCode == true %}
-                {% include "security/authentication/_login_security_code_form.html.twig" %}
+            {% if message["form"] is not defined %}
+                {% if securityCode == true %}
+                    {% include "security/authentication/_login_security_code_form.html.twig" %}
+                {% else %}
+                    {% include "security/authentication/_login_form.html.twig" %}
+                {% endif %}
             {% else %}
-                {% include "security/authentication/_login_form.html.twig" %}
+                <div class="uk-margin uk-margin-large-top">
+                    <a href="{{ getRoutePath('home') }}" class="uk-button uk-button-secondary uk-button-large uk-border-rounded uk-width-1-1">
+                        Home
+                    </a>
+                </div>
             {% endif %}
         </div>
         <a href="/" class="uk-button uk-button-text uk-width-1-1 uk-text-center uk-margin">forgot password</a>
