@@ -7,22 +7,32 @@ use Climb\Bag\Bag;
 
 class DataChecker
 {
-    private const TYPE_NULL    = 'null';
-    public const TYPE_EMAIL    = 'email';
-    public const TYPE_PASSWORD = 'password';
-    public const TYPE_NAME     = 'name';
-    public const TYPE_TITLE    = 'title';
-    public const TYPE_COMMENT  = 'comment';
-    public const TYPE_NUMBER   = 'number';
-
     /**
      * @var Bag
      */
     private Bag $container;
 
-    public function __construct()
-    {
-        $this->container = new Bag();
+    private NullDataChecker $nullChecker;
+
+    /**
+     * @var MinLengthDataChecker
+     */
+    private MinLengthDataChecker $minLengthChecker;
+
+    /**
+     * @var MaxLengthDataChecker
+     */
+    private MaxLengthDataChecker $maxLengthChecker;
+
+    public function __construct(
+        NullDataChecker $nullChecker,
+        MinLengthDataChecker $minLengthChecker,
+        MaxLengthDataChecker $maxLengthChecker
+    ) {
+        $this->nullChecker      = $nullChecker;
+        $this->minLengthChecker = $minLengthChecker;
+        $this->maxLengthChecker = $maxLengthChecker;
+        $this->container        = new Bag();
     }
 
     /**
@@ -49,36 +59,47 @@ class DataChecker
     }
 
     /**
-     * @param string      $type
-     * @param string      $data
-     * @param bool        $nullable
-     * @param string|null $message
+     * @param string $data
+     * @param Field  $field
      *
      * @return string|true
      */
-    public function checkField(string $type, string $data, bool $nullable, string $message = null)
+    public function checkField(string $data, Field $field)
     {
-        if ($nullable === false) {
-            $nullChecker = $this->getDataChecker(self::TYPE_NULL);
-            if ($nullChecker->check($data) !== true) {
-                return $nullChecker->getErrorMessage();
+        // Nullable checker
+        if (!$field->isNullable()) {
+            $nullCheck = $this->nullChecker->check($data);
+            if ($nullCheck !== true) {
+                return ($field->hasNullMessage()) ? $field->getNullMessage() : $nullCheck;
             }
         }
 
-        $dataChecker = $this->getDataChecker($type);
+        // Min length checker
+        $minLengthCheck = $this->minLengthChecker->check($data, $field->getMinLength());
+        if ($minLengthCheck !== true) {
+            return $minLengthCheck;
+        }
+
+        // Max length checker
+        $maxLengthCheck = $this->maxLengthChecker->check($data, $field->getMaxLength());
+        if ($maxLengthCheck !== true) {
+            return $maxLengthCheck;
+        }
+
+        $dataChecker = $this->getDataChecker($field->getType());
 
         if ($dataChecker->check($data) === true) {
             return true;
         }
 
-        return ($message !== null) ? $message : $dataChecker->getErrorMessage();
+        return ($field->hasMessage()) ? $field->getMessage() : $dataChecker->getErrorMessage();
     }
 
     /**
      * @param Field[] $annotations
      * @param array   $data
      *
-     * @return array|bool
+     * @return array|true
      */
     public function check(array $annotations, array $data)
     {
@@ -88,12 +109,8 @@ class DataChecker
             if (!array_key_exists($attribute, $annotations)) {
                 continue;
             }
-            $check = $this->checkField(
-                $annotations[$attribute]->getType(),
-                $fieldData,
-                $annotations[$attribute]->isNullable(),
-                $annotations[$attribute]->getMessage()
-            );
+
+            $check = $this->checkField($fieldData, $annotations[$attribute]);
 
             if ($check !== true) {
                 $messages[$attribute] = $check;
