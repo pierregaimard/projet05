@@ -65,8 +65,8 @@ class UserAuthenticationChecker
             return $userCheck;
         }
 
-        // Step2: checks locked user.
-        $userActiveCheck = $this->checkUserActive($userCheck);
+        // Step2: checks user status.
+        $userActiveCheck = $this->checkUserStatus($userCheck);
         if ($userActiveCheck !== true) {
             return $userActiveCheck;
         }
@@ -107,12 +107,23 @@ class UserAuthenticationChecker
      *
      * @return array|true
      */
-    private function checkUserActive(User $user)
+    private function checkUserStatus(User $user)
     {
         if ($user->isLocked()) {
             return [
+                'form' => false,
                 'type' => 'danger',
                 'message' => "Your account is locked. Please contact the administrator"
+            ];
+        }
+
+        if ($user->isInValidation()) {
+            return [
+                'form' => false,
+                'type' => 'primary',
+                'message' =>
+                    "Sorry but your account is being validated." .
+                    " You will be notified very soon of its validation. Thanks for your understanding"
             ];
         }
 
@@ -139,6 +150,7 @@ class UserAuthenticationChecker
             ];
 
             $message2 = [
+                'form' => false,
                 'type' => 'danger',
                 'message' => "Your account have been locked. Please contact the administrator"
             ];
