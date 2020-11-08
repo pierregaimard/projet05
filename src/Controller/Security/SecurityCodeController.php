@@ -3,11 +3,10 @@
 namespace App\Controller\Security;
 
 use App\Service\Form\Annotation\Field;
-use App\Service\Form\DataChecker\DataChecker;
 use App\Service\Form\EntityFormDataManager;
 use App\Service\Security\FormTokenManager;
 use App\Service\Security\UserAuthenticationChecker;
-use App\Service\Security\UserAuthenticationCodeManager;
+use App\Service\Security\UserSecurityCodeManager;
 use App\Service\Security\UserSecurityManager;
 use Climb\Controller\AbstractController;
 use Climb\Exception\AppException;
@@ -35,22 +34,22 @@ class SecurityCodeController extends AbstractController
     private UserSecurityManager $userManager;
 
     /**
-     * @var UserAuthenticationCodeManager
+     * @var UserSecurityCodeManager
      */
-    private UserAuthenticationCodeManager $codeManager;
+    private UserSecurityCodeManager $codeManager;
 
     /**
-     * @param FormTokenManager              $tokenManager
-     * @param EntityFormDataManager         $formManager
-     * @param UserAuthenticationChecker     $authenticator
-     * @param UserAuthenticationCodeManager $codeManager
-     * @param UserSecurityManager           $userManager
+     * @param FormTokenManager          $tokenManager
+     * @param EntityFormDataManager     $formManager
+     * @param UserAuthenticationChecker $authenticator
+     * @param UserSecurityCodeManager   $codeManager
+     * @param UserSecurityManager       $userManager
      */
     public function __construct(
         FormTokenManager $tokenManager,
         EntityFormDataManager $formManager,
         UserAuthenticationChecker $authenticator,
-        UserAuthenticationCodeManager $codeManager,
+        UserSecurityCodeManager $codeManager,
         UserSecurityManager $userManager
     ) {
         $this->tokenManager  = $tokenManager;
@@ -111,7 +110,7 @@ class SecurityCodeController extends AbstractController
 
         // Check security code
         if (!$this->codeManager->isCodeValid($code)) {
-            $this->codeManager->dispatchSecurityCode($user);
+            $this->codeManager->dispatchSecurityCode($user->getEmail());
             return $this->redirectToRoute(
                 'login',
                 null,
@@ -146,7 +145,7 @@ class SecurityCodeController extends AbstractController
         return $this->redirectToRoute(
             'login',
             null,
-            ['securityCode' => true, 'message' => $this->codeManager->getMessage($user)]
+            ['securityCode' => true, 'message' => $this->codeManager->getMessage($user->getEmail())]
         );
     }
 }
