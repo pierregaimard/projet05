@@ -2,6 +2,8 @@
 
 namespace App\Controller\Security;
 
+use App\Service\Form\Annotation\Field;
+use App\Service\Form\DataChecker\DataChecker;
 use App\Service\Form\EntityFormDataManager;
 use App\Service\Security\FormTokenManager;
 use App\Service\Security\UserAuthenticationChecker;
@@ -79,7 +81,10 @@ class SecurityCodeController extends AbstractController
 
         // Check form data
         $code      = $data->get('code');
-        $checkCode = $this->formManager->checkFormField('number', $code, false);
+        $field     = new Field();
+        $field->setType(Field::TYPE_NUMBER);
+        $field->setNullable(false);
+        $checkCode = $this->formManager->checkFormField($code, $field);
 
         if ($checkCode !== true) {
             return $this->redirectToRoute(
