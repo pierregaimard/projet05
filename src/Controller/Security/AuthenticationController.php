@@ -135,7 +135,7 @@ class AuthenticationController extends AbstractController
             return $this->redirectToRoute(
                 'login',
                 null,
-                ['securityCode' => true, 'message' => $this->codeManager->getMessage($userAuthCheck)]
+                ['securityCode' => true, 'message' => $this->codeManager->getMessage($userAuthCheck->getEmail())]
             );
         }
 
