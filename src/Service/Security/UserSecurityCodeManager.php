@@ -138,16 +138,29 @@ class UserSecurityCodeManager
     }
 
     /**
+     * @param string $email
+     *
      * @return string[]
      */
-    public function getInvalidMessage(): array
+    public function getNewCodeMessage(string $email): array
+    {
+        return [
+            'type' => 'info',
+            'message' => 'A new code have been sent to ' . $email . '. Please enter this code here.'
+        ];
+    }
+
+    /**
+     * @param string $email
+     *
+     * @return string[]
+     */
+    public function getInvalidMessage(string $email): array
     {
         return [
             'type' => 'danger',
             'message' =>
-                'invalid security code. A new code have been sent to ' .
-                $this->userManager->getSessionLogin() .
-                '. Please enter this code here.'
+                'invalid security code. A new code have been sent to ' . $email . '. Please enter this code here.'
         ];
     }
 
