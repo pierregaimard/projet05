@@ -52,16 +52,14 @@ class EntityFormDataManager
     }
 
     /**
-     * @param string      $type
-     * @param             $data
-     * @param bool        $nullable
-     * @param string|null $message
+     * @param       $data
+     * @param Field $field
      *
      * @return string|true
      */
-    public function checkFormField(string $type, $data, bool $nullable = false, string $message = null)
+    public function checkFormField($data, Field $field)
     {
-        return $this->dataChecker->checkField($type, $data, $nullable, $message);
+        return $this->dataChecker->checkField($data, $field);
     }
 
     /**
