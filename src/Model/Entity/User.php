@@ -80,7 +80,7 @@ class User implements UserInterface
     /**
      * @var EntityBag
      *
-     * @Relation(type="association", entity="App\Model\Entity\UserRole", association="as_user_role")
+     * @Relation(type="association", entity="App\Model\Entity\UserRole", association="as_user_role", invertedBy="users")
      */
     private EntityBag $roles;
 
