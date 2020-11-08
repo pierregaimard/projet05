@@ -287,6 +287,14 @@ class User implements UserInterface
     }
 
     /**
+     * @return bool
+     */
+    public function isInValidation(): bool
+    {
+        return $this->getStatus()->getStatus() === self::STATUS_VALIDATION;
+    }
+
+    /**
      * @param string|null $type
      *
      * @return string
