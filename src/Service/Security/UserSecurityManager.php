@@ -2,7 +2,10 @@
 
 namespace App\Service\Security;
 
+use App\Model\Entity\UserRole;
 use App\Model\Entity\UserStatus;
+use App\Service\Email\EmailManager;
+use App\Service\Templating\TemplatingManager;
 use Climb\Http\Session\SessionInterface;
 use Climb\Orm\EntityManager;
 use Climb\Orm\Orm;
@@ -36,20 +39,39 @@ class UserSecurityManager
     private SessionInterface $session;
 
     /**
+     * @var EmailManager
+     */
+    private EmailManager $emailManager;
+
+    /**
+     * @var TemplatingManager
+     */
+    private TemplatingManager $templating;
+
+    /**
      * UserSecurityManager constructor.
      *
-     * @param Orm              $orm
-     * @param UserManager      $userManager
-     * @param SessionInterface $session
+     * @param Orm               $orm
+     * @param UserManager       $userManager
+     * @param SessionInterface  $session
+     * @param EmailManager      $emailManager
+     * @param TemplatingManager $templating
      *
      * @throws AppException
      */
-    public function __construct(Orm $orm, UserManager $userManager, SessionInterface $session)
-    {
-        $this->orm         = $orm;
-        $this->manager     = $orm->getManager('App');
-        $this->userManager = $userManager;
-        $this->session     = $session;
+    public function __construct(
+        Orm $orm,
+        UserManager $userManager,
+        SessionInterface $session,
+        EmailManager $emailManager,
+        TemplatingManager $templating
+    ) {
+        $this->orm          = $orm;
+        $this->manager      = $orm->getManager('App');
+        $this->userManager  = $userManager;
+        $this->session      = $session;
+        $this->emailManager = $emailManager;
+        $this->templating   = $templating;
     }
 
     /**
@@ -64,6 +86,7 @@ class UserSecurityManager
 
         if ($user->getBadCredentials() > 2) {
             $this->lockUser($user);
+            $this->sendUserLockNotificationToAdmin($user->getFormattedName('long'));
         }
     }
 
@@ -88,6 +111,27 @@ class UserSecurityManager
         $lockedStatus = $this->getUserStatus(User::STATUS_LOCKED);
         $user->setStatus($lockedStatus);
         $this->manager->updateOne($user);
+    }
+
+    /**
+     * @param string $name
+     *
+     * @throws AppException
+     */
+    private function sendUserLockNotificationToAdmin(string $name): void
+    {
+        $roleRepository = $this->manager->getRepository(UserRole::class);
+        $role           = $roleRepository->findOneBy(['role' => User::ROLE_ADMIN]);
+        $admin          = $role->getUsers()[array_key_first($role->getUsers())];
+
+        $this->emailManager->send(
+            $admin->getEmail(),
+            'User lock notification',
+            $this->templating->render(
+                'security/authentication/_email_admin_lock_notification.html.twig',
+                ['name' => $name]
+            )
+        );
     }
 
     /**
