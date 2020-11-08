@@ -30,7 +30,9 @@
     "argument": [
       "@Climb\\Orm\\Orm",
       "@Climb\\Security\\UserManager",
-      "@Climb\\Http\\Session\\Session"
+      "@Climb\\Http\\Session\\Session",
+      "@App\\Service\\Email\\EmailManager",
+      "@App\\Service\\Templating\\TemplatingManager"
     ]
   },
   "App\\Service\\Security\\UserSecurityCodeManager": {
