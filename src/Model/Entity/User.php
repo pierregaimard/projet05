@@ -14,6 +14,8 @@ class User implements UserInterface
     public const STATUS_VALIDATION = 'VALIDATION';
     public const STATUS_ACTIVE     = 'ACTIVE';
     public const STATUS_LOCKED     = 'LOCKED';
+    public const ROLE_ADMIN        = 'ADMIN';
+    public const ROLE_MEMBER       = 'MEMBER';
 
     /**
      * @var int
