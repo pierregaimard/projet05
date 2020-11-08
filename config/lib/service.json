@@ -6,6 +6,13 @@
       "@App\\Service\\Form\\DataFilter\\DataFilter"
     ]
   },
+  "App\\Service\\Form\\DataChecker\\DataChecker": {
+    "argument": [
+      "@App\\Service\\Form\\DataChecker\\NullDataChecker",
+      "@App\\Service\\Form\\DataChecker\\MinLengthDataChecker",
+      "@App\\Service\\Form\\DataChecker\\MaxLengthDataChecker"
+    ]
+  },
   "App\\Service\\Security\\FormTokenManager": {
     "argument": [
       "@Climb\\Security\\TokenManager"
@@ -73,6 +80,12 @@
       "@App\\Service\\Security\\UserAuthenticationChecker",
       "@App\\Service\\Security\\UserAuthenticationCodeManager",
       "@App\\Service\\Security\\UserSecurityManager"
+    ]
+  },
+  "App\\Controller\\Security\\SignUpController": {
+    "argument": [
+      "@App\\Service\\Security\\FormTokenManager",
+      "@App\\Service\\Form\\EntityFormDataManager"
     ]
   }
 }
