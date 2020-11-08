@@ -1,31 +1,21 @@
-<form method="post" action="/">
+<form method="post" action="{{ getRoutePath('sign_up_check_pw') }}">
     <div class="uk-fieldset uk-margin-large-top">
-        <!-- first name -->
+        <!-- security code -->
         {%
             include 'form/_form_input.html.twig'
-            with {'type': 'text', 'id': 'firstName', 'name': 'firstName', 'label': 'First Name', 'error': 'Invalid info'}
-        %}
-        <!-- last name -->
-        {%
-            include 'form/_form_input.html.twig'
-            with {'type': 'text', 'id': 'lastName', 'name': 'firstName', 'label': 'Last Name'}
-        %}
-        <!-- email -->
-        {%
-            include 'form/_form_input.html.twig'
-            with {'type': 'email', 'id': 'email', 'name': 'email', 'label': 'E-mail'}
+            with {'type': 'code', 'id': 'code', 'name': 'code', 'label': 'Security code', 'error': formCheck['code']}
         %}
     </div>
     <div class="uk-fieldset uk-margin-large-top">
         <!-- password -->
         {%
             include 'form/_form_input.html.twig'
-            with {'type': 'password', 'id': 'password', 'name': 'password', 'label': 'Password'}
+            with {'type': 'password', 'id': 'password', 'name': 'password', 'label': 'Password', 'error': formCheck['password'], 'data': formData['password']}
         %}
         <!-- password confirm-->
         {%
             include 'form/_form_input.html.twig'
-            with {'type': 'passwordConfirm', 'id': 'passwordConfirm', 'name': 'passwordConfirm', 'label': 'Confirm password'}
+            with {'type': 'passwordConfirm', 'id': 'passwordConfirm', 'name': 'passwordConfirm', 'label': 'Confirm password', 'error': formCheck['passwordConfirm'], 'data': formData['passwordConfirm']}
         %}
     </div>
     <div class="uk-fieldset uk-margin-large-top">
