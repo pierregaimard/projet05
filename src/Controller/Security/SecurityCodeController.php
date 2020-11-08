@@ -80,8 +80,8 @@ class SecurityCodeController extends AbstractController
         }
 
         // Check form data
-        $code      = $data->get('code');
-        $field     = new Field();
+        $code  = $data->get('code');
+        $field = new Field();
         $field->setType(Field::TYPE_NUMBER);
         $field->setNullable(false);
         $checkCode = $this->formManager->checkFormField($code, $field);
