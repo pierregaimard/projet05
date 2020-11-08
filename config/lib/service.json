@@ -53,7 +53,8 @@
       "@Climb\\Orm\\Orm",
       "@Climb\\Http\\Session\\Session",
       "@Climb\\Security\\UserPasswordManager",
-      "@App\\Service\\Email\\EmailManager"
+      "@App\\Service\\Email\\EmailManager",
+      "@App\\Service\\Templating\\TemplatingManager"
     ]
   },
   "App\\Service\\Email\\MailerManager": {
