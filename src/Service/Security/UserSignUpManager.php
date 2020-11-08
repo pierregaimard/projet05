@@ -110,13 +110,12 @@ class UserSignUpManager
     public function setFinalUser(string $password): User
     {
         $statusRepository = $this->entityManager->getRepository(UserStatus::class);
-        $status = $statusRepository->findOneBy(['status' => User::STATUS_VALIDATION]);
-
-        $roleRepository = $this->entityManager->getRepository(UserRole::class);
-        $role = $roleRepository->findOneBy(['role' => User::ROLE_MEMBER]);
+        $status           = $statusRepository->findOneBy(['status' => User::STATUS_VALIDATION]);
+        $roleRepository   = $this->entityManager->getRepository(UserRole::class);
+        $role             = $roleRepository->findOneBy(['role' => User::ROLE_MEMBER]);
 
         $tempUserData = $this->getTempUser();
-        $user = new User();
+        $user         = new User();
         $user->setFirstName($tempUserData['firstName']);
         $user->setLastName($tempUserData['lastName']);
         $user->setEmail($tempUserData['email']);
