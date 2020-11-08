@@ -86,8 +86,9 @@ class User implements UserInterface
 
     public function __construct()
     {
-        $this->roles          = new EntityBag();
-        $this->badCredentials = 0;
+        $this->roles            = new EntityBag();
+        $this->badCredentials   = 0;
+        $this->lastSecurityCode = null;
     }
 
     public function isGranted(string $role): bool
