@@ -60,7 +60,7 @@ class SecurityFormDataManager
         $field->setMinLength(8);
         $checkPw        = $this->formDataManager->checkFormField($password, $field);
         $checkPwConfirm = $this->formDataManager->checkFormField($passwordConfirm, $field);
-        $message = [];
+        $message        = [];
 
         if ($checkPw !== true) {
             $message['password'] = $checkPw;
