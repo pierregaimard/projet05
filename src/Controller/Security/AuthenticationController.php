@@ -66,6 +66,11 @@ class AuthenticationController extends AbstractController
      */
     public function login()
     {
+        if (!$this->getRequestData()->has('securityCode')) {
+            $this->codeManager->unsetSessionHash();
+            $this->userManager->unsetSessionLogin();
+        }
+
         $token = $this->tokenManager->getToken('authentication');
 
         $response = new Response();
