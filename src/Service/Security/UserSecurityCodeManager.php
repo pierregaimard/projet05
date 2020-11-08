@@ -10,7 +10,7 @@ use Climb\Security\TokenManager;
 use DateTime;
 use Exception;
 
-class UserAuthenticationCodeManager
+class UserSecurityCodeManager
 {
     private const HASH_KEYWORD     = 'tSYDgd548s5$dks';
     private const SESSION_CODE_KEY = 'HYsgdycHSGtdg54$GHF';
@@ -97,9 +97,9 @@ class UserAuthenticationCodeManager
     }
 
     /**
-     * @param User $user
+     * @param string $email
      */
-    public function dispatchSecurityCode(User $user): void
+    public function dispatchSecurityCode(string $email): void
     {
         $code    = $this->codeManager->generateCode();
         $message = $this->templating->render(
@@ -107,7 +107,7 @@ class UserAuthenticationCodeManager
             ['code' => $code]
         );
 
-        $this->emailManager->send($user->getEmail(), 'Authentication code', $message);
+        $this->emailManager->send($email, 'Authentication code', $message);
         $this->setSessionHash($this->getHashSecurityCode($code));
     }
 
@@ -125,29 +125,42 @@ class UserAuthenticationCodeManager
     }
 
     /**
-     * @param User $user
+     * @param string $email
      *
      * @return string[]
      */
-    public function getMessage(User $user): array
+    public function getMessage(string $email): array
     {
         return [
             'type' => 'info',
-            'message' => 'A security code have been sent to ' . $user->getEmail() . '. Please enter this code here.'
+            'message' => 'A security code have been sent to ' . $email . '. Please enter this code here.'
         ];
     }
 
     /**
+     * @param string $email
+     *
      * @return string[]
      */
-    public function getInvalidMessage(): array
+    public function getNewCodeMessage(string $email): array
+    {
+        return [
+            'type' => 'info',
+            'message' => 'A new code have been sent to ' . $email . '. Please enter this code here.'
+        ];
+    }
+
+    /**
+     * @param string $email
+     *
+     * @return string[]
+     */
+    public function getInvalidMessage(string $email): array
     {
         return [
             'type' => 'danger',
             'message' =>
-                'invalid security code. A new code have been sent to ' .
-                $this->userManager->getSessionLogin() .
-                '. Please enter this code here.'
+                'invalid security code. A new code have been sent to ' . $email . '. Please enter this code here.'
         ];
     }
 

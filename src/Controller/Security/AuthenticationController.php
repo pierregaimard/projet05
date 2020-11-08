@@ -6,7 +6,7 @@ use App\Model\Entity\User;
 use App\Service\Form\EntityFormDataManager;
 use App\Service\Security\FormTokenManager;
 use App\Service\Security\UserAuthenticationChecker;
-use App\Service\Security\UserAuthenticationCodeManager;
+use App\Service\Security\UserSecurityCodeManager;
 use App\Service\Security\UserSecurityManager;
 use Climb\Controller\AbstractController;
 use Climb\Exception\AppException;
@@ -36,22 +36,22 @@ class AuthenticationController extends AbstractController
     private UserSecurityManager $userManager;
 
     /**
-     * @var UserAuthenticationCodeManager
+     * @var UserSecurityCodeManager
      */
-    private UserAuthenticationCodeManager $codeManager;
+    private UserSecurityCodeManager $codeManager;
 
     /**
-     * @param FormTokenManager              $tokenManager
-     * @param EntityFormDataManager         $formManager
-     * @param UserAuthenticationChecker     $authenticator
-     * @param UserAuthenticationCodeManager $codeManager
-     * @param UserSecurityManager           $userManager
+     * @param FormTokenManager          $tokenManager
+     * @param EntityFormDataManager     $formManager
+     * @param UserAuthenticationChecker $authenticator
+     * @param UserSecurityCodeManager   $codeManager
+     * @param UserSecurityManager       $userManager
      */
     public function __construct(
         FormTokenManager $tokenManager,
         EntityFormDataManager $formManager,
         UserAuthenticationChecker $authenticator,
-        UserAuthenticationCodeManager $codeManager,
+        UserSecurityCodeManager $codeManager,
         UserSecurityManager $userManager
     ) {
         $this->tokenManager  = $tokenManager;
@@ -66,6 +66,11 @@ class AuthenticationController extends AbstractController
      */
     public function login()
     {
+        if (!$this->getRequestData()->has('securityCode')) {
+            $this->codeManager->unsetSessionHash();
+            $this->userManager->unsetSessionLogin();
+        }
+
         $token = $this->tokenManager->getToken('authentication');
 
         $response = new Response();
@@ -124,13 +129,13 @@ class AuthenticationController extends AbstractController
 
         // Check security code needs
         if ($this->codeManager->needSecurityCode($userAuthCheck)) {
-            $this->codeManager->dispatchSecurityCode($userAuthCheck);
+            $this->codeManager->dispatchSecurityCode($userAuthCheck->getEmail());
             $this->userManager->setSessionLogin($userAuthCheck->getEmail());
 
             return $this->redirectToRoute(
                 'login',
                 null,
-                ['securityCode' => true, 'message' => $this->codeManager->getMessage($userAuthCheck)]
+                ['securityCode' => true, 'message' => $this->codeManager->getMessage($userAuthCheck->getEmail())]
             );
         }
 

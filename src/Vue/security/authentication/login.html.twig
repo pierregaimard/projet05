@@ -14,7 +14,7 @@
         <!-- form box -->
         <div class="app-login-box uk-padding-small uk-box-shadow-small">
             <h1 class="uk-text-center">Login</h1>
-            {% include "security/authentication/_form_message.html.twig" %}
+            {% include "form/_form_message.html.twig" %}
             {% if securityCode == true %}
                 {% include "security/authentication/_login_security_code_form.html.twig" %}
             {% else %}

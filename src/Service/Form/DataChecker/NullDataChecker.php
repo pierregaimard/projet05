@@ -2,23 +2,19 @@
 
 namespace App\Service\Form\DataChecker;
 
-class NullDataChecker implements DataCheckerInterface
+class NullDataChecker
 {
     /**
      * @param string $data
      *
-     * @return bool
+     * @return string|true
      */
-    public function check(string $data): bool
+    public function check(string $data)
     {
-        return $data !== '';
-    }
+        if ($data !== '') {
+            return true;
+        }
 
-    /**
-     * @return string
-     */
-    public function getErrorMessage(): string
-    {
         return 'This field is required';
     }
 }

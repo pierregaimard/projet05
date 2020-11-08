@@ -14,6 +14,8 @@ class User implements UserInterface
     public const STATUS_VALIDATION = 'VALIDATION';
     public const STATUS_ACTIVE     = 'ACTIVE';
     public const STATUS_LOCKED     = 'LOCKED';
+    public const ROLE_ADMIN        = 'ADMIN';
+    public const ROLE_MEMBER       = 'MEMBER';
 
     /**
      * @var int
@@ -26,7 +28,7 @@ class User implements UserInterface
      * @var string
      *
      * @Column(name="first_name")
-     * @Field(type="name", nullable=false)
+     * @Field(type="name", nullable=false, minLength=3)
      */
     private string $firstName;
 
@@ -34,7 +36,7 @@ class User implements UserInterface
      * @var string
      *
      * @Column(name="last_name")
-     * @Field(type="name", nullable=false)
+     * @Field(type="name", nullable=false, minLength=3)
      */
     private string $lastName;
 
@@ -50,7 +52,7 @@ class User implements UserInterface
      * @var string
      *
      * @Column(name="password")
-     * @Field(type="password", nullable=false)
+     * @Field(type="password", nullable=false, minLength=8)
      */
     private string $password;
 
@@ -78,14 +80,15 @@ class User implements UserInterface
     /**
      * @var EntityBag
      *
-     * @Relation(type="association", entity="App\Model\Entity\UserRole", association="as_user_role")
+     * @Relation(type="association", entity="App\Model\Entity\UserRole", association="as_user_role", invertedBy="users")
      */
     private EntityBag $roles;
 
     public function __construct()
     {
-        $this->roles          = new EntityBag();
-        $this->badCredentials = 0;
+        $this->roles            = new EntityBag();
+        $this->badCredentials   = 0;
+        $this->lastSecurityCode = null;
     }
 
     public function isGranted(string $role): bool

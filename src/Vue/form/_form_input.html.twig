@@ -1,0 +1,28 @@
+<div class="uk-margin">
+    <div class="uk-form-controls">
+        <label
+            class="uk-form-label {% if error is not null %}uk-form-danger{% endif %} uk-margin-small-left"
+            for="{{ id }}"
+        >
+            {{ label }}
+        </label>
+        <input
+                type="{{ type }}"
+                id="{{ id }}"
+                name="{{ name }}"
+                class="
+                    uk-input uk-border-rounded
+                    {% if error is not null %}
+                        uk-form-danger
+                    {% endif %}
+                "
+                value="{{ data }}"
+                placeholder="{{ placeholder }}"
+        >
+        {% if error is not null %}
+            <p class="uk-form-danger uk-margin-remove-top uk-margin-small-left">
+                {{ error }}
+            </p>
+        {% endif %}
+    </div>
+</div>
