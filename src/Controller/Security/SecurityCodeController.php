@@ -2,12 +2,12 @@
 
 namespace App\Controller\Security;
 
-use App\Service\Form\Annotation\Field;
-use App\Service\Form\EntityFormDataManager;
 use App\Service\Security\FormTokenManager;
+use App\Service\Security\SecurityFormDataManager;
 use App\Service\Security\UserAuthenticationChecker;
 use App\Service\Security\UserSecurityCodeManager;
 use App\Service\Security\UserSecurityManager;
+use App\Service\Security\UserSignUpManager;
 use Climb\Controller\AbstractController;
 use Climb\Exception\AppException;
 
@@ -17,11 +17,6 @@ class SecurityCodeController extends AbstractController
      * @var FormTokenManager
      */
     private FormTokenManager $tokenManager;
-
-    /**
-     * @var EntityFormDataManager
-     */
-    private EntityFormDataManager $formManager;
 
     /**
      * @var UserAuthenticationChecker
@@ -39,24 +34,37 @@ class SecurityCodeController extends AbstractController
     private UserSecurityCodeManager $codeManager;
 
     /**
+     * @var SecurityFormDataManager
+     */
+    private SecurityFormDataManager $securityFormData;
+
+    /**
+     * @var UserSignUpManager
+     */
+    private UserSignUpManager $signUpManager;
+
+    /**
      * @param FormTokenManager          $tokenManager
-     * @param EntityFormDataManager     $formManager
      * @param UserAuthenticationChecker $authenticator
      * @param UserSecurityCodeManager   $codeManager
      * @param UserSecurityManager       $userManager
+     * @param SecurityFormDataManager   $securityFormData
+     * @param UserSignUpManager         $signUpManager
      */
     public function __construct(
         FormTokenManager $tokenManager,
-        EntityFormDataManager $formManager,
         UserAuthenticationChecker $authenticator,
         UserSecurityCodeManager $codeManager,
-        UserSecurityManager $userManager
+        UserSecurityManager $userManager,
+        SecurityFormDataManager $securityFormData,
+        UserSignUpManager $signUpManager
     ) {
-        $this->tokenManager  = $tokenManager;
-        $this->formManager   = $formManager;
-        $this->authenticator = $authenticator;
-        $this->codeManager   = $codeManager;
-        $this->userManager   = $userManager;
+        $this->tokenManager     = $tokenManager;
+        $this->authenticator    = $authenticator;
+        $this->codeManager      = $codeManager;
+        $this->userManager      = $userManager;
+        $this->securityFormData = $securityFormData;
+        $this->signUpManager    = $signUpManager;
     }
 
     /**
@@ -79,22 +87,18 @@ class SecurityCodeController extends AbstractController
         }
 
         // Check form data
-        $code  = $data->get('code');
-        $field = new Field();
-        $field->setType(Field::TYPE_NUMBER);
-        $field->setNullable(false);
-        $checkCode = $this->formManager->checkFormField($code, $field);
+        $checkCode = $this->securityFormData->checkSecurityCode($data->get('code'));
 
         if ($checkCode !== true) {
             return $this->redirectToRoute(
                 'login',
                 null,
-                ['securityCode' => true, 'message' => ['type' => 'danger', 'message' => $checkCode]]
+                ['securityCode' => true, 'formCheck' => ['code' => $checkCode]]
             );
         }
 
         // Filter form data
-        $code = $this->formManager->filterField('number', $code);
+        $code = $this->securityFormData->filterSecurityCode($data->get('code'));
 
         // Get user entity
         $user = $this->authenticator->checkUser($this->userManager->getSessionLogin());
@@ -114,7 +118,7 @@ class SecurityCodeController extends AbstractController
             return $this->redirectToRoute(
                 'login',
                 null,
-                ['securityCode' => true, 'message' => $this->codeManager->getInvalidMessage()]
+                ['securityCode' => true, 'message' => $this->codeManager->getInvalidMessage($user->getEmail())]
             );
         }
 
@@ -134,7 +138,7 @@ class SecurityCodeController extends AbstractController
      *
      * @throws AppException
      */
-    public function sendNewCode()
+    public function loginNewCode()
     {
         // Get user entity
         $user = $this->authenticator->checkUser($this->userManager->getSessionLogin());
@@ -145,7 +149,24 @@ class SecurityCodeController extends AbstractController
         return $this->redirectToRoute(
             'login',
             null,
-            ['securityCode' => true, 'message' => $this->codeManager->getMessage($user->getEmail())]
+            ['securityCode' => true, 'message' => $this->codeManager->getNewCodeMessage($user->getEmail())]
+        );
+    }
+
+    /**
+     * @Route(path="/signUp/newCode", name="signup_code_new")
+     */
+    public function signUpNewCode()
+    {
+        $email = $this->signUpManager->getTempUser()['email'];
+
+        // Dispatch new code
+        $this->codeManager->dispatchSecurityCode($email);
+
+        return $this->redirectToRoute(
+            'sign_up',
+            ['step' => 'stepTwo'],
+            ['message' => $this->codeManager->getNewCodeMessage($email)]
         );
     }
 }
