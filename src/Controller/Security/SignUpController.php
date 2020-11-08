@@ -252,6 +252,7 @@ class SignUpController extends AbstractController
         }
 
         $user = $this->signUpManager->setFinalUser($pass);
+        $this->signUpManager->sendNewUserNotificationToAdmin($user->getFormattedName('long'));
 
         return $this->redirectToRoute('sign_up', ['step' => 'stepFour'], ['firstName' => $user->getFirstName()]);
     }
