@@ -12,6 +12,7 @@ use Climb\Orm\Orm;
 use Climb\Exception\AppException;
 use App\Model\Entity\User;
 use Climb\Security\UserManager;
+use Climb\Security\UserPasswordManager;
 use DateTime;
 
 class UserSecurityManager
@@ -49,13 +50,19 @@ class UserSecurityManager
     private TemplatingManager $templating;
 
     /**
+     * @var UserPasswordManager
+     */
+    private UserPasswordManager $passwordManager;
+
+    /**
      * UserSecurityManager constructor.
      *
-     * @param Orm               $orm
-     * @param UserManager       $userManager
-     * @param SessionInterface  $session
-     * @param EmailManager      $emailManager
-     * @param TemplatingManager $templating
+     * @param Orm                 $orm
+     * @param UserManager         $userManager
+     * @param SessionInterface    $session
+     * @param EmailManager        $emailManager
+     * @param TemplatingManager   $templating
+     * @param UserPasswordManager $passwordManager
      *
      * @throws AppException
      */
@@ -64,14 +71,16 @@ class UserSecurityManager
         UserManager $userManager,
         SessionInterface $session,
         EmailManager $emailManager,
-        TemplatingManager $templating
+        TemplatingManager $templating,
+        UserPasswordManager $passwordManager
     ) {
-        $this->orm          = $orm;
-        $this->manager      = $orm->getManager('App');
-        $this->userManager  = $userManager;
-        $this->session      = $session;
-        $this->emailManager = $emailManager;
-        $this->templating   = $templating;
+        $this->orm             = $orm;
+        $this->manager         = $orm->getManager('App');
+        $this->userManager     = $userManager;
+        $this->session         = $session;
+        $this->emailManager    = $emailManager;
+        $this->templating      = $templating;
+        $this->passwordManager = $passwordManager;
     }
 
     /**
@@ -186,6 +195,28 @@ class UserSecurityManager
     public function unsetSessionLogin(): void
     {
         $this->session->remove(self::SESSION_LOGIN_KEY);
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasSessionLogin(): bool
+    {
+        return $this->session->has(self::SESSION_LOGIN_KEY);
+    }
+
+    /**
+     * @param string $password
+     *
+     * @throws AppException
+     */
+    public function saveUserPassword(string $password): void
+    {
+        $userRepository = $this->manager->getRepository(User::class);
+        $user           = $userRepository->findOneBy(['email' => $this->getSessionLogin()]);
+        $user->setPassword($this->passwordManager->getPasswordHash($password));
+
+        $this->manager->updateOne($user);
     }
 
     /**
