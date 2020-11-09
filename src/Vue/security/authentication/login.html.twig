@@ -29,6 +29,6 @@
                 </div>
             {% endif %}
         </div>
-        <a href="/" class="uk-button uk-button-text uk-width-1-1 uk-text-center uk-margin">forgot password</a>
+        <a href="{{ getRoutePath("forgot_password", {"step": "stepOne"}) }}" class="uk-button uk-button-text uk-width-1-1 uk-text-center uk-margin">forgot password</a>
     </div>
 {% endblock %}
