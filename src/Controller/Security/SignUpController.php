@@ -84,16 +84,15 @@ class SignUpController extends AbstractController
         $data  = $this->getRequestData();
 
         // Security code checker for step three
-        if ($step === 'stepThree' && $data->get('checkCode') === true) {
-            if (!$this->codeManager->isCodeValid($this->getRequestData()->get('code'))) {
+        if ($step === 'stepThree') {
+            if (
+                !$this->getRequestData()->has('stepToken') ||
+                !$this->tokenManager->isValid('stepThreeToken', $this->getRequestData()->get('stepToken'))
+            ) {
                 $this->codeManager->unsetSessionHash();
                 $this->signUpManager->unsetTempUser();
 
-                return $this->redirectToRoute(
-                    'sign_up',
-                    ['step' => 'stepOne'],
-                    ['message' => ['type' => 'danger', 'message' => 'Security alert, please try again']]
-                );
+                return $this->redirectToRoute('sign_up', ['step' => 'stepOne']);
             }
         }
 
@@ -197,7 +196,11 @@ class SignUpController extends AbstractController
             );
         }
 
-        return $this->redirectToRoute('sign_up', ['step' => 'stepThree'], ['code' => $code, 'checkCode' => true]);
+        return $this->redirectToRoute(
+            'sign_up',
+            ['step' => 'stepThree'],
+            ['stepToken' => $this->tokenManager->getToken('stepThreeToken')]
+        );
     }
 
     /**
@@ -215,6 +218,8 @@ class SignUpController extends AbstractController
             return $this->redirectToRoute('sign_up', ['step' => 'stepThree'], ['message' => $tokenCheck]);
         }
 
+        $stepToken = $this->tokenManager->getToken('stepThreeToken');
+
         // Check form data
         $pass          = $data->get('password');
         $passConfirm   = $data->get('passwordConfirm');
@@ -223,7 +228,7 @@ class SignUpController extends AbstractController
             return $this->redirectToRoute(
                 'sign_up',
                 ['step' => 'stepThree'],
-                ['formCheck' => $passwordCheck, 'checkCode' => false]
+                ['formCheck' => $passwordCheck, 'stepToken' => $stepToken]
             );
         }
 
@@ -233,7 +238,7 @@ class SignUpController extends AbstractController
             return $this->redirectToRoute(
                 'sign_up',
                 ['step' => 'stepThree'],
-                ['message' => $identicalCheck, 'checkCode' => false]
+                ['message' => $identicalCheck, 'stepToken' => $stepToken]
             );
         }
 
@@ -244,7 +249,7 @@ class SignUpController extends AbstractController
                 'sign_up',
                 ['step' => 'stepThree'],
                 [
-                    'checkCode' => false,
+                    'stepToken' => $stepToken,
                     'message' => ['type' => 'danger', 'message' => 'Invalid password, please check requirements'],
                     'passwordRequirements' => $requirementsCheck
                 ]
