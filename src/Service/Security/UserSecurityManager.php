@@ -5,7 +5,6 @@ namespace App\Service\Security;
 use App\Model\Entity\UserRole;
 use App\Model\Entity\UserStatus;
 use App\Service\Email\EmailManager;
-use App\Service\Templating\TemplatingManager;
 use Climb\Http\Session\SessionInterface;
 use Climb\Orm\EntityManager;
 use Climb\Orm\Orm;
@@ -45,11 +44,6 @@ class UserSecurityManager
     private EmailManager $emailManager;
 
     /**
-     * @var TemplatingManager
-     */
-    private TemplatingManager $templating;
-
-    /**
      * @var UserPasswordManager
      */
     private UserPasswordManager $passwordManager;
@@ -61,7 +55,6 @@ class UserSecurityManager
      * @param UserManager         $userManager
      * @param SessionInterface    $session
      * @param EmailManager        $emailManager
-     * @param TemplatingManager   $templating
      * @param UserPasswordManager $passwordManager
      *
      * @throws AppException
@@ -71,7 +64,6 @@ class UserSecurityManager
         UserManager $userManager,
         SessionInterface $session,
         EmailManager $emailManager,
-        TemplatingManager $templating,
         UserPasswordManager $passwordManager
     ) {
         $this->orm             = $orm;
@@ -79,7 +71,6 @@ class UserSecurityManager
         $this->userManager     = $userManager;
         $this->session         = $session;
         $this->emailManager    = $emailManager;
-        $this->templating      = $templating;
         $this->passwordManager = $passwordManager;
     }
 
@@ -129,18 +120,27 @@ class UserSecurityManager
      */
     private function sendUserLockNotificationToAdmin(string $name): void
     {
-        $roleRepository = $this->manager->getRepository(UserRole::class);
-        $role           = $roleRepository->findOneBy(['role' => User::ROLE_ADMIN]);
-        $admin          = $role->getUsers()[array_key_first($role->getUsers())];
+        $admin = $this->getAdminUser();
 
         $this->emailManager->send(
             $admin->getEmail(),
             'User lock notification',
-            $this->templating->render(
-                'security/authentication/_email_admin_lock_notification.html.twig',
-                ['name' => $name]
-            )
+            'security/authentication/_email_admin_lock_notification.html.twig',
+            ['name' => $name]
         );
+    }
+
+    /**
+     * @return User
+     *
+     * @throws AppException
+     */
+    public function getAdminUser(): User
+    {
+        $roleRepository = $this->manager->getRepository(UserRole::class);
+        $role           = $roleRepository->findOneBy(['role' => User::ROLE_ADMIN]);
+
+        return $role->getUsers()[array_key_first($role->getUsers())];
     }
 
     /**
