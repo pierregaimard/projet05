@@ -11,7 +11,7 @@ class NameDataChecker implements DataCheckerInterface
      */
     public function check(string $data): bool
     {
-        return preg_match('#^[a-zA-Zâäçéèêëîïôùûüÿ]+([ -]?[a-zA-Zâäçéèêëîïôùûüÿ]*)$#', $data) !== 0;
+        return preg_match('#^[a-zA-Zâäçéèêëîïôùûüÿ\']+([ -]?[a-zA-Zâäçéèêëîïôùûüÿ\']*)$#', $data) !== 0;
     }
 
     /**
