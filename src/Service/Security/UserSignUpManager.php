@@ -37,14 +37,17 @@ class UserSignUpManager
      */
     private EmailManager $emailManager;
 
-    private TemplatingManager $templating;
+    /**
+     * @var UserSecurityManager
+     */
+    private UserSecurityManager $userManager;
 
     /**
      * @param Orm                 $orm
      * @param SessionInterface    $session
      * @param UserPasswordManager $passwordManager
      * @param EmailManager        $emailManager
-     * @param TemplatingManager   $templating
+     * @param UserSecurityManager $userManager
      *
      * @throws AppException
      */
@@ -53,13 +56,13 @@ class UserSignUpManager
         SessionInterface $session,
         UserPasswordManager $passwordManager,
         EmailManager $emailManager,
-        TemplatingManager $templating
+        UserSecurityManager $userManager
     ) {
         $this->entityManager   = $orm->getManager('App');
         $this->session         = $session;
         $this->passwordManager = $passwordManager;
         $this->emailManager    = $emailManager;
-        $this->templating      = $templating;
+        $this->userManager     = $userManager;
     }
 
     /**
@@ -141,14 +144,13 @@ class UserSignUpManager
      */
     public function sendNewUserNotificationToAdmin(string $name): void
     {
-        $roleRepository = $this->entityManager->getRepository(UserRole::class);
-        $role           = $roleRepository->findOneBy(['role' => User::ROLE_ADMIN]);
-        $admin          = $role->getUsers()[array_key_first($role->getUsers())];
-        
+        $admin = $this->userManager->getAdminUser();
+
         $this->emailManager->send(
             $admin->getEmail(),
             'New member subscription',
-            $this->templating->render('security/signup/_email_admin_notification.html.twig', ['name' => $name])
+            'security/signup/_email_admin_notification.html.twig',
+            ['name' => $name]
         );
     }
 }
