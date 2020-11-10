@@ -92,7 +92,7 @@ class UserSecurityCodeManager
      */
     public function dispatchSecurityCode(string $email): void
     {
-        $code    = $this->codeManager->generateCode();
+        $code = $this->codeManager->generateCode();
         $this->emailManager->send(
             $email,
             'Authentication code',
