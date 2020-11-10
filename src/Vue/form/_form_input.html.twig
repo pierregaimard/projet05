@@ -1,11 +1,13 @@
-<div class="uk-margin">
+<div class="{% if ukMargin is defined %}{{ ukMargin }}{% else %}uk-margin{% endif %}">
     <div class="uk-form-controls">
-        <label
-            class="uk-form-label {% if error is not null %}uk-form-danger{% endif %} uk-margin-small-left"
-            for="{{ id }}"
-        >
-            {{ label }}
-        </label>
+        {% if label is defined %}
+            <label
+                class="uk-form-label {% if error is not null %}uk-form-danger{% endif %} uk-margin-small-left"
+                for="{{ id }}"
+            >
+                {{ label }}
+            </label>
+        {% endif %}
         <input
                 type="{{ type }}"
                 id="{{ id }}"
