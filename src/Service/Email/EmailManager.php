@@ -36,13 +36,14 @@ class EmailManager
     }
 
     /**
-     * @param string      $email
-     * @param string      $subject
-     * @param string      $content
+     * @param string     $email
+     * @param string     $subject
+     * @param string     $templatePath
+     * @param array|null $data
      *
      * @return int
      */
-    public function send(string $email, string $subject, string $content): int
+    public function send(string $email, string $subject, string $templatePath, array $data = null): int
     {
         $message = (new Swift_Message())
             ->setSubject($subject)
@@ -50,7 +51,10 @@ class EmailManager
             ->setTo($email)
             ->setContentType('text/html')
             ->setBody(
-                $this->templating->render('email/blog_email_template.html.twig', ['content' => $content])
+                $this->templating->render(
+                    'email/blog_email_template.html.twig',
+                    ['content' => $this->templating->render($templatePath, $data)]
+                )
             );
 
         return $this->mailer->send($message);
