@@ -1,0 +1,16 @@
+<script>
+    {% if flashes is not empty %}
+        $(document).ready(function () {
+            {% for flash in flashes %}
+                UIkit.notification(
+                    '{{ flash.message|raw }}',
+                    {
+                        status: '{{ flash.status }}',
+                        timeout: 5000,
+                        position: 'top-center'
+                    }
+                );
+            {% endfor %}
+        });
+    {% endif %}
+</script>

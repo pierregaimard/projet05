@@ -9,6 +9,7 @@ use App\Service\Security\FormTokenManager;
 use App\Service\Security\UserSecurityManager;
 use Climb\Controller\AbstractController;
 use Climb\Exception\AppException;
+use Climb\Http\RedirectResponse;
 use Climb\Http\Response;
 
 class HomeController extends AbstractController
@@ -113,6 +114,15 @@ class HomeController extends AbstractController
             ['message' => $message]
         );
 
-        return $this->redirectToRoute('home');
+        $response = new RedirectResponse($this->getRoutePath('home'));
+        $response->getFlashes()->add(
+            'message',
+            [
+                'status' => 'default',
+                'message' => '<span uk-icon="icon: check"></span> Your message has been sent successfully'
+            ]
+        );
+
+        return $response;
     }
 }
