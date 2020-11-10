@@ -8,19 +8,18 @@
                 {{ label }}
             </label>
         {% endif %}
-        <input
-                type="{{ type }}"
+        <textarea
                 id="{{ id }}"
                 name="{{ name }}"
+                rows="{{ rows }}"
                 class="
-                    uk-input uk-border-rounded
+                    uk-textarea uk-border-rounded
                     {% if error is not null %}
                         uk-form-danger
                     {% endif %}
                 "
-                value="{{ data }}"
                 placeholder="{{ placeholder }}"
-        >
+        >{{ data }}</textarea>
         {% if error is not null %}
             <p class="uk-form-danger uk-margin-remove-top uk-margin-small-left">
                 {{ error }}

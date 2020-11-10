@@ -4,7 +4,6 @@ namespace App\Service\Security;
 
 use App\Model\Entity\User;
 use App\Service\Email\EmailManager;
-use App\Service\Templating\TemplatingManager;
 use Climb\Http\Session\SessionInterface;
 use Climb\Security\TokenManager;
 use DateTime;
@@ -31,11 +30,6 @@ class UserSecurityCodeManager
     private UserSecurityManager $userManager;
 
     /**
-     * @var TemplatingManager
-     */
-    private TemplatingManager $templating;
-
-    /**
      * @var TokenManager
      */
     private TokenManager $tokenManager;
@@ -49,7 +43,6 @@ class UserSecurityCodeManager
      * @param EmailManager        $emailManager
      * @param SecurityCodeManager $codeManager
      * @param UserSecurityManager $userManager
-     * @param TemplatingManager   $templating
      * @param TokenManager        $tokenManager
      * @param SessionInterface    $session
      */
@@ -57,14 +50,12 @@ class UserSecurityCodeManager
         EmailManager $emailManager,
         SecurityCodeManager $codeManager,
         UserSecurityManager $userManager,
-        TemplatingManager $templating,
         TokenManager $tokenManager,
         SessionInterface $session
     ) {
         $this->emailManager = $emailManager;
         $this->codeManager  = $codeManager;
         $this->userManager  = $userManager;
-        $this->templating   = $templating;
         $this->tokenManager = $tokenManager;
         $this->session      = $session;
     }
@@ -102,12 +93,12 @@ class UserSecurityCodeManager
     public function dispatchSecurityCode(string $email): void
     {
         $code    = $this->codeManager->generateCode();
-        $message = $this->templating->render(
+        $this->emailManager->send(
+            $email,
+            'Authentication code',
             'security/authentication/_email_security_code.html.twig',
             ['code' => $code]
         );
-
-        $this->emailManager->send($email, 'Authentication code', $message);
         $this->setSessionHash($this->getHashSecurityCode($code));
     }
 

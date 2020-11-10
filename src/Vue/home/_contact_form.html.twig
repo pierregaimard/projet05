@@ -1,24 +1,25 @@
-<form class="app-contact-form uk-margin-medium-top">
-    <div class="uk-margin-small">
-        <div class="uk-form-controls">
-            <input name="firstName" id="first-name" class="uk-input uk-border-rounded" type="text" placeholder="First name">
-        </div>
-    </div>
-    <div class="uk-margin-small">
-        <div class="uk-form-controls">
-            <input name="lastName" id="last-name" class="uk-input uk-border-rounded" type="text" placeholder="Last name">
-        </div>
-    </div>
-    <div class="uk-margin-small">
-        <div class="uk-form-controls">
-            <input name="email" id="email" class="uk-input uk-border-rounded" type="email" placeholder="E-mail">
-        </div>
-    </div>
-    <div class="uk-margin-small">
-        <div class="uk-form-controls">
-            <textarea name="message" id="message" class="uk-textarea uk-border-rounded" rows="5" placeholder="Message..."></textarea>
-        </div>
-    </div>
+<form method="post" action="{{ getRoutePath('contact_form_check') }}" class="app-contact-form uk-margin-medium-top">
+    <!-- first name -->
+    {%
+        include 'form/_form_input.html.twig'
+        with {'ukMargin': 'uk-margin-small', 'type': 'text', 'id': 'firstName', 'name': 'firstName', 'placeholder': 'First Name', 'error': formCheck['firstName'], 'data': formData['firstName']}
+    %}
+    <!-- last name -->
+    {%
+        include 'form/_form_input.html.twig'
+        with {'ukMargin': 'uk-margin-small', 'type': 'text', 'id': 'lastName', 'name': 'lastName', 'placeholder': 'Last Name', 'error': formCheck['lastName'], 'data': formData['lastName']}
+    %}
+    <!-- email -->
+    {%
+        include 'form/_form_input.html.twig'
+        with {'ukMargin': 'uk-margin-small', 'type': 'text', 'id': 'email', 'name': 'email', 'placeholder': 'E-mail', 'error': formCheck['email'], 'data': formData['email']}
+    %}
+    <!-- message -->
+    {%
+        include 'form/_form_textarea.html.twig'
+        with {'ukMargin': 'uk-margin-small', 'id': 'message', 'name': 'message', 'placeholder': 'Message', 'rows': 5, 'error': formCheck['message'], 'data': formData['message']}
+    %}
+    <input type="hidden" name="token" value="{{ token }}">
     <div class="uk-margin-small">
         <button type="submit" class="uk-button uk-width-1-1 uk-button-secondary uk-border-rounded">Send</button>
     </div>
