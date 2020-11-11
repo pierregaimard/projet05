@@ -306,6 +306,8 @@ class User implements UserInterface
                 return ucfirst(substr($this->firstName, 0, 1));
             case 'short':
                 return ucfirst(substr($this->firstName, 0, 1)) . ' ' . ucfirst(strtolower($this->lastName));
+            case 'firstName':
+                return ucfirst(strtolower($this->firstName));
             case 'long':
             default:
                 return $this->firstName . ' ' . $this->lastName;
