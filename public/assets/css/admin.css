@@ -1,0 +1,14 @@
+.app-admin-home-container { max-width: 500px; }
+
+.app-menu-item:hover { background-color: #2f2e2f; }
+
+.app-menu-item h4 { font-weight: 300; }
+
+.app-menu-item:hover h4 { color: #dbd9db; }
+
+.app-menu-item .uk-badge { font-weight: 500; }
+
+.app-menu-item:hover .uk-badge {
+  background-color: #dbd9db;
+  color: #2f2e2f;
+}
