@@ -1,0 +1,29 @@
+{% extends "core.html.twig" %}
+
+{% block Stylesheet %}
+    <link rel="stylesheet" href="public/assets/css/admin.css" />
+{% endblock %}
+
+{% block Body %}
+    <div class="uk-container app-admin-home-container" uk-height-viewport="expand: true">
+        <h1 class="uk-margin-large-top uk-margin-large-bottom uk-text-center uk-text-bold">
+            <img src="public/assets/img/padlock.svg" alt="padlock illustration" width="100">
+            Admin
+        </h1>
+        {%
+            include
+            "admin/_home_menu_item.html.twig"
+            with {'path': '/','icon': 'users', 'title': 'Members', 'badge': users|length}
+        %}
+        {%
+            include
+            "admin/_home_menu_item.html.twig"
+            with {'path': '/','icon': 'check', 'title': 'Accounts to validate', 'badge': validationUsers|length}
+        %}
+        {%
+            include
+            "admin/_home_menu_item.html.twig"
+            with {'path': '/','icon': 'comments', 'title': 'Comments to validate', 'badge': users|length}
+        %}
+    </div>
+{% endblock %}
