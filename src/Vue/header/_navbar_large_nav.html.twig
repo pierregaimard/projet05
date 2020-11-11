@@ -7,7 +7,7 @@
     <!-- menu for logged users -->
     {% if user is not null %}
         <li>
-            <a href="/">
+            <a href="{{ getRoutePath('admin_home') }}">
                 admin
             </a>
         </li>
