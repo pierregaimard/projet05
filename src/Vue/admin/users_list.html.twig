@@ -1,0 +1,49 @@
+{% extends "core.html.twig" %}
+
+{% block Stylesheet %}
+    <link rel="stylesheet" href="public/assets/css/_data_list.css" />
+{% endblock %}
+
+{% block Body %}
+    <div class="uk-container app-admin-list-container uk-padding-small" uk-height-viewport="expand: true">
+        <!-- Breadcrumb -->
+        <div class="uk-card uk-card-body uk-background-muted uk-padding-small uk-border-rounded">
+            <ul class="uk-breadcrumb uk-margin-left">
+                <li><a href="{{ getRoutePath('admin_home') }}">Admin</a></li>
+                <li><span>Users</span></li>
+            </ul>
+        </div>
+        <!-- Title -->
+        <h3 class="uk-text-center uk-margin-large-bottom">
+            <span class="uk-margin-right" uk-icon="icon: users; ratio: 1.5"></span>
+            Users list
+        </h3>
+        <!-- List -->
+        <div id="users-list" class="uk-margin app-data-list">
+            <div class="uk-text-right">
+                {% include "list/_list_option.html.twig" with {
+                        'sortButons':
+                        [
+                            {'data': 'name', 'label': 'Name'},
+                            {'data': 'email', 'label': 'E-mail'},
+                            {'data': 'status', 'label': 'Status'}
+                        ]
+                    }
+                %}
+            </div>
+            {% include "admin/_members_list.html.twig" %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block Javascript %}
+    <!-- List -->
+    <script>
+        $(document).ready(function(){
+            let options = {
+                valueNames: [ 'name', 'email', 'status' ]
+            };
+            let usersList = new List('users-list', options);
+        });
+    </script>
+{% endblock %}
