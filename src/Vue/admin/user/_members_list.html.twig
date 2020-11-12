@@ -8,7 +8,7 @@
                         <span class="email uk-visible@s">- {{ member.email }}</span>
                     </div>
                     <div class="uk-margin-right">
-                        <span class="status uk-label uk-label-{% if member.status.status == 'VALIDATION' %}warning{% elseif member.status.status == 'ACTIVE' %}success{% elseif member.status.status == 'LOCKED' %}danger{% endif %}">
+                        <span class="status uk-label uk-label-{% if member.status.status == 'ACTIVE' %}success{% elseif member.status.status == 'LOCKED' %}danger{% endif %}">
                             {{ member.status.status }}
                         </span>
                     </div>
