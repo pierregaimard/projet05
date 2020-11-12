@@ -1,0 +1,42 @@
+{% extends "core.html.twig" %}
+
+{% block Stylesheet %}
+    <link rel="stylesheet" href="public/assets/css/_data_list_2.css" />
+{% endblock %}
+
+{% block Body %}
+    <div class="uk-container app-admin-list-container uk-padding-small" uk-height-viewport="expand: true">
+        <!-- Breadcrumb -->
+        <div class="uk-card uk-card-body uk-background-muted uk-padding-small uk-border-rounded">
+            <ul class="uk-breadcrumb uk-margin-left">
+                <li><a href="{{ getRoutePath('admin_home') }}">Admin</a></li>
+                <li><span>Members validation</span></li>
+            </ul>
+        </div>
+        <!-- Title -->
+        <h3 class="uk-text-center uk-margin-large-bottom">
+            <span class="uk-margin-small-right" uk-icon="icon: check; ratio: 2"></span>
+            Members validation list
+        </h3>
+        <!-- List -->
+        <div id="users-list" class="uk-margin app-data-list">
+            <div class="uk-text-right">
+                {% include "list/_list_option.html.twig" with {
+                    'sortButons':
+                    [
+                        {'data': 'name', 'label': 'Name'},
+                        {'data': 'email', 'label': 'E-mail'},
+                        {'data': 'status', 'label': 'Status'}
+                    ]
+                }
+                %}
+            </div>
+            {% include "admin/member_validation/_members_validation_list.html.twig" %}
+            {% include "admin/member_validation/_user_validation_confirm.html.twig" %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block Javascript %}
+    {% include "admin/member_validation/_user_validation_confirm_script.html.twig" %}
+{% endblock %}
