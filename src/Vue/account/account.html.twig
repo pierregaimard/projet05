@@ -1,0 +1,16 @@
+{% extends "core.html.twig" %}
+
+{% block Stylesheet %}
+{% endblock %}
+
+{% block Body %}
+    <div class="uk-container uk-background-muted" uk-height-viewport="expand: true" style="max-width: 500px">
+        <h2 class="uk-margin-large-top uk-margin-large-bottom uk-text-center">
+            <span uk-icon="icon: user; ratio: 3;"></span>
+            Account
+        </h2>
+        <div>
+            {% include "account/_account_form.html.twig" %}
+        </div>
+    </div>
+{% endblock %}
