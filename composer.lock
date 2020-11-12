@@ -150,16 +150,16 @@
         },
         {
             "name": "pierregaimard/climb",
-            "version": "1.0.2",
+            "version": "1.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/pierregaimard/climb.git",
-                "reference": "c28995b1f01e994c344f90a35c18d166b5b5e476"
+                "reference": "f157f4fa7e4bf1b6d2befaf79f10e1f94e1544ea"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pierregaimard/climb/zipball/c28995b1f01e994c344f90a35c18d166b5b5e476",
-                "reference": "c28995b1f01e994c344f90a35c18d166b5b5e476",
+                "url": "https://api.github.com/repos/pierregaimard/climb/zipball/f157f4fa7e4bf1b6d2befaf79f10e1f94e1544ea",
+                "reference": "f157f4fa7e4bf1b6d2befaf79f10e1f94e1544ea",
                 "shasum": ""
             },
             "require": {
@@ -189,9 +189,9 @@
             "description": "Php framework project",
             "support": {
                 "issues": "https://github.com/pierregaimard/climb/issues",
-                "source": "https://github.com/pierregaimard/climb/tree/v1.0.2"
+                "source": "https://github.com/pierregaimard/climb/tree/v1.0.3"
             },
-            "time": "2020-11-02T16:24:18+00:00"
+            "time": "2020-11-11T10:58:35+00:00"
         },
         {
             "name": "psr/container",

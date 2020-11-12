@@ -1,0 +1,18 @@
+.app-data-list .uk-list li {
+  border: 1px solid #e3e3e3;
+  border-radius: 10px;
+}
+
+.app-data-list .uk-label {
+  width: 90px;
+  text-align: center;
+  border-radius: 5px;
+}
+
+.app-data-list .uk-list li:hover { background-color: #2f2e2f; }
+
+.app-data-list .uk-list li a { color: #706e6e; }
+
+.app-data-list .uk-list li a:hover { color: #b7b7b7; }
+
+.app-data-list form { width: 250px; }

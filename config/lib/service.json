@@ -126,5 +126,15 @@
       "@App\\Service\\Security\\SecurityFormDataManager",
       "@App\\Service\\Security\\UserPasswordChecker"
     ]
+  },
+  "App\\Controller\\Admin\\AdminUserController": {
+    "argument": [
+      "@App\\Service\\Email\\EmailManager"
+    ]
+  },
+  "App\\Controller\\Admin\\AdminMemberValidationController": {
+    "argument": [
+      "@App\\Service\\Email\\EmailManager"
+    ]
   }
 }
