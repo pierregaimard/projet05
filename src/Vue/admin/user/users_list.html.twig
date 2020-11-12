@@ -1,7 +1,7 @@
 {% extends "core.html.twig" %}
 
 {% block Stylesheet %}
-    <link rel="stylesheet" href="../../../../public/assets/css/_data_list.css" />
+    <link rel="stylesheet" href="public/assets/css/_data_list.css" />
 {% endblock %}
 
 {% block Body %}
@@ -10,13 +10,13 @@
         <div class="uk-card uk-card-body uk-background-muted uk-padding-small uk-border-rounded">
             <ul class="uk-breadcrumb uk-margin-left">
                 <li><a href="{{ getRoutePath('admin_home') }}">Admin</a></li>
-                <li><span>Users</span></li>
+                <li><span>Members</span></li>
             </ul>
         </div>
         <!-- Title -->
         <h3 class="uk-text-center uk-margin-large-bottom">
-            <span class="uk-margin-right" uk-icon="icon: users; ratio: 1.5"></span>
-            Users list
+            <span class="uk-margin-right" uk-icon="icon: users; ratio: 2"></span>
+            Members list
         </h3>
         <!-- List -->
         <div id="users-list" class="uk-margin app-data-list">
