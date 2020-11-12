@@ -20,7 +20,7 @@
             <div class="uk-navbar-dropdown">
                 <ul class="uk-nav uk-navbar-dropdown-nav">
                     <li class="uk-nav-header">{{ user.formattedName() }}</li>
-                    <li><a href="/">My account</a></li>
+                    <li><a href="{{ getRoutePath('account_home') }}">My account</a></li>
                     <li><a href="{{ getRoutePath('logout') }}">logout</a></li>
                 </ul>
             </div>
