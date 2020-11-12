@@ -1,0 +1,42 @@
+<ul class="uk-list list">
+    {% for member in users %}
+        {% if member.status.status == 'VALIDATION' %}
+            <li>
+                <div class="uk-padding-small uk-flex uk-flex-between">
+                    <div class="uk-margin-auto-vertical">
+                        <span class="name">{{ member.formattedName('large') }}</span>
+                        <span class="email uk-visible@s">- {{ member.email }}</span>
+                    </div>
+                    <div class="uk-margin-right@s">
+                        <a
+                            href="#app-user-action-confirm"
+                            class="uk-button uk-button-small uk-button-danger uk-border-rounded uk-margin-small-right"
+                            data-name="{{ member.formattedName('large') }}"
+                            data-validation-text="rejection"
+                            data-action-text="Reject"
+                            data-action-class="uk-button uk-button-danger"
+                            data-action-link="{{ getRoutePath('admin_user_validation_action', {'key': member.key, 'action': 'reject'}) }}"
+                            uk-toggle
+                        >
+                            <span uk-icon="close"></span>
+                            <span class="uk-visible@s">Reject</span>
+                        </a>
+                        <a
+                            href="#app-user-action-confirm"
+                            class="uk-button uk-button-small uk-button-default app-button-success uk-border-rounded"
+                            data-name="{{ member.formattedName('large') }}"
+                            data-validation-text="validation"
+                            data-action-text="Accept"
+                            data-action-class="uk-button uk-button-default app-button-success"
+                            data-action-link="{{ getRoutePath('admin_user_validation_action', {'key': member.key, 'action': 'accept'}) }}"
+                            uk-toggle
+                        >
+                            <span uk-icon="check"></span>
+                            <span class="uk-visible@s">Accept</span>
+                        </a>
+                    </div>
+                </div>
+            </li>
+        {% endif %}
+    {% endfor %}
+</ul>
