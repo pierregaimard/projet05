@@ -3,7 +3,6 @@
 namespace App\Controller\Admin;
 
 use App\Model\Entity\User;
-use App\Model\Entity\UserRole;
 use App\Model\Entity\UserStatus;
 use App\Service\Email\EmailManager;
 use Climb\Controller\AbstractController;
@@ -34,8 +33,8 @@ class AdminUserController extends AbstractController
     public function list()
     {
         $manager        = $this->getOrm()->getManager('App');
-        $roleRepository = $manager->getRepository(UserRole::class);
-        $users          = $roleRepository->findOneBy(['role' => User::ROLE_MEMBER])->getUsers();
+        $userRepository = $manager->getRepository(User::class);
+        $users          = $userRepository->findValidatedMembers();
 
         $response = new Response();
         $response->setContent($this->render(
