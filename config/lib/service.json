@@ -136,5 +136,25 @@
     "argument": [
       "@App\\Service\\Email\\EmailManager"
     ]
+  },
+  "App\\Controller\\Account\\UserAccountController": {
+    "argument": [
+      "@App\\Service\\Security\\FormTokenManager",
+      "@App\\Service\\Form\\EntityFormDataManager",
+      "@Climb\\Security\\UserManager",
+      "@App\\Service\\Security\\UserSecurityManager",
+      "@App\\Service\\Security\\UserSecurityCodeManager"
+    ]
+  },
+  "App\\Controller\\Account\\UserAccountPasswordController": {
+    "argument": [
+      "@App\\Service\\Security\\FormTokenManager",
+      "@App\\Service\\Form\\EntityFormDataManager",
+      "@Climb\\Security\\UserManager",
+      "@App\\Service\\Security\\UserSecurityManager",
+      "@App\\Service\\Security\\UserSecurityCodeManager",
+      "@App\\Service\\Security\\UserPasswordChecker",
+      "@Climb\\Security\\UserPasswordManager"
+    ]
   }
 }
