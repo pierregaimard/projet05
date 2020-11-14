@@ -18,22 +18,31 @@
             <span class="uk-margin-small-right" uk-icon="icon: check; ratio: 2"></span>
             Members validation list
         </h3>
-        <!-- List -->
-        <div id="users-list" class="uk-margin app-data-list">
-            <div class="uk-text-right">
-                {% include "list/_list_option.html.twig" with {
-                    'sortButons':
-                    [
-                        {'data': 'name', 'label': 'Name'},
-                        {'data': 'email', 'label': 'E-mail'},
-                        {'data': 'status', 'label': 'Status'}
-                    ]
-                }
-                %}
+        {% if users is not empty %}
+            <!-- List -->
+            <div id="users-list" class="uk-margin app-data-list">
+                <div class="uk-text-right">
+                    {% include "list/_list_option.html.twig" with {
+                        'sortButons':
+                        [
+                            {'data': 'name', 'label': 'Name'},
+                            {'data': 'email', 'label': 'E-mail'},
+                            {'data': 'status', 'label': 'Status'}
+                        ]
+                    }
+                    %}
+                </div>
+                {% include "admin/member_validation/_members_validation_list.html.twig" %}
+                {% include "admin/member_validation/_user_validation_confirm.html.twig" %}
             </div>
-            {% include "admin/member_validation/_members_validation_list.html.twig" %}
-            {% include "admin/member_validation/_user_validation_confirm.html.twig" %}
-        </div>
+        {% else %}
+            <div class="uk-text-center uk-margin-large">
+                <span uk-icon="icon: comment; ratio: 6;"></span>
+                <h1 class="uk-margin-remove-top">
+                    there is no member to validate for the moment
+                </h1>
+            </div>
+        {% endif %}
     </div>
 {% endblock %}
 
