@@ -107,6 +107,7 @@ class SignUpController extends AbstractController
                 'formData' => $data->get('formData'),
                 'requires' => $data->get('passwordRequirements'),
                 'firstName' => ucfirst(strtolower($data->get('firstName'))),
+                'email' => $data->get('email')
             ]
         ));
 
@@ -156,7 +157,7 @@ class SignUpController extends AbstractController
             'email' => $this->formDataManager->filterField(Field::TYPE_EMAIL, $data->get('email'))
         ]);
 
-        return $this->redirectToRoute('sign_up', ['step' => 'stepTwo']);
+        return $this->redirectToRoute('sign_up', ['step' => 'stepTwo'], ['email' => $data->get('email')]);
     }
 
     /**
