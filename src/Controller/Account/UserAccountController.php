@@ -55,11 +55,11 @@ class UserAccountController extends AbstractController
         UserSecurityManager $userSecurity,
         UserSecurityCodeManager $codeManager
     ) {
-        $this->tokenManager    = $tokenManager;
-        $this->formManager     = $formManager;
-        $this->userManager     = $userManager;
-        $this->userSecurity    = $userSecurity;
-        $this->codeManager     = $codeManager;
+        $this->tokenManager = $tokenManager;
+        $this->formManager  = $formManager;
+        $this->userManager  = $userManager;
+        $this->userSecurity = $userSecurity;
+        $this->codeManager  = $codeManager;
     }
 
     /**
