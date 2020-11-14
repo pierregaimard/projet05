@@ -19,6 +19,7 @@ class UserRepository extends EntityRepository
             SELECT * FROM user
             INNER JOIN as_user_role ON user.id = as_user_role.id_user AND as_user_role.id_user_role = :user_role
             WHERE user.id_status != :user_status
+            ORDER BY user.first_name ASC, user.last_name ASC 
         ";
 
         return $this->findByRequest(
