@@ -1,0 +1,68 @@
+{% extends "core.html.twig" %}
+
+{% block Body %}
+    <div class="uk-container" uk-height-viewport="expand: true" style="max-width: 500px">
+        <h2 class="uk-margin-large-top uk-margin-large-bottom uk-text-center">
+            <span uk-icon="icon: user; ratio: 3;"></span>
+            Account
+        </h2>
+        <div>
+            <h4 class="uk-heading-line uk-text-center">
+                <span>Name</span>
+            </h4>
+            {% include "form/_form_message.html.twig" with {'message': messageName} %}
+            {% include "account/_account_name_form.html.twig" %}
+            <h4 class="uk-heading-line uk-text-center uk-margin-large-top">
+                <span>E-mail</span>
+            </h4>
+            {% include "form/_form_message.html.twig" with {'message': messageEmail} %}
+            {% if emailCode != true %}
+                {% include "account/_account_email_form.html.twig" %}
+            {% else %}
+                {% include "account/_account_email_code_form.html.twig" %}
+            {% endif %}
+            <h4 class="uk-heading-line uk-text-center uk-margin-large-top">
+                <span>Password</span>
+            </h4>
+            {% include "form/_form_message.html.twig" with {'message': messagePassword} %}
+            {% include "account/_account_password_form.html.twig" %}
+        </div>
+        <div class="uk-margin-large-bottom">
+            <a href="{{ getRoutePath('account_home') }}" class="uk-button uk-button-default uk-border-rounded uk-margin uk-width-1-1">
+                <span uk-icon="refresh"></span>
+                Reset
+            </a>
+            <a href="#app-account-delete-confirm" class="uk-button uk-button-danger uk-border-rounded uk-width-1-1" uk-toggle>
+                <span uk-icon="trash"></span>
+                Delete my account
+            </a>
+            {% include "account/_account_delete_confirm.html.twig" %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block Javascript %}
+    <script>
+        $(document).ready(function (){
+            let $firstName = $('#firstName');
+            let $lastName = $('#lastName');
+            let $email = $('#email');
+            let $newPassword = $('#newPassword');
+            let $passwordConfirm = $('#passwordConfirm');
+
+            let $nameButton = $('#nameButton');
+            let $emailButton = $('#emailButton');
+            let $passwordButton = $('#passwordButton');
+
+            $nameButton.hide();
+            $emailButton.hide();
+            $passwordButton.hide();
+
+            $firstName.on('keyup', function (){ $nameButton.show(); });
+            $lastName.on('keyup', function (){ $nameButton.show(); });
+            $email.on('keyup', function (){ $emailButton.show(); });
+            $newPassword.on('keyup', function (){ $passwordButton.show(); });
+            $passwordConfirm.on('keyup', function (){ $passwordButton.show(); });
+        });
+    </script>
+{% endblock %}

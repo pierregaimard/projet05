@@ -6,12 +6,12 @@ use App\Model\Entity\User;
 use App\Model\Entity\UserRole;
 use App\Model\Entity\UserStatus;
 use App\Service\Email\EmailManager;
-use App\Service\Templating\TemplatingManager;
 use Climb\Http\Session\SessionInterface;
 use Climb\Orm\EntityManager;
 use Climb\Orm\Orm;
 use Climb\Exception\AppException;
 use Climb\Security\UserPasswordManager;
+use DateTime;
 
 class UserSignUpManager
 {
@@ -122,6 +122,7 @@ class UserSignUpManager
         $status           = $statusRepository->findOneBy(['status' => User::STATUS_VALIDATION]);
         $roleRepository   = $this->entityManager->getRepository(UserRole::class);
         $role             = $roleRepository->findOneBy(['role' => User::ROLE_MEMBER]);
+        $now              = new DateTime('NOW');
 
         $tempUserData = $this->getTempUser();
         $user         = new User();
@@ -131,6 +132,7 @@ class UserSignUpManager
         $user->setPassword($this->passwordManager->getPasswordHash($password));
         $user->setStatus($status);
         $user->addRole($role);
+        $user->setLastSecurityCode($now->format('Y-m-d'));
 
         $this->entityManager->insertOne($user);
 
