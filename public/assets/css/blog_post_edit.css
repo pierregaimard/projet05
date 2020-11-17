@@ -1,0 +1,8 @@
+.app-blog-post-form textarea { resize: none; }
+
+.app-blog-post-form textarea,
+.app-blog-post-form input,
+.app-blog-post-form select {
+  border: 1px solid #e3e2e3;
+  background-color: white;
+}

@@ -1,0 +1,26 @@
+.app-navbar-title { display: none; }
+
+.app-data-list form {
+  width: 300px;
+  border: 1px solid #e3e3e3;
+  border-radius: 5px;
+}
+
+.app-post-date {
+  padding: 10px 20px;
+  border-radius: 5px;
+}
+
+.app-card-blog-post-large {
+  padding-left: 10px;
+  border-left: 0 solid #f3f3f3;
+  transition: all 0.4s;
+}
+
+.app-card-blog-post-large:hover {
+  padding-left: 20px;
+  border-left: 20px solid #f3f3f3;
+  transition: all 0.4s;
+}
+
+.app-card-blog-post-large .app-chapo { color: #e9490f; }

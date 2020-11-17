@@ -75,8 +75,8 @@ CREATE TABLE as_user_role (
 -- --------------- --
 CREATE TABLE blog_post (
     id               SMALLINT     UNSIGNED NOT NULL AUTO_INCREMENT,
-    title            VARCHAR(50)  NOT NULL,
-    chapo            VARCHAR(100) NOT NULL,
+    title            VARCHAR(80)  NOT NULL,
+    chapo            TINYTEXT     NOT NULL,
     content          TEXT         NOT NULL,
     creation_time    DATETIME     NOT NULL,
     last_update_time DATETIME     NOT NULL,

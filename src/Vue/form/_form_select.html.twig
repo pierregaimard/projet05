@@ -1,0 +1,33 @@
+<div class="{% if ukMargin is defined %}{{ ukMargin }}{% else %}uk-margin{% endif %}">
+    <div class="uk-form-controls">
+        {% if label is defined %}
+            <label
+                    class="uk-form-label {% if error is not null %}uk-form-danger{% endif %} uk-margin-small-left"
+                    for="{{ id }}"
+            >
+                {{ label }}
+            </label>
+        {% endif %}
+        <select
+                id="{{ id }}"
+                name="{{ name }}"
+                class="
+                    uk-input uk-border-rounded
+                    {% if error is not null %}
+                        uk-form-danger
+                    {% endif %}
+                "
+        >
+            {% for option in options %}
+                <option value="{{ option['value'] }}" {% if option['selected'] == true %}selected{% endif %}>
+                    {{ option['label'] }}
+                </option>
+            {% endfor %}
+        </select>
+        {% if error is not null %}
+            <p class="uk-form-danger uk-margin-remove-top uk-margin-small-left">
+                {{ error }}
+            </p>
+        {% endif %}
+    </div>
+</div>

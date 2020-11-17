@@ -1,0 +1,45 @@
+{% extends "core.html.twig" %}
+
+{% block Stylesheet %}
+    <link rel="stylesheet" href="public/assets/css/blog.css" />
+{% endblock %}
+
+{% block Body %}
+    {% include "blog/_heading.html.twig" %}
+    <div class="uk-container-small uk-margin-auto uk-padding-small" uk-height-viewport="expand: true">
+        <!-- List -->
+        <div id="blog-posts-list" class="uk-margin-top app-data-list">
+            <div class="uk-text-right">
+                {% include "list/_list_option.html.twig" with {
+                    'sortButons':
+                    [
+                        {'data': 'title', 'label': 'Title'},
+                        {'data': 'date', 'label': 'Publication date'}
+                    ]
+                }
+                %}
+            </div>
+            <div class="uk-margin-large">
+                <ul class="uk-list uk-list-divider list">
+                    {% for post in posts %}
+                        <li class="uk-margin-medium">
+                            {% include "blog/_blog_post.html.twig" with {'post': post} %}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block Javascript %}
+    <!-- List -->
+    <script>
+        $(document).ready(function(){
+            let options = {
+                valueNames: [ 'title', 'date' ]
+            };
+            let usersList = new List('blog-posts-list', options);
+        });
+    </script>
+{% endblock %}

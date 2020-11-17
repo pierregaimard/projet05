@@ -156,5 +156,11 @@
       "@App\\Service\\Security\\UserPasswordChecker",
       "@Climb\\Security\\UserPasswordManager"
     ]
+  },
+  "App\\Controller\\Blog\\BlogPostController": {
+    "argument": [
+      "@App\\Service\\Security\\FormTokenManager",
+      "@App\\Service\\Form\\EntityFormDataManager"
+    ]
   }
 }

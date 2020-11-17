@@ -2,7 +2,7 @@
 
 namespace App\Service\Form\DataChecker;
 
-class TitleDataChecker implements DataCheckerInterface
+class PostDataChecker implements DataCheckerInterface
 {
     /**
      * @param string $data
@@ -11,7 +11,7 @@ class TitleDataChecker implements DataCheckerInterface
      */
     public function check(string $data): bool
     {
-        return preg_match('#^[ a-zA-Z0-9,âäçéèêëîïôùûüÿ.!?\-\']+$#', $data) !== 0;
+        return $data !== '';
     }
 
     /**
@@ -19,6 +19,6 @@ class TitleDataChecker implements DataCheckerInterface
      */
     public function getErrorMessage(): string
     {
-        return 'Invalid field data';
+        return 'Invalid character is used';
     }
 }

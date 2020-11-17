@@ -3,6 +3,7 @@
 namespace App\Model\Entity;
 
 use Climb\Orm\EntityBag;
+use App\Service\Form\Annotation\Field;
 
 /**
  * @Table(name="blog_post")
@@ -20,6 +21,7 @@ class BlogPost
      * @var string
      *
      * @Column(name="title")
+     * @Field(type="title", nullable=false, maxLength=80)
      */
     private string $title;
 
@@ -27,6 +29,7 @@ class BlogPost
      * @var string
      *
      * @Column(name="chapo")
+     * @Field(type="title", nullable=false, maxLength=255)
      */
     private string $chapo;
 
@@ -34,6 +37,7 @@ class BlogPost
      * @var string
      *
      * @Column(name="content")
+     * @Field(type="post", nullable=false)
      */
     private string $content;
 
@@ -132,6 +136,14 @@ class BlogPost
     public function setContent(string $content): void
     {
         $this->content = $content;
+    }
+
+    /**
+     * @return string
+     */
+    public function getHtmlContent(): string
+    {
+        return htmlspecialchars_decode($this->content);
     }
 
     /**
