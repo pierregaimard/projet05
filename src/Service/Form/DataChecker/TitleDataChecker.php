@@ -11,7 +11,7 @@ class TitleDataChecker implements DataCheckerInterface
      */
     public function check(string $data): bool
     {
-        return preg_match('#^[ a-zA-Z0-9âäçéèêëîïôùûüÿ.!?\-\']+$#', $data) !== 0;
+        return preg_match('#^[ a-zA-Z0-9,âäçéèêëîïôùûüÿ.!?\-\']+$#', $data) !== 0;
     }
 
     /**
