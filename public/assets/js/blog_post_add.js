@@ -1,4 +1,7 @@
-let Editor = ClassicEditor
+/*global ClassicEditor*/
+/*eslint no-undef: "error"*/
+
+ClassicEditor
     .create( document.querySelector( "#content" ), {
         toolbar: [ "heading", "|", "bold", "italic", "link", "bulletedList", "numberedList", "fontColor", "|", "indent", "outdent", "alignment", "|", "blockQuote", "insertTable", "code", "codeBlock", "|", "undo", "redo" ],
         heading: {
