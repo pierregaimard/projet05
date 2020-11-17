@@ -1,0 +1,52 @@
+{% extends "core.html.twig" %}
+
+{% block Stylesheet %}
+    <link rel="stylesheet" href="public/assets/css/blog_post_view.css" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.3.2/styles/atom-one-dark.min.css">
+{% endblock %}
+
+{% block Body %}
+    <div class="uk-container-expand uk-background-secondary uk-text-center uk-light uk-padding">
+        <div class="uk-margin-large">
+            <h1 class="uk-text-lighter">
+                {{ post.title }}
+            </h1>
+        </div>
+    </div>
+    <div class="uk-container-small uk-margin-auto" uk-height-viewport="expand: true">
+        <!-- Breadcrumb -->
+        <div class="uk-card uk-card-body uk-background-muted uk-padding-small uk-border-rounded uk-margin-medium-top">
+            <ul class="uk-breadcrumb uk-margin-left">
+                <li><a href="{{ getRoutePath('blog') }}">Blog</a></li>
+                <li><span>{{ post.title }}</span></li>
+            </ul>
+        </div>
+        {% include "blog/post/_admin_buttons.html.twig" %}
+        <!-- Article -->
+        <article class="uk-article uk-margin-medium-top uk-padding-small">
+            <p class="uk-article-meta">
+                Written by
+                <a href="#">{{ post.user.formattedName('large') }}</a>
+                on {{ post.creationDate|date('d F Y') }}.<br>
+                <small>Last update on {{ post.lastUpdateDate|date('d F Y') }}.</small>
+            </p>
+            <p class="uk-text-lead uk-margin-medium">
+                {{ post.chapo }}
+            </p>
+            <div class="app-blog-post-content">
+                {{ post.htmlContent|raw }}
+            </div>
+        </article>
+        {% include "blog/comment/comments.html.twig" %}
+        <div class="uk-text-center uk-margin uk-padding-small">
+            <a href="{{ getRoutePath('blog') }}" class="uk-button uk-button-default uk-width-1-1 uk-border-rounded">Return</a>
+        </div>
+    </div>
+{% endblock %}
+
+{% block Javascript %}
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.3.2/highlight.min.js"></script>
+    <script>
+        hljs.initHighlightingOnLoad();
+    </script>
+{% endblock %}
