@@ -147,9 +147,8 @@ class BlogPostController extends AbstractController
      */
     public function view(int $key)
     {
-        $manager = $this->getOrm()->getManager('App');
-        $post = $manager->getRepository(BlogPost::class)->findOne($key);
-
+        $manager  = $this->getOrm()->getManager('App');
+        $post     = $manager->getRepository(BlogPost::class)->findOne($key);
         $response = new Response();
         $response->setContent($this->render(
             'blog/post/view.html.twig',
