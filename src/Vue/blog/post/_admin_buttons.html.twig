@@ -1,0 +1,13 @@
+{% if user.isGranted('ADMIN') %}
+    <div class="uk-text-center uk-margin-large-top">
+        <a href="{{ getRoutePath('blog_post_edit', {'key': post.key}) }}" class="uk-button uk-button-secondary uk-margin-small-right uk-border-rounded">
+            <span uk-icon="pencil"></span>
+            Edit
+        </a>
+        <a href="#app-post-delete-confirm" class="uk-button uk-button-danger uk-border-rounded" uk-toggle>
+            <span uk-icon="trash"></span>
+            Delete
+        </a>
+    </div>
+    {% include "blog/post/_delete_confirm.html.twig" %}
+{% endif %}
