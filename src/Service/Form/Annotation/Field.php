@@ -13,6 +13,7 @@ class Field implements AnnotationInterface
     public const TYPE_TITLE    = 'title';
     public const TYPE_COMMENT  = 'comment';
     public const TYPE_NUMBER   = 'number';
+    public const TYPE_POST     = 'post';
 
     /**
      * @var string
