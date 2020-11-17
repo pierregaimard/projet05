@@ -35,12 +35,12 @@ article p {
 }
 
 article blockquote p {
-    border-left: 8px solid #cfcdcd;
-    margin: 40px 0;
-    padding: 20px 5px 20px 15px;
-    background-color: #f6f6f6;
-    border-radius: 5px;
-    font-size: 22px;
+  border-left: 8px solid #cfcdcd;
+  margin: 40px 0;
+  padding: 20px 5px 20px 15px;
+  background-color: #f6f6f6;
+  border-radius: 5px;
+  font-size: 22px;
 }
 
 .app-comment-form form textarea {
