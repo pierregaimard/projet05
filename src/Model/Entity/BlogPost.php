@@ -141,6 +141,14 @@ class BlogPost
     /**
      * @return string
      */
+    public function getHtmlContent(): string
+    {
+        return htmlspecialchars_decode($this->content);
+    }
+
+    /**
+     * @return string
+     */
     public function getCreationTime(): string
     {
         return $this->creationTime;
