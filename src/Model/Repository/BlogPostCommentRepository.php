@@ -34,7 +34,7 @@ class BlogPostCommentRepository extends EntityRepository
      *
      * @throws AppException
      */
-    public function findByMember(int $postId, int $memberId)
+    public function findByPostAndMember(int $postId, int $memberId)
     {
         $request = '
             SELECT * from blog_post_comment
@@ -57,7 +57,7 @@ class BlogPostCommentRepository extends EntityRepository
      *
      * @throws AppException
      */
-    public function findByStatus(int $postId, string $status)
+    public function findByPostAndStatus(int $postId, string $status)
     {
         $request = '
             SELECT * from blog_post_comment
