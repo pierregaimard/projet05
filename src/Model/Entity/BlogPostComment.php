@@ -18,6 +18,7 @@ class BlogPostComment
      * @var string
      *
      * @Column(name="comment")
+     * @Field(type="comment", nullable=false, nullMessage="Oups, your comment is empty!")
      */
     private string $comment;
 
