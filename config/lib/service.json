@@ -162,5 +162,12 @@
       "@App\\Service\\Security\\FormTokenManager",
       "@App\\Service\\Form\\EntityFormDataManager"
     ]
+  },
+  "App\\Controller\\Blog\\PostCommentController": {
+    "argument": [
+      "@App\\Service\\Security\\FormTokenManager",
+      "@App\\Service\\Form\\EntityFormDataManager",
+      "@App\\Service\\Email\\EmailManager"
+    ]
   }
 }
