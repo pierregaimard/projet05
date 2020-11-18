@@ -1,0 +1,36 @@
+{% set diff = date(comment.time).diff(date('NOW')) %}
+{% set leftMinutes = diff|date('%i') %}
+{% set leftHours = diff|date('%h') %}
+{% set leftDays = diff.days %}
+{% set leftMonth = diff|date('%m') %}
+{% set leftYears = diff|date('%y') %}
+{% if leftMinutes < 1 %}
+    Less than a minute
+{% elseif leftMinutes > 0 and leftHours < 1 %}
+    {% if leftMinutes == 1 %}
+        1 minute
+    {% else %}
+        {{ leftMinutes }} minutes
+    {% endif %}
+{% elseif leftHours > 0 and leftHours < 24 %}
+    {% if leftHours == 1 %}
+        1 hour
+    {% else %}
+        {{ leftHours }} hours
+    {% endif %}
+{% elseif leftDays > 0 and leftMonth < 1 %}
+    {% if leftDays == 1 %}
+        1 day
+    {% else %}
+        {{ leftDays }} days
+    {% endif %}
+{% elseif leftMonth > 0 and leftMonth <= 12 %}
+    {% if leftMonth == 1 %}
+        1 month
+    {% else %}
+        {{ leftMonth }} months
+    {% endif %}
+{% elseif leftYears > 0 %}
+    {{ leftYears }} years
+{% endif %}
+ago
