@@ -104,16 +104,16 @@ CREATE TABLE blog_post_comment_status (
 -- Table blog_post_comment --
 -- ----------------------- --
 CREATE TABLE blog_post_comment (
-    id                          INT      UNSIGNED NOT NULL AUTO_INCREMENT,
-    comment                     TINYTEXT NOT NULL,
-    time                        DATETIME NOT NULL,
-    id_blog_post                SMALLINT UNSIGNED NOT NULL,
-    id_user                     SMALLINT UNSIGNED NOT NULL,
-    id_blog_post_comment_status TINYINT  UNSIGNED NOT NULL,
+    id           INT      UNSIGNED NOT NULL AUTO_INCREMENT,
+    comment      TINYTEXT NOT NULL,
+    time         DATETIME NOT NULL,
+    id_blog_post SMALLINT UNSIGNED NOT NULL,
+    id_user      SMALLINT UNSIGNED NOT NULL,
+    id_status    TINYINT  UNSIGNED NOT NULL,
     PRIMARY KEY (id),
-    CONSTRAINT fk_blog_post_comment_id_blog_post                FOREIGN KEY (id_blog_post)                REFERENCES blog_post (id)                ON DELETE CASCADE,
-    CONSTRAINT fk_blog_post_comment_id_user                     FOREIGN KEY (id_user)                     REFERENCES user (id)                     ON DELETE CASCADE,
-    CONSTRAINT fk_blog_post_comment_id_blog_post_comment_status FOREIGN KEY (id_blog_post_comment_status) REFERENCES blog_post_comment_status (id)
+    CONSTRAINT fk_blog_post_comment_id_blog_post FOREIGN KEY (id_blog_post) REFERENCES blog_post (id)                ON DELETE CASCADE,
+    CONSTRAINT fk_blog_post_comment_id_user      FOREIGN KEY (id_user)      REFERENCES user (id)                     ON DELETE CASCADE,
+    CONSTRAINT fk_blog_post_comment_id_status    FOREIGN KEY (id_status)    REFERENCES blog_post_comment_status (id)
 )
     ENGINE=INNODB,
     DEFAULT CHARSET=utf8mb4;
