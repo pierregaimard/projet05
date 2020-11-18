@@ -158,13 +158,13 @@ class BlogPostController extends AbstractController
         $user               = $this->getUser();
 
         if ($user === null) {
-            $comments = $commentsRepository->findByStatus(
+            $comments = $commentsRepository->findByPostAndStatus(
                 $post->getKey(),
                 BlogPostCommentStatus::STATUS_APPROVED
             );
         }
         if ($user && $this->getUser()->isGranted(User::ROLE_MEMBER)) {
-            $comments = $commentsRepository->findByMember($post->getKey(), $this->getUser()->getKey());
+            $comments = $commentsRepository->findByPostAndMember($post->getKey(), $this->getUser()->getKey());
         }
         if ($user && $this->getUser()->isGranted(User::ROLE_ADMIN)) {
             $comments = $commentsRepository->findByPost($post->getKey());
