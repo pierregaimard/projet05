@@ -5,7 +5,7 @@ namespace App\Controller\Blog;
 use App\Model\Entity\BlogPost;
 use App\Model\Entity\BlogPostComment;
 use App\Model\Entity\BlogPostCommentStatus;
-use App\Service\Email\EmailManager;
+use App\Service\Comment\BlogPostCommentManager;
 use App\Service\Form\EntityFormDataManager;
 use App\Service\Security\FormTokenManager;
 use Climb\Controller\AbstractController;
@@ -27,18 +27,18 @@ class PostCommentController extends AbstractController
     private EntityFormDataManager $formManager;
 
     /**
-     * @var EmailManager
+     * @var BlogPostCommentManager
      */
-    private EmailManager $emailManager;
+    private BlogPostCommentManager $commentManager;
 
     public function __construct(
         FormTokenManager $tokenManager,
         EntityFormDataManager $formManager,
-        EmailManager $emailManager
+        BlogPostCommentManager $commentManager
     ) {
         $this->tokenManager = $tokenManager;
         $this->formManager  = $formManager;
-        $this->emailManager = $emailManager;
+        $this->commentManager = $commentManager;
     }
 
     /**
@@ -77,8 +77,8 @@ class PostCommentController extends AbstractController
             );
         }
 
-        $status = $manager->getRepository(BlogPostCommentStatus::class)->findOneBy(
-            ['status' => BlogPostCommentStatus::STATUS_VALIDATION]
+        $status = $manager->getRepository(BlogPostCommentStatus::class)->findOne(
+            BlogPostCommentStatus::STATUS_VALIDATION
         );
         $comment = new BlogPostComment();
         $comment->setUser($this->getUser());
@@ -168,28 +168,7 @@ class PostCommentController extends AbstractController
      */
     public function validate(int $postKey, int $key)
     {
-        $manager = $this->getOrm()->getManager('App');
-        $comment = $manager->getRepository(BlogPostComment::class)->findOne($key);
-        $post    = $manager->getRepository(BlogPost::class)->findOne($postKey);
-
-        // Email notification
-        $this->emailManager->send(
-            $comment->getUser()->getEmail(),
-            'Comment approved',
-            'blog/comment/_comment_action_email.html.twig',
-            [
-                'title' => $post->getTitle(),
-                'comment' => $comment,
-                'action' => 'approve'
-            ]
-        );
-
-        $status = $manager->getRepository(BlogPostCommentStatus::class)->findOneBy(
-            ['status' => BlogPostCommentStatus::STATUS_APPROVED]
-        );
-
-        $comment->setStatus($status);
-        $manager->updateOne($comment);
+        $this->commentManager->validate($key);
 
         $response = new RedirectResponse($this->getRoutePath('blog_post_view', ['key' => $postKey]));
         $response->getFlashes()->add(
@@ -220,23 +199,7 @@ class PostCommentController extends AbstractController
      */
     public function reject(int $postKey, int $key)
     {
-        $manager = $this->getOrm()->getManager('App');
-        $comment = $manager->getRepository(BlogPostComment::class)->findOne($key);
-        $post    = $manager->getRepository(BlogPost::class)->findOne($postKey);
-
-        $manager->deleteOne($comment);
-
-        // Email notification
-        $this->emailManager->send(
-            $comment->getUser()->getEmail(),
-            'Comment rejected',
-            'blog/comment/_comment_action_email.html.twig',
-            [
-                'title' => $post->getTitle(),
-                'comment' => $comment,
-                'action' => 'reject'
-            ]
-        );
+        $this->commentManager->reject($key);
 
         $response = new RedirectResponse($this->getRoutePath('blog_post_view', ['key' => $postKey]));
         $response->getFlashes()->add(
