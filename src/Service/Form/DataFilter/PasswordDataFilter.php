@@ -11,6 +11,6 @@ class PasswordDataFilter implements DataFilterInterface
      */
     public function filter($data)
     {
-        return filter_var(trim($data), FILTER_SANITIZE_EMAIL);
+        return trim($data);
     }
 }
