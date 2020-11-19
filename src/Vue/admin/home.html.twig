@@ -23,7 +23,7 @@
         {%
             include
             "admin/_home_menu_item.html.twig"
-            with {'path': '/', 'icon': 'comments', 'title': 'Comments to validate', 'badge': users|length}
+            with {'path': getRoutePath('admin_comment_validation_list'), 'icon': 'comments', 'title': 'Comments to validate', 'badge': validationComments|length}
         %}
     </div>
 {% endblock %}
