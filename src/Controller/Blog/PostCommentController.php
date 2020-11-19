@@ -36,8 +36,8 @@ class PostCommentController extends AbstractController
         EntityFormDataManager $formManager,
         BlogPostCommentManager $commentManager
     ) {
-        $this->tokenManager = $tokenManager;
-        $this->formManager  = $formManager;
+        $this->tokenManager   = $tokenManager;
+        $this->formManager    = $formManager;
         $this->commentManager = $commentManager;
     }
 
@@ -77,7 +77,7 @@ class PostCommentController extends AbstractController
             );
         }
 
-        $status = $manager->getRepository(BlogPostCommentStatus::class)->findOne(
+        $status  = $manager->getRepository(BlogPostCommentStatus::class)->findOne(
             BlogPostCommentStatus::STATUS_VALIDATION
         );
         $comment = new BlogPostComment();
