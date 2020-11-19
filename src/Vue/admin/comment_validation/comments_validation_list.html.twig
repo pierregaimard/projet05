@@ -1,0 +1,42 @@
+{% extends "core.html.twig" %}
+
+{% block Stylesheet %}
+    <link rel="stylesheet" href="public/assets/css/_data_list_2.css" />
+{% endblock %}
+
+{% block Body %}
+    <div class="uk-container-xsmall uk-margin-auto app-admin-list-container uk-padding-small" uk-height-viewport="expand: true">
+        <!-- Breadcrumb -->
+        <div class="uk-card uk-card-body uk-background-muted uk-padding-small uk-border-rounded">
+            <ul class="uk-breadcrumb uk-margin-left">
+                <li><a href="{{ getRoutePath('admin_home') }}">Admin</a></li>
+                <li><span>Comments validation</span></li>
+            </ul>
+        </div>
+        <!-- Title -->
+        <h3 class="uk-text-center uk-margin-large-bottom">
+            <span class="uk-margin-right" uk-icon="icon: users; ratio: 2"></span>
+            Comments list
+        </h3>
+        <!-- List -->
+        <div id="comments-list" class="uk-margin app-data-list">
+            <div class="uk-text-right">
+                {% include "list/_list_option.html.twig" with {
+                    'sortButons':
+                    [
+                        {'data': 'author', 'label': 'Author'},
+                        {'data': 'post', 'label': 'Blog Post'}
+                    ]
+                }
+                %}
+            </div>
+            {% include "admin/comment_validation/_comments_list.html.twig" %}
+        </div>
+        {% include "admin/comment_validation/_comment_validation_confirm.html.twig" %}
+    </div>
+{% endblock %}
+
+{% block Javascript %}
+    <!-- List -->
+    {% include "admin/comment_validation/_comment_validation_confirm_script.html.twig" %}
+{% endblock %}
