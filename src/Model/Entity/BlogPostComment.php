@@ -30,13 +30,6 @@ class BlogPostComment
     private string $time;
 
     /**
-     * @var BlogPost
-     *
-     * @Relation(type="entity", entity="App\Model\Entity\BlogPost", invertedBy="comments")
-     */
-    private BlogPost $blogPost;
-
-    /**
      * @var User
      *
      * @Relation(type="entity", entity="App\Model\Entity\User")
@@ -49,6 +42,13 @@ class BlogPostComment
      * @Relation(type="entity", entity="App\Model\Entity\BlogPostCommentStatus")
      */
     private BlogPostCommentStatus $status;
+
+    /**
+     * @var BlogPost|null
+     *
+     * @Relation(type="entity", entity="App\Model\Entity\BlogPost", invertedBy="comments")
+     */
+    private ?BlogPost $blogPost;
 
     /**
      * @return int
@@ -99,22 +99,6 @@ class BlogPostComment
     }
 
     /**
-     * @return BlogPost
-     */
-    public function getBlogPost(): BlogPost
-    {
-        return $this->blogPost;
-    }
-
-    /**
-     * @param BlogPost $blogPost
-     */
-    public function setBlogPost(BlogPost $blogPost): void
-    {
-        $this->blogPost = $blogPost;
-    }
-
-    /**
      * @return User
      */
     public function getUser(): User
@@ -144,5 +128,21 @@ class BlogPostComment
     public function setStatus(BlogPostCommentStatus $status): void
     {
         $this->status = $status;
+    }
+
+    /**
+     * @return BlogPost|null
+     */
+    public function getBlogPost(): ?BlogPost
+    {
+        return $this->blogPost;
+    }
+
+    /**
+     * @param BlogPost|null $blogPost
+     */
+    public function setBlogPost(?BlogPost $blogPost): void
+    {
+        $this->blogPost = $blogPost;
     }
 }
