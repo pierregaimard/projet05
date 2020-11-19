@@ -79,6 +79,12 @@
       "@Climb\\Templating\\Twig\\TemplatingManager"
     ]
   },
+  "App\\Service\\Comment\\BlogPostCommentManager": {
+    "argument": [
+      "@App\\Service\\Email\\EmailManager",
+      "@Climb\\Orm\\Orm"
+    ]
+  },
   "App\\Controller\\HomeController": {
     "argument": [
       "@App\\Service\\Security\\FormTokenManager",
@@ -167,7 +173,12 @@
     "argument": [
       "@App\\Service\\Security\\FormTokenManager",
       "@App\\Service\\Form\\EntityFormDataManager",
-      "@App\\Service\\Email\\EmailManager"
+      "@App\\Service\\Comment\\BlogPostCommentManager"
+    ]
+  },
+  "App\\Controller\\Admin\\AdminCommentController": {
+    "argument": [
+      "@App\\Service\\Comment\\BlogPostCommentManager"
     ]
   }
 }
