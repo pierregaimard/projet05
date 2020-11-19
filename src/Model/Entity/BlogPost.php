@@ -65,7 +65,12 @@ class BlogPost
     /**
      * @var EntityBag
      *
-     * @Relation(type="collection", entity="App\Model\Entity\BlogPostComment", invertedBy="blogPost")
+     * @Relation(
+     *     type="collection",
+     *     entity="App\Model\Entity\BlogPostComment",
+     *     foreignKey="id_blog_post",
+     *     invertedBy="comments"
+     * )
      */
     private EntityBag $comments;
 
