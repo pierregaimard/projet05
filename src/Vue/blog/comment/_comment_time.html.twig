@@ -6,25 +6,25 @@
 {% set leftYears = diff|date('%y') %}
 {% if leftMinutes < 1 %}
     Less than a minute
-{% elseif leftMinutes > 0 and leftHours < 1 %}
+{% elseif leftMinutes > 0 and leftHours < 1 and leftDays == 0 and leftYears == 0 %}
     {% if leftMinutes == 1 %}
         1 minute
     {% else %}
         {{ leftMinutes }} minutes
     {% endif %}
-{% elseif leftHours > 0 and leftHours < 24 %}
+{% elseif leftHours > 0 and leftHours < 24 and leftDays == 0 and leftYears == 0 %}
     {% if leftHours == 1 %}
         1 hour
     {% else %}
         {{ leftHours }} hours
     {% endif %}
-{% elseif leftDays > 0 and leftMonth < 1 %}
+{% elseif leftDays > 0 and leftMonth < 1 and leftYears == 0 %}
     {% if leftDays == 1 %}
         1 day
     {% else %}
         {{ leftDays }} days
     {% endif %}
-{% elseif leftMonth > 0 and leftMonth <= 12 %}
+{% elseif leftMonth > 0 and leftMonth <= 12 and leftYears == 0 %}
     {% if leftMonth == 1 %}
         1 month
     {% else %}
