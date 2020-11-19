@@ -3,6 +3,7 @@
 namespace App\Model\Repository;
 
 use App\Model\Entity\BlogPostComment;
+use App\Model\Entity\BlogPostCommentStatus;
 use Climb\Orm\EntityRepository;
 use Climb\Exception\AppException;
 
@@ -11,19 +12,18 @@ class BlogPostCommentRepository extends EntityRepository
     /**
      * @param int $postId
      *
-     * @return array|null
+     * @return BlogPostComment[]|null
      *
      * @throws AppException
      */
     public function findByPost(int $postId)
     {
-        $request = '
-            SELECT * from blog_post_comment
-            WHERE id_blog_post = :id_blog_post
-            ORDER BY blog_post_comment.time DESC
-        ';
-
-        return $this->findByRequest($request, ['id_blog_post' => $postId]);
+        return $this->findBy(
+            [
+                'id_blog_post' => $postId
+            ],
+            [EntityRepository::OPT_ORDER_BY => ['time' => 'DESC']]
+        );
     }
 
     /**
@@ -50,24 +50,36 @@ class BlogPostCommentRepository extends EntityRepository
     }
 
     /**
-     * @param string $status
-     * @param int    $postId
+     * @param int $statusId
      *
      * @return BlogPostComment[]|null
      *
      * @throws AppException
      */
-    public function findByPostAndStatus(int $postId, string $status)
+    public function findByStatus(int $statusId)
     {
-        $request = '
-            SELECT * from blog_post_comment
-            INNER JOIN blog_post_comment_status
-                ON blog_post_comment_status.id = blog_post_comment.id_status
-                AND blog_post_comment_status.status = :status
-            WHERE id_blog_post = :id_blog_post
-            ORDER BY blog_post_comment.time DESC
-        ';
+        return $this->findBy(
+            ['id_status' => $statusId],
+            [EntityRepository::OPT_ORDER_BY => ['time' => 'DESC']]
+        );
+    }
 
-        return $this->findByRequest($request, ['status' => $status, 'id_blog_post' => $postId]);
+    /**
+     * @param int $statusId
+     * @param int $postId
+     *
+     * @return BlogPostComment[]|null
+     *
+     * @throws AppException
+     */
+    public function findByPostAndStatus(int $postId, int $statusId)
+    {
+        return $this->findBy(
+            [
+                'id_blog_post' => $postId,
+                'id_status' => $statusId
+            ],
+            [EntityRepository::OPT_ORDER_BY => ['time' => 'DESC']]
+        );
     }
 }
