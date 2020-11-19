@@ -1,0 +1,52 @@
+{% if comments != null %}
+    <div class="uk-margin-top uk-padding">
+        <div class="uk-text-center">
+            <span uk-icon="icon: comments; ratio: 4"></span>
+            <h4 class="uk-h1 uk-heading-medium uk-margin-remove-top">
+                Comments
+            </h4>
+        </div>
+        <div>
+            <ul class="uk-list uk-list-divider app-comments-list">
+                {% for comment in comments %}
+                    <li>
+                        {% include "blog/comment/_comment.html.twig" with {'comment': comment} %}
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% if user != null and user.isGranted('MEMBER') %}
+            <div class="uk-margin-large-top app-comment-form">
+                <h3 class="uk-margin-left uk-margin-remove-bottom">
+                    Add a comment!
+                </h3>
+                {% include "form/_form_message.html.twig" %}
+                {% include "blog/comment/_comment_form.html.twig" %}
+            </div>
+        {% endif %}
+        {% include "blog/comment/_comment_action_confirm.html.twig" %}
+    </div>
+{% else %}
+    <div class="uk-margin-top uk-padding uk-text-center">
+        <span uk-icon="icon: comments; ratio: 6"></span>
+        <h3 class="uk-h1 uk-heading-medium">
+            There are no comments yet
+        </h3>
+        {% if user == null %}
+            <p class="uk-margin-remove uk-text-lead">
+                <a href="{{ getRoutePath('sign_up', {'step': 'stepOne'}) }}">Sign-up</a>
+                or
+                <a href="{{ getRoutePath('login') }}">login</a>
+                to add one!
+            </p>
+        {% elseif user.isGranted('MEMBER') %}
+            <div class="app-comment-form">
+                <p class="uk-text-lead uk-margin-large-bottom">
+                    add one!
+                </p>
+                {% include "form/_form_message.html.twig" %}
+                {% include "blog/comment/_comment_form.html.twig" %}
+            </div>
+        {% endif %}
+    </div>
+{% endif %}

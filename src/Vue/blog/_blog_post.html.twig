@@ -4,8 +4,8 @@
         {{ post.chapo }}
     </h3>
     <p class="date uk-text-muted uk-text-small">
-        Written by {{ post.user.formattedName('large') }} on {{ post.creationTime|date("d F Y") }}<br>
-        <i class="uk-text-small">Updated on {{ post.lastUpdateTime|date("d F Y") }}</i>
+        Written by {{ post.user.formattedName('large') }} on {{ date(post.creationTime)|date("d F Y") }}<br>
+        <i class="uk-text-small">Updated on {{ date(post.lastUpdateTime)|date("d F Y") }}</i>
     </p>
     <p class="uk-text-muted uk-text-small uk-text-bold uk-margin-small-top">
         <span class="uk-margin-small-right" uk-icon="comment"></span>

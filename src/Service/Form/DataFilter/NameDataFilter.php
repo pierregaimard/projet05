@@ -11,6 +11,6 @@ class NameDataFilter implements DataFilterInterface
      */
     public function filter($data)
     {
-        return filter_var(trim($data), FILTER_SANITIZE_STRING);
+        return htmlspecialchars(trim($data));
     }
 }

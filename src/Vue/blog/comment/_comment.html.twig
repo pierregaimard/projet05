@@ -1,0 +1,34 @@
+<article class="uk-comment uk-margin-medium">
+    <header class="uk-comment-header">
+        <div class="uk-grid-medium uk-flex-top" uk-grid>
+            <div class="uk-width-auto uk-margin-medium-top">
+                <img class="uk-comment-avatar" src="public/assets/img/robot-comment.svg" width="80" alt="">
+            </div>
+            <div class="uk-width-expand">
+                <h4 class="uk-comment-title uk-margin-remove-bottom">
+                    <span class="uk-link-reset">
+                        {{ comment.user.formattedName('large') }}
+                    </span>
+                </h4>
+                <ul class="uk-comment-meta uk-subnav uk-subnav-divider uk-margin-remove-top">
+                    <li>
+                        <span class="uk-margin-small-right">
+                            {% include "blog/comment/_comment_time.html.twig" %}
+                        </span>
+                    </li>
+                </ul>
+                {% if comment.status.status == 'VALIDATION' %}
+                    <p>
+                        <span class="uk-label uk-label-warning uk-margin-small-right">
+                            Waiting for validation
+                        </span>
+                    </p>
+                {% endif %}
+                <p>
+                    {{ comment.comment }}
+                </p>
+                {% include "blog/comment/_comment_action_buttons.html.twig" %}
+            </div>
+        </div>
+    </header>
+</article>

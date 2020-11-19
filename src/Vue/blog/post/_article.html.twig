@@ -1,0 +1,15 @@
+<!-- Article -->
+<article class="uk-article uk-margin-medium-top uk-padding-small">
+    <p class="uk-article-meta">
+        Written by
+        <a href="#">{{ post.user.formattedName('large') }}</a>
+        on {{ date(post.creationTime)|date('d F Y') }}.<br>
+        <small>Last update on {{ date(post.lastUpdateTime)|date('d F Y') }}.</small>
+    </p>
+    <p class="uk-text-lead uk-margin-medium">
+        {{ post.chapo }}
+    </p>
+    <div class="app-blog-post-content">
+        {{ post.htmlContent|raw }}
+    </div>
+</article>

@@ -7,6 +7,9 @@ namespace App\Model\Entity;
  */
 class BlogPostCommentStatus
 {
+    public const STATUS_VALIDATION = 1;
+    public const STATUS_APPROVED   = 2;
+
     /**
      * @var int
      *

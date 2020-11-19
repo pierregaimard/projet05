@@ -3,6 +3,8 @@
 namespace App\Controller\Blog;
 
 use App\Model\Entity\BlogPost;
+use App\Model\Entity\BlogPostComment;
+use App\Model\Entity\BlogPostCommentStatus;
 use App\Model\Entity\User;
 use App\Service\Form\EntityFormDataManager;
 use App\Service\Security\FormTokenManager;
@@ -147,13 +149,37 @@ class BlogPostController extends AbstractController
      */
     public function view(int $key)
     {
-        $manager  = $this->getOrm()->getManager('App');
-        $post     = $manager->getRepository(BlogPost::class)->findOne($key);
+        $token              = $this->tokenManager->getToken('BlogPostComment');
+        $data               = $this->getRequestData();
+        $manager            = $this->getOrm()->getManager('App');
+        $post               = $manager->getRepository(BlogPost::class)->findOne($key);
+        $commentsRepository = $manager->getRepository(BlogPostComment::class);
+        $comments           = null;
+        $user               = $this->getUser();
+
+        if ($user === null) {
+            $comments = $commentsRepository->findByPostAndStatus(
+                $post->getKey(),
+                BlogPostCommentStatus::STATUS_APPROVED
+            );
+        }
+        if ($user && $this->getUser()->isGranted(User::ROLE_MEMBER)) {
+            $comments = $commentsRepository->findByPostAndMember($post->getKey(), $this->getUser()->getKey());
+        }
+        if ($user && $this->getUser()->isGranted(User::ROLE_ADMIN)) {
+            $comments = $commentsRepository->findByPost($post->getKey());
+        }
+
         $response = new Response();
         $response->setContent($this->render(
             'blog/post/view.html.twig',
             [
-                'post' => $post
+                'post' => $post,
+                'token' => $token,
+                'message' => $data->get('message'),
+                'formData' => $data->get('formData'),
+                'formCheck' => $data->get('formCheck'),
+                'comments' => $comments
             ]
         ));
 
@@ -171,11 +197,11 @@ class BlogPostController extends AbstractController
      */
     public function edit(int $key)
     {
-        $manager = $this->getOrm()->getManager('App');
-        $post    = $manager->getRepository(BlogPost::class)->findOne($key);
-        $users   = $manager->getRepository(User::class)->findByRole('ADMIN');
-
+        $manager      = $this->getOrm()->getManager('App');
+        $post         = $manager->getRepository(BlogPost::class)->findOne($key);
+        $users        = $manager->getRepository(User::class)->findByRole('ADMIN');
         $usersOptions = [];
+
         foreach ($users as $user) {
             $usersOptions[] = [
                 'value' => $user->getKey(),
@@ -249,12 +275,12 @@ class BlogPostController extends AbstractController
         $manager = $this->getOrm()->getManager('App');
         $user    = $manager->getRepository(User::class)->findOne($data->get('user'));
         $now     = (new DateTime('NOW'))->format('Y-m-d');
+
         $post->setLastUpdateTime($now);
         $data->remove('token');
         $data->remove('user');
         $this->formManager->setEntityFormData($post, $data->getAll());
         $post->setUser($user);
-
         $manager->updateOne($post);
 
         $response = new RedirectResponse($this->getRoutePath('blog_post_view', ['key' => $key]));

@@ -18,7 +18,7 @@
                             data-action-link="{{ getRoutePath('admin_user_validation_action', {'key': member.key, 'action': 'reject'}) }}"
                             uk-toggle
                         >
-                            <span uk-icon="close"></span>
+                            <span class="uk-hidden@s" uk-icon="close"></span>
                             <span class="uk-visible@s">Reject</span>
                         </a>
                         <a
@@ -31,7 +31,7 @@
                             data-action-link="{{ getRoutePath('admin_user_validation_action', {'key': member.key, 'action': 'accept'}) }}"
                             uk-toggle
                         >
-                            <span uk-icon="check"></span>
+                            <span class="uk-hidden@s" uk-icon="check"></span>
                             <span class="uk-visible@s">Accept</span>
                         </a>
                     </div>

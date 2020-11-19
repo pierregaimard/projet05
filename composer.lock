@@ -88,16 +88,16 @@
         },
         {
             "name": "egulias/email-validator",
-            "version": "2.1.23",
+            "version": "2.1.24",
             "source": {
                 "type": "git",
                 "url": "https://github.com/egulias/EmailValidator.git",
-                "reference": "5fa792ad1853ae2bc60528dd3e5cbf4542d3c1df"
+                "reference": "ca90a3291eee1538cd48ff25163240695bd95448"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/egulias/EmailValidator/zipball/5fa792ad1853ae2bc60528dd3e5cbf4542d3c1df",
-                "reference": "5fa792ad1853ae2bc60528dd3e5cbf4542d3c1df",
+                "url": "https://api.github.com/repos/egulias/EmailValidator/zipball/ca90a3291eee1538cd48ff25163240695bd95448",
+                "reference": "ca90a3291eee1538cd48ff25163240695bd95448",
                 "shasum": ""
             },
             "require": {
@@ -144,22 +144,28 @@
             ],
             "support": {
                 "issues": "https://github.com/egulias/EmailValidator/issues",
-                "source": "https://github.com/egulias/EmailValidator/tree/2.1.23"
+                "source": "https://github.com/egulias/EmailValidator/tree/2.1.24"
             },
-            "time": "2020-10-31T20:37:35+00:00"
+            "funding": [
+                {
+                    "url": "https://github.com/egulias",
+                    "type": "github"
+                }
+            ],
+            "time": "2020-11-14T15:56:27+00:00"
         },
         {
             "name": "pierregaimard/climb",
-            "version": "1.1.0",
+            "version": "1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/pierregaimard/climb.git",
-                "reference": "5b8f73f01935e8c25942938cb49053b3c21af7d4"
+                "reference": "0fb290f762eb9c6b333bf2fefcb790dc930e0930"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pierregaimard/climb/zipball/5b8f73f01935e8c25942938cb49053b3c21af7d4",
-                "reference": "5b8f73f01935e8c25942938cb49053b3c21af7d4",
+                "url": "https://api.github.com/repos/pierregaimard/climb/zipball/0fb290f762eb9c6b333bf2fefcb790dc930e0930",
+                "reference": "0fb290f762eb9c6b333bf2fefcb790dc930e0930",
                 "shasum": ""
             },
             "require": {
@@ -189,9 +195,9 @@
             "description": "Php framework project",
             "support": {
                 "issues": "https://github.com/pierregaimard/climb/issues",
-                "source": "https://github.com/pierregaimard/climb/tree/v1.1.0"
+                "source": "https://github.com/pierregaimard/climb/tree/v1.1.1"
             },
-            "time": "2020-11-12T20:58:28+00:00"
+            "time": "2020-11-18T19:33:32+00:00"
         },
         {
             "name": "psr/container",
@@ -878,16 +884,16 @@
     "packages-dev": [
         {
             "name": "composer/xdebug-handler",
-            "version": "1.4.4",
+            "version": "1.4.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/xdebug-handler.git",
-                "reference": "6e076a124f7ee146f2487554a94b6a19a74887ba"
+                "reference": "f28d44c286812c714741478d968104c5e604a1d4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/xdebug-handler/zipball/6e076a124f7ee146f2487554a94b6a19a74887ba",
-                "reference": "6e076a124f7ee146f2487554a94b6a19a74887ba",
+                "url": "https://api.github.com/repos/composer/xdebug-handler/zipball/f28d44c286812c714741478d968104c5e604a1d4",
+                "reference": "f28d44c286812c714741478d968104c5e604a1d4",
                 "shasum": ""
             },
             "require": {
@@ -921,7 +927,7 @@
             "support": {
                 "irc": "irc://irc.freenode.org/composer",
                 "issues": "https://github.com/composer/xdebug-handler/issues",
-                "source": "https://github.com/composer/xdebug-handler/tree/1.4.4"
+                "source": "https://github.com/composer/xdebug-handler/tree/1.4.5"
             },
             "funding": [
                 {
@@ -937,7 +943,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-10-24T12:39:10+00:00"
+            "time": "2020-11-13T08:04:11+00:00"
         },
         {
             "name": "pdepend/pdepend",

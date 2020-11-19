@@ -55,3 +55,23 @@ article blockquote p {
   background-color: #393737;
   color: white;
 }
+
+.app-comments-list .app-comment-actions {
+  height: 0;
+  overflow: hidden;
+  transition: all 0.4s;
+}
+
+.app-comments-list li:hover .app-comment-actions {
+  height: 40px;
+  transition: all 0.4s;
+}
+
+.app-comments-list .app-comment-actions .uk-button-default,
+#post-comment-action-confirm .app-button-success {
+  background-color: #32d296;
+  color: white;
+}
+
+.app-comments-list .app-comment-actions .uk-button-default:hover,
+#post-comment-action-confirm .app-button-success:hover { background-color: #27c48a; }
