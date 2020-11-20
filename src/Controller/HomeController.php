@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Model\Entity\BlogPost;
 use App\Model\Entity\Message;
 use App\Service\Email\EmailManager;
 use App\Service\Form\EntityFormDataManager;
@@ -11,6 +12,7 @@ use Climb\Controller\AbstractController;
 use Climb\Exception\AppException;
 use Climb\Http\RedirectResponse;
 use Climb\Http\Response;
+use Climb\Orm\EntityRepository;
 
 class HomeController extends AbstractController
 {
@@ -59,7 +61,15 @@ class HomeController extends AbstractController
      */
     public function home()
     {
-        $token = $this->tokenManager->getToken('contactForm');
+        $token   = $this->tokenManager->getToken('contactForm');
+        $manager = $this->getOrm()->getManager('App');
+        $posts   = $manager->getRepository(BlogPost::class)->findAll(
+            [
+                EntityRepository::OPT_ORDER_BY => ['creation_time' => 'DESC'],
+                EntityRepository::OPT_LIMIT => 3,
+                EntityRepository::OPT_OFFSET => 0
+            ]
+        );
 
         $response = new Response();
         $response->setContent($this->render(
@@ -68,7 +78,8 @@ class HomeController extends AbstractController
                 'token' => $token,
                 'message' => $this->getRequestData()->get('message'),
                 'formCheck' => $this->getRequestData()->get('formCheck'),
-                'formData' => $this->getRequestData()->get('formData')
+                'formData' => $this->getRequestData()->get('formData'),
+                'posts' => $posts
             ]
         ));
 
