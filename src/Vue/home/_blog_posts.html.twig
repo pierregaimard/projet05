@@ -1,33 +1,13 @@
-<a href="/" class="uk-display-block uk-padding-small uk-background-muted uk-margin app-card-blog-post">
-    <div class="uk-flex">
-        <div class="uk-width-1-1@s uk-width-2-3@m">
-            Php 8, enjoy new features!
+{% for post in posts %}
+    <a href="{{ getRoutePath('blog_post_view', {'key': post.key}) }}" class="uk-display-block uk-padding-small uk-background-muted uk-margin app-card-blog-post">
+        <div class="uk-flex">
+            <div class="uk-width-1-1@s uk-width-2-3@m">
+                {{ post.title }}
+            </div>
+            <div class="uk-width-1-3@m uk-visible@s uk-text-right">
+                {{ post.creationTime|date('d M Y') }}
+                <span class="uk-badge uk-margin-small-left">{{ post.comments|length }}</span>
+            </div>
         </div>
-        <div class="uk-width-1-3@m uk-visible@s uk-text-right">
-            27 octobre 2020
-            <span class="uk-badge uk-margin-small-left">12</span>
-        </div>
-    </div>
-</a>
-<a href="/" class="uk-display-block uk-padding-small uk-background-muted uk-margin app-card-blog-post">
-    <div class="uk-flex">
-        <div class="uk-width-1-1@s uk-width-2-3@m">
-            Composer 2, new version is available!
-        </div>
-        <div class="uk-width-1-3@m uk-visible@s uk-text-right">
-            30 octobre 2020
-            <span class="uk-badge uk-margin-small-left">14</span>
-        </div>
-    </div>
-</a>
-<a href="/" class="uk-display-block uk-padding-small uk-background-muted uk-margin app-card-blog-post">
-    <div class="uk-flex">
-        <div class="uk-width-1-1@s uk-width-2-3@m">
-            MySql 8, new sha256 encryption
-        </div>
-        <div class="uk-width-1-3@m uk-visible@s uk-text-right">
-            31 octobre 2020
-            <span class="uk-badge uk-margin-small-left">7</span>
-        </div>
-    </div>
-</a>
+    </a>
+{% endfor %}
