@@ -1,0 +1,24 @@
+{% extends "core.html.twig" %}
+
+{% block Stylesheet %}
+    <link rel="stylesheet" href="public/assets/css/status.css" />
+{% endblock %}
+
+{% block Body %}
+    <div class="uk-container-expand uk-background-secondary uk-light app-status" uk-height-viewport="expand: true">
+        <div class="uk-text-center uk-position-center">
+            <p class="uk-text-lead uk-margin-large-bottom">
+                Sorry but you must be authenticated to access this page.
+            </p>
+            <img src="public/assets/img/401-unauthorized.svg" width="600" alt="401 unauthorized">
+            <p class="uk-margin-large">
+                <a href="{{ getRoutePath('login') }}" class="uk-button uk-button-large uk-button-secondary uk-border-rounded uk-margin-right">
+                    login
+                </a>
+                <a href="{{ getRoutePath('home') }}" class="uk-button uk-button-large uk-button-secondary uk-border-rounded">
+                    home
+                </a>
+            </p>
+        </div>
+    </div>
+{% endblock %}
