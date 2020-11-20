@@ -1,10 +1,10 @@
 {% if comments != null %}
     <div class="uk-margin-top uk-padding">
         <div class="uk-text-center">
-            <span uk-icon="icon: comments; ratio: 4"></span>
-            <h4 class="uk-h1 uk-heading-medium uk-margin-remove-top">
+            <span uk-icon="icon: comments; ratio: 3"></span>
+            <h3 class="uk-margin-small-top">
                 Comments
-            </h4>
+            </h3>
         </div>
         <div>
             <ul class="uk-list uk-list-divider app-comments-list">
@@ -28,8 +28,8 @@
     </div>
 {% else %}
     <div class="uk-margin-top uk-padding uk-text-center">
-        <span uk-icon="icon: comments; ratio: 6"></span>
-        <h3 class="uk-h1 uk-heading-medium">
+        <span uk-icon="icon: comments; ratio: 3"></span>
+        <h3 class="uk-margin-small-top">
             There are no comments yet
         </h3>
         {% if user == null %}
