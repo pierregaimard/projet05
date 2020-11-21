@@ -6,15 +6,6 @@
                 Comments
             </h3>
         </div>
-        <div>
-            <ul class="uk-list uk-list-divider app-comments-list">
-                {% for comment in comments %}
-                    <li>
-                        {% include "blog/comment/_comment.html.twig" with {'comment': comment} %}
-                    </li>
-                {% endfor %}
-            </ul>
-        </div>
         {% if user != null and user.isGranted('MEMBER') %}
             <div class="uk-margin-large-top app-comment-form">
                 <h3 class="uk-margin-left uk-margin-remove-bottom">
@@ -24,6 +15,15 @@
                 {% include "blog/comment/_comment_form.html.twig" %}
             </div>
         {% endif %}
+        <div>
+            <ul class="uk-list uk-list-divider app-comments-list">
+                {% for comment in comments %}
+                    <li>
+                        {% include "blog/comment/_comment.html.twig" with {'comment': comment} %}
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
         {% include "blog/comment/_comment_action_confirm.html.twig" %}
     </div>
 {% else %}
