@@ -55,9 +55,11 @@ class HomeController extends AbstractController
     }
 
     /**
+     * @Route(path="/", name="home")
+     *
      * @return Response
      *
-     * @Route(path="/", name="home")
+     * @throws AppException
      */
     public function home()
     {
