@@ -17,25 +17,25 @@
         <!-- User card -->
         <div class="uk-margin-large-top uk-flex uk-flex-center">
             <div class="uk-card uk-card-body uk-width-1-3@l uk-width-1-2@m uk-border-rounded uk-box-shadow-small">
-                <div class="uk-card-badge uk-label uk-text-lowercase uk-light uk-background-secondary">{{ user.status.status }}</div>
+                <div class="uk-card-badge uk-label uk-text-lowercase uk-light uk-background-secondary">{{ member.status.status }}</div>
                 <h3 class="uk-card-title uk-text-center uk-margin-remove-bottom">
                     <div>
                         <span class="uk-border-rounded" uk-icon="icon: user; ratio: 8"></span>
                     </div>
-                    {{ user.formattedName('large') }}
+                    {{ member.formattedName('large') }}
                 </h3>
                 <p class="uk-text-center uk-margin-remove-top">
-                    {{ user.email }}
+                    {{ member.email }}
                 </p>
             </div>
         </div>
         <!-- Admin options -->
         <div class="uk-width-1-3@l uk-width-1-2@m uk-margin-large-top uk-margin-large-bottom uk-margin-auto">
             <a href="#app-user-lock-confirm" class="uk-button uk-button-default uk-border-rounded uk-width-1-1" uk-toggle>
-                {% if user.status.status == 'ACTIVE' %}
+                {% if member.status.status == 'ACTIVE' %}
                     <span uk-icon="lock"></span>
                     Lock
-                {% elseif user.status.status == 'LOCKED' %}
+                {% elseif member.status.status == 'LOCKED' %}
                     <span uk-icon="unlock"></span>
                     Unlock
                 {% endif %}
