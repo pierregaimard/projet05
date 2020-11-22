@@ -131,16 +131,29 @@ class UserSecurityManager
     }
 
     /**
-     * @return User
+     * @return User|null
      *
      * @throws AppException
      */
-    public function getAdminUser(): User
+    public function getAdminUser(): ?User
     {
         $roleRepository = $this->manager->getRepository(UserRole::class);
         $role           = $roleRepository->findOneBy(['role' => User::ROLE_ADMIN]);
 
         return $role->getUsers()[array_key_first($role->getUsers())];
+    }
+
+    /**
+     * @return bool
+     *
+     * @throws AppException
+     */
+    public function hasAdminUser(): bool
+    {
+        $roleRepository = $this->manager->getRepository(UserRole::class);
+        $role           = $roleRepository->findOneBy(['role' => User::ROLE_ADMIN]);
+
+        return $role !== null;
     }
 
     /**
@@ -217,6 +230,16 @@ class UserSecurityManager
         $user->setPassword($this->passwordManager->getPasswordHash($password));
 
         $this->manager->updateOne($user);
+    }
+
+    /**
+     * @param string $password
+     *
+     * @return string|null
+     */
+    public function getPasswordHash(string $password)
+    {
+        return $this->passwordManager->getPasswordHash($password);
     }
 
     /**
