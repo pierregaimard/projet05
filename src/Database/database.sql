@@ -2,8 +2,6 @@
 -- ---------- DataBase ------------ --
 -- -------------------------------- --
 
-USE dbs809996;
-
 SET lc_time_names = 'fr_FR';
 
 
@@ -124,7 +122,6 @@ CREATE TABLE blog_post_comment (
 -- --------------------------------- --
 
 
-DELIMITER |
 
 
 -- ------------------ --
@@ -136,14 +133,14 @@ ON blog_post FOR EACH ROW
 BEGIN
     SET NEW.creation_time = NOW();    -- set blog_post creation time to now on insertion --
     SET NEW.last_update_time = NOW(); -- set blog_post last update time to now on insertion --
-END |
+END;
 
 -- BEFORE UPDATE --
 CREATE TRIGGER before_update_blog_post BEFORE UPDATE
 ON blog_post FOR EACH ROW
 BEGIN
     SET NEW.last_update_time = NOW(); -- update last update time to now when updating blog post --
-END |
+END;
 
 -- ------------------------- --
 -- blog_post_comment_trigger --
@@ -153,10 +150,9 @@ CREATE TRIGGER before_insert_blog_post_comment BEFORE INSERT
 ON blog_post_comment FOR EACH ROW
 BEGIN
     SET NEW.time = NOW(); -- set blog post comment insertion time to now on insertion --
-END |
+END;
 
 
-DELIMITER ;
 
 
 -- --------------------------------- --
