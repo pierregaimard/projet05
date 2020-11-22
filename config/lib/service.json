@@ -85,6 +85,16 @@
       "@Climb\\Orm\\Orm"
     ]
   },
+  "App\\Service\\Init\\InitializationManager": {
+    "argument": [
+      "@Climb\\Orm\\DbConnectionManager",
+      "@Climb\\Filesystem\\FileReader",
+      "@App\\Service\\Security\\UserSecurityManager",
+      "@Climb\\Orm\\Orm",
+      "$env(BASE_DIR)",
+      "$env(APP_DB_DBNAME)"
+    ]
+  },
   "App\\Controller\\HomeController": {
     "argument": [
       "@App\\Service\\Security\\FormTokenManager",
@@ -179,6 +189,11 @@
   "App\\Controller\\Admin\\AdminCommentController": {
     "argument": [
       "@App\\Service\\Comment\\BlogPostCommentManager"
+    ]
+  },
+  "App\\Controller\\Init\\InitializationController": {
+    "argument": [
+      "@App\\Service\\Init\\InitializationManager"
     ]
   }
 }
