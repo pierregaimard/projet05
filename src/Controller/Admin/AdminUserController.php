@@ -34,13 +34,13 @@ class AdminUserController extends AbstractController
     {
         $manager        = $this->getOrm()->getManager('App');
         $userRepository = $manager->getRepository(User::class);
-        $users          = $userRepository->findValidatedMembers();
+        $members        = $userRepository->findValidatedMembers();
 
         $response = new Response();
         $response->setContent($this->render(
             'admin/user/users_list.html.twig',
             [
-                'users' => $users
+                'members' => $members
             ]
         ));
 
@@ -61,13 +61,13 @@ class AdminUserController extends AbstractController
     {
         $manager        = $this->getOrm()->getManager('App');
         $userRepository = $manager->getRepository(User::class);
-        $user           = $userRepository->findOne($key);
+        $member         = $userRepository->findOne($key);
 
         $response = new Response();
         $response->setContent($this->render(
             'admin/user/user_view.html.twig',
             [
-                'user' => $user
+                'member' => $member
             ]
         ));
 
