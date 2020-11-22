@@ -15,9 +15,9 @@ use DateTime;
 class InitializationManager
 {
     private const INIT_ADMIN_FIRSTNAME = 'admin';
-    private const INIT_ADMIN_LASTNAME = 'admin';
-    private const INIT_ADMIN_EMAIL = 'admin@blog.fr';
-    private const INIT_ADMIN_PASSWORD = 'admin$Pass';
+    private const INIT_ADMIN_LASTNAME  = 'admin';
+    private const INIT_ADMIN_EMAIL     = 'admin@blog.fr';
+    private const INIT_ADMIN_PASSWORD  = 'admin$Pass';
 
     /**
      * @var DbConnectionManager
@@ -91,9 +91,8 @@ class InitializationManager
                 $this->baseDir . '/src/Database/database.sql',
                 FileReader::TYPE_STRING
             );
-
-
-        $pdo = $this->connector->getPdo('App');
+        
+        $pdo     = $this->connector->getPdo('App');
         $request = $pdo->prepare($request);
         $request->execute();
     }
