@@ -144,6 +144,19 @@ class UserSecurityManager
     }
 
     /**
+     * @return bool
+     *
+     * @throws AppException
+     */
+    public function hasAdminUser(): bool
+    {
+        $roleRepository = $this->manager->getRepository(UserRole::class);
+        $role           = $roleRepository->findOneBy(['role' => User::ROLE_ADMIN]);
+
+        return $role !== null;
+    }
+
+    /**
      * @param User $user
      */
     public function setUser(User $user): void
