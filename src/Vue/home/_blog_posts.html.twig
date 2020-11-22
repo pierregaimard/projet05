@@ -1,15 +1,27 @@
-{% for post in posts %}
-    <a href="{{ getRoutePath('blog_post_view', {'key': post.key}) }}" class="uk-display-block uk-padding-small uk-background-muted uk-margin app-card-blog-post">
-        <div class="uk-flex">
-            <div class="uk-width-1-1@s uk-width-2-3@m">
-                {{ post.title }}
+{% if posts is not empty %}
+    <h3 class="uk-h3 uk-text-bolde uk-margin-large-top">
+        Last blog posts
+    </h3>
+    {% for post in posts %}
+        <a href="{{ getRoutePath('blog_post_view', {'key': post.key}) }}" class="uk-display-block uk-padding-small uk-background-muted uk-margin app-card-blog-post">
+            <div class="uk-flex">
+                <div class="uk-width-1-1@s uk-width-2-3@m">
+                    {{ post.title }}
+                </div>
+                <div class="uk-width-1-3@m uk-visible@s uk-text-right">
+                    {{ post.creationTime|date('d M Y') }}
+                    <span class="uk-badge uk-margin-small-left">
+                        {{ post.comments|length }}
+                    </span>
+                </div>
             </div>
-            <div class="uk-width-1-3@m uk-visible@s uk-text-right">
-                {{ post.creationTime|date('d M Y') }}
-                <span class="uk-badge uk-margin-small-left">
-                    {{ post.comments|length }}
-                </span>
-            </div>
-        </div>
-    </a>
-{% endfor %}
+        </a>
+    {% endfor %}
+    <p>
+        <a href="{{ getRoutePath('blog') }}" class="uk-button uk-button-secondary uk-border-rounded"> Read more ...</a>
+    </p>
+{% else %}
+    <h3 class="uk-h3 uk-text-bolde uk-margin-large-top">
+        There is no blog posts at the moment...
+    </h3>
+{% endif %}
