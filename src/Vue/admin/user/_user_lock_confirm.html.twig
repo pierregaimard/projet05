@@ -1,6 +1,6 @@
-{% if user.status.status == 'ACTIVE' %}
+{% if member.status.status == 'ACTIVE' %}
     {% set status = 'lock' %}
-{% elseif user.status.status == 'LOCKED' %}
+{% elseif member.status.status == 'LOCKED' %}
     {% set status = 'unlock' %}
 {% endif %}
 
@@ -8,11 +8,11 @@
     <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
         <h2 class="uk-modal-title">Confirmation</h2>
         <p class="uk-margin-medium-bottom">
-            Are you sure you want to {{ status }} the user <b>{{ user.formattedName('large') }}</b> ?
+            Are you sure you want to {{ status }} the member <b>{{ member.formattedName('large') }}</b> ?
         </p>
         <p class="uk-text-right">
             <button class="uk-button uk-button-default uk-modal-close uk-margin-small-right" type="button">Cancel</button>
-            <a href="{{ getRoutePath('admin_user_lock', {'key': user.key}) }}" class="uk-button uk-button-secondary" type="button">{{ status|capitalize }}</a>
+            <a href="{{ getRoutePath('admin_user_lock', {'key': member.key}) }}" class="uk-button uk-button-secondary" type="button">{{ status|capitalize }}</a>
         </p>
     </div>
 </div>
