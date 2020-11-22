@@ -63,6 +63,10 @@ class HomeController extends AbstractController
      */
     public function home()
     {
+        if (!$this->userManager->hasAdminUser()) {
+            return $this->redirectToRoute('initialize');
+        }
+
         $token   = $this->tokenManager->getToken('contactForm');
         $manager = $this->getOrm()->getManager('App');
         $posts   = $manager->getRepository(BlogPost::class)->findAll(
