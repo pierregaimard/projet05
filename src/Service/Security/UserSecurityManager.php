@@ -131,11 +131,11 @@ class UserSecurityManager
     }
 
     /**
-     * @return User
+     * @return User|null
      *
      * @throws AppException
      */
-    public function getAdminUser(): User
+    public function getAdminUser(): ?User
     {
         $roleRepository = $this->manager->getRepository(UserRole::class);
         $role           = $roleRepository->findOneBy(['role' => User::ROLE_ADMIN]);
