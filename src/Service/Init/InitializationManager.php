@@ -18,6 +18,7 @@ class InitializationManager
     private const INIT_ADMIN_LASTNAME  = 'admin';
     private const INIT_ADMIN_EMAIL     = 'admin@blog.fr';
     private const INIT_ADMIN_PASSWORD  = 'admin$Pass';
+    private const INIT_DATABASE_PATH   = '/src/Database/database.sql';
 
     /**
      * @var DbConnectionManager
@@ -88,7 +89,7 @@ class InitializationManager
         $request =
             'USE ' . $this->dbName . '; ' .
             $this->fileReader->getContent(
-                $this->baseDir . '/src/Database/database.sql',
+                $this->baseDir . self::INIT_DATABASE_PATH,
                 FileReader::TYPE_STRING
             );
         
@@ -109,10 +110,10 @@ class InitializationManager
         $status           = $statusRepository->findOneBy(['status' => User::STATUS_ACTIVE]);
 
         $admin = new User();
-        $admin->setFirstName('admin');
-        $admin->setLastName('admin');
-        $admin->setEmail('admin@blog.fr');
-        $admin->setPassword($this->securityManager->getPasswordHash('root$Pass'));
+        $admin->setFirstName(self::INIT_ADMIN_FIRSTNAME);
+        $admin->setLastName(self::INIT_ADMIN_LASTNAME);
+        $admin->setEmail(self::INIT_ADMIN_EMAIL);
+        $admin->setPassword($this->securityManager->getPasswordHash(self::INIT_ADMIN_PASSWORD));
         $admin->addRole($role);
         $admin->setStatus($status);
         $admin->setLastSecurityCode((new DateTime('NOW'))->format('Y-m-d'));
