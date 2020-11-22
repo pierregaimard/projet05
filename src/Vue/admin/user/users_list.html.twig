@@ -13,26 +13,35 @@
                 <li><span>Members</span></li>
             </ul>
         </div>
-        <!-- Title -->
-        <h3 class="uk-text-center uk-margin-large-bottom">
-            <span class="uk-margin-right" uk-icon="icon: users; ratio: 2"></span>
-            Members list
-        </h3>
-        <!-- List -->
-        <div id="users-list" class="uk-margin app-data-list">
-            <div class="uk-text-right">
-                {% include "list/_list_option.html.twig" with {
-                        'sortButons':
-                        [
-                            {'data': 'name', 'label': 'Name'},
-                            {'data': 'email', 'label': 'E-mail'},
-                            {'data': 'status', 'label': 'Status'}
-                        ]
-                    }
-                %}
+        {% if users is not empty %}
+            <!-- Title -->
+            <h3 class="uk-text-center uk-margin-large-bottom">
+                <span class="uk-margin-right" uk-icon="icon: users; ratio: 2"></span>
+                Members list
+            </h3>
+            <!-- List -->
+            <div id="users-list" class="uk-margin app-data-list">
+                <div class="uk-text-right">
+                    {% include "list/_list_option.html.twig" with {
+                            'sortButons':
+                            [
+                                {'data': 'name', 'label': 'Name'},
+                                {'data': 'email', 'label': 'E-mail'},
+                                {'data': 'status', 'label': 'Status'}
+                            ]
+                        }
+                    %}
+                </div>
+                {% include "admin/user/_members_list.html.twig" %}
             </div>
-            {% include "admin/user/_members_list.html.twig" %}
-        </div>
+        {% else %}
+            <div class="uk-text-center uk-margin-large-top">
+                <span uk-icon="icon: comment; ratio: 6;"></span>
+                <h1 class="uk-margin-remove-top">
+                    There is no member at the moment
+                </h1>
+            </div>
+        {% endif %}
     </div>
 {% endblock %}
 
