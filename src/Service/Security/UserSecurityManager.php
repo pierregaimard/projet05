@@ -220,6 +220,16 @@ class UserSecurityManager
     }
 
     /**
+     * @param string $password
+     *
+     * @return string|null
+     */
+    public function getPasswordHash(string $password)
+    {
+        return $this->passwordManager->getPasswordHash($password);
+    }
+
+    /**
      * @param string $status
      *
      * @return object|null
