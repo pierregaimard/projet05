@@ -124,9 +124,9 @@ class BlogPostController extends AbstractController
         $this->formManager->setEntityFormData($post, $data->getAll());
 
         $manager = $this->getOrm()->getManager('App');
-        $manager->insertOne($post);
+        $postId  = $manager->insertOne($post);
 
-        $response = new RedirectResponse($this->getRoutePath('blog'));
+        $response = new RedirectResponse($this->getRoutePath('blog_post_view', ['key' => $postId]));
         $response->getFlashes()->add(
             'message',
             [
