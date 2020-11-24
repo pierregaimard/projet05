@@ -92,7 +92,7 @@ class AuthenticationController extends AbstractController
     {
         $data = $this->getRequest()->getPost();
 
-        // Checks security token
+        // Check security token
         $tokenCheck = $this->tokenManager->isValid('authentication', $data->get('token'));
         if ($tokenCheck !== true) {
             return $this->redirectToRoute(
