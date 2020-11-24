@@ -83,6 +83,7 @@ class ForgotPasswordController extends AbstractController
      */
     public function forgotPassword(string $step)
     {
+        // Security check
         if ($step === 'stepThree') {
             if (
                 !$this->getRequestData()->has('stepToken') ||
@@ -121,7 +122,7 @@ class ForgotPasswordController extends AbstractController
     {
         $data = $this->getRequest()->getPost();
 
-        // Checks security token
+        // Check security token
         $tokenCheck = $this->tokenManager->isValid('forgotPassword', $data->get('token'));
         if ($tokenCheck !== true) {
             return $this->redirectToRoute(
@@ -166,7 +167,7 @@ class ForgotPasswordController extends AbstractController
     {
         $data = $this->getRequest()->getPost();
 
-        // Checks security token
+        // Check security token
         $tokenCheck = $this->tokenManager->isValid('forgotPassword', $data->get('token'));
         if ($tokenCheck !== true) {
             $this->userSecurity->unsetSessionLogin();
