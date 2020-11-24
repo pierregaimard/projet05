@@ -110,7 +110,7 @@ class UserAccountController extends AbstractController
         $data = $this->getRequest()->getPost();
         $user = $this->getUser();
 
-        // Checks security token
+        // Check security token
         $tokenCheck = $this->tokenManager->isValid('accountCheck', $data->get('token'));
         if ($tokenCheck !== true) {
             return $this->redirectToRoute(
@@ -134,6 +134,7 @@ class UserAccountController extends AbstractController
         $userRepository = $manager->getRepository(User::class);
 
         if ($type === 'email') {
+            // Check email duplication
             $userCheck = $userRepository->has(['email' => $data->get('email')]);
             if ($userCheck === true) {
                 return $this->redirectToRoute(
@@ -162,6 +163,7 @@ class UserAccountController extends AbstractController
             );
         }
 
+        // Update user name
         $data->remove('token');
         $this->formManager->setEntityFormData($user, $data->getAll());
         $manager->updateOne($user);
@@ -191,7 +193,7 @@ class UserAccountController extends AbstractController
         $user  = $this->getUser();
         $email = $this->userSecurity->getSessionLogin();
 
-        // Checks security token
+        // Check security token
         $tokenCheck = $this->tokenManager->isValid('accountCheck', $data->get('token'));
         if ($tokenCheck !== true) {
             return $this->redirectToRoute(
@@ -228,6 +230,7 @@ class UserAccountController extends AbstractController
             );
         }
 
+        // Update user email
         $manager        = $this->getOrm()->getManager('App');
         $userRepository = $manager->getRepository(User::class);
         $user           = $userRepository->findOne($user->getKey());
@@ -255,6 +258,7 @@ class UserAccountController extends AbstractController
      */
     public function deleteAccount()
     {
+        // Delete user
         $manager = $this->getOrm()->getManager('App');
         $manager->deleteOne($this->getUser());
         $this->userSecurity->unsetUser();
