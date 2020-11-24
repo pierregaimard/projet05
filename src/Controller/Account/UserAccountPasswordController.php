@@ -88,7 +88,7 @@ class UserAccountPasswordController extends AbstractController
     {
         $data = $this->getRequest()->getPost();
 
-        // Checks security token
+        // Check security token
         $tokenCheck = $this->tokenManager->isValid('accountCheck', $data->get('token'));
         if ($tokenCheck !== true) {
             return $this->redirectToRoute(
@@ -154,6 +154,7 @@ class UserAccountPasswordController extends AbstractController
             );
         }
 
+        // Update user password
         $manager        = $this->getOrm()->getManager('App');
         $userRepository = $manager->getRepository(User::class);
         $user           = $userRepository->findOne($this->getUser()->getKey());
