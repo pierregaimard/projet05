@@ -15,6 +15,9 @@ class InitializationController extends AbstractController
      */
     private InitializationManager $initManager;
 
+    /**
+     * @param InitializationManager $initManager
+     */
     public function __construct(InitializationManager $initManager)
     {
         $this->initManager = $initManager;
@@ -31,6 +34,7 @@ class InitializationController extends AbstractController
             return $this->redirectToRoute('home');
         }
 
+        // Initialize blog post Database and fixtures
         $this->initManager->initializeDatabase();
         $this->initManager->initAdminUser();
         $this->initManager->setUser();
