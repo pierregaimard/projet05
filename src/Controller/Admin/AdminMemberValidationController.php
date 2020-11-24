@@ -19,6 +19,9 @@ class AdminMemberValidationController extends AbstractController
      */
     private EmailManager $emailManager;
 
+    /**
+     * @param EmailManager $emailManager
+     */
     public function __construct(EmailManager $emailManager)
     {
         $this->emailManager = $emailManager;
