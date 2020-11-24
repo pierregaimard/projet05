@@ -211,6 +211,7 @@ class BlogPostController extends AbstractController
         $users        = $manager->getRepository(User::class)->findByRole('ADMIN');
         $usersOptions = [];
 
+        // Author form select options
         foreach ($users as $user) {
             $usersOptions[] = [
                 'value' => $user->getKey(),
