@@ -19,6 +19,9 @@ class AdminCommentController extends AbstractController
      */
     private BlogPostCommentManager $commentManager;
 
+    /**
+     * @param BlogPostCommentManager $commentManager
+     */
     public function __construct(BlogPostCommentManager $commentManager)
     {
         $this->commentManager = $commentManager;
