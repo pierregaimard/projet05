@@ -13,19 +13,19 @@ $(document).ready(function () {
     $emailButton.hide();
     $passwordButton.hide();
 
-    $firstName.on('keyup', function () {
+    $firstName.on("keyup", function () {
         $nameButton.show();
     });
-    $lastName.on('keyup', function () {
+    $lastName.on("keyup", function () {
         $nameButton.show();
     });
-    $email.on('keyup', function () {
+    $email.on("keyup", function () {
         $emailButton.show();
     });
-    $newPassword.on('keyup', function () {
+    $newPassword.on("keyup", function () {
         $passwordButton.show();
     });
-    $passwordConfirm.on('keyup', function () {
+    $passwordConfirm.on("keyup", function () {
         $passwordButton.show();
     });
 });
