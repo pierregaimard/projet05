@@ -222,6 +222,7 @@ class BlogPostController extends AbstractController
         $data     = $this->getRequestData();
         $formData = $data->get('formData');
 
+        // Hydrate form fields if formData is empty
         if ($formData === false) {
             $formData = [
                 'title' => $post->getTitle(),
@@ -281,11 +282,10 @@ class BlogPostController extends AbstractController
             );
         }
 
+        // Update post
         $manager = $this->getOrm()->getManager('App');
         $user    = $manager->getRepository(User::class)->findOne($data->get('user'));
         $now     = (new DateTime('NOW'))->format('Y-m-d');
-
-        // Update post
         $post->setLastUpdateTime($now);
         $data->remove('token');
         $data->remove('user');
