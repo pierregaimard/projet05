@@ -1,7 +1,7 @@
 {% extends "core.html.twig" %}
 
 {% block Stylesheet %}
-    <link rel="stylesheet" href="public/assets/css/_data_list.css" />
+    <link rel="stylesheet" href="/public/assets/css/_data_list.css" />
 {% endblock %}
 
 {% block Body %}
@@ -47,12 +47,5 @@
 
 {% block Javascript %}
     <!-- List -->
-    <script>
-        $(document).ready(function(){
-            let options = {
-                valueNames: [ 'name', 'email', 'status' ]
-            };
-            let usersList = new List('users-list', options);
-        });
-    </script>
+    <script src="/public/assets/js/user_list.js"></script>
 {% endblock %}
