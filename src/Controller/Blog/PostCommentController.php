@@ -131,6 +131,7 @@ class PostCommentController extends AbstractController
         $comment  = $manager->getRepository(BlogPostComment::class)->findOne($key);
         $response = new RedirectResponse($this->getRoutePath('blog_post_view', ['key' => $postKey]));
 
+        // Security test
         if (
             $comment->getUser()->getKey() !== $this->getUser()->getKey()
         ) {
