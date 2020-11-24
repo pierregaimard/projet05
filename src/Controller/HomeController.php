@@ -63,6 +63,7 @@ class HomeController extends AbstractController
      */
     public function home()
     {
+        // Check blog initialization
         if (!$this->userManager->hasAdminUser()) {
             return $this->redirectToRoute('initialize');
         }
