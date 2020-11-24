@@ -19,6 +19,9 @@ class AdminUserController extends AbstractController
      */
     private EmailManager $emailManager;
 
+    /**
+     * @param EmailManager $emailManager
+     */
     public function __construct(EmailManager $emailManager)
     {
         $this->emailManager = $emailManager;
@@ -96,6 +99,7 @@ class AdminUserController extends AbstractController
             case User::STATUS_LOCKED:
                 $status  = $statusRepository->findOneBy(['status' => User::STATUS_ACTIVE]);
                 $message = ' have been unlocked successfully!';
+                // Send unlock email to member
                 $this->emailManager->send(
                     $user->getEmail(),
                     'Account unlocked',
@@ -117,6 +121,7 @@ class AdminUserController extends AbstractController
             ]
         );
 
+        // Update user status
         $user->setStatus($status);
         $manager->updateOne($user);
 
@@ -139,8 +144,10 @@ class AdminUserController extends AbstractController
         $userRepository = $manager->getRepository(User::class);
         $user           = $userRepository->findOne($key);
 
+        // Delete user
         $manager->deleteOne($user);
 
+        // Send account removal email to member
         $this->emailManager->send(
             $user->getEmail(),
             'Account removal',
