@@ -37,6 +37,8 @@ class InitializationController extends AbstractController
         // Initialize blog post Database and fixtures
         $this->initManager->initializeDatabase();
         $this->initManager->initAdminUser();
+
+        // Set automatically Admin session
         $this->initManager->setUser();
 
         $response = new RedirectResponse(
