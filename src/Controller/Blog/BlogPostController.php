@@ -29,6 +29,10 @@ class BlogPostController extends AbstractController
      */
     private EntityFormDataManager $formManager;
 
+    /**
+     * @param FormTokenManager      $tokenManager
+     * @param EntityFormDataManager $formManager
+     */
     public function __construct(FormTokenManager $tokenManager, EntityFormDataManager $formManager)
     {
         $this->tokenManager = $tokenManager;
@@ -95,7 +99,7 @@ class BlogPostController extends AbstractController
     {
         $data = $this->getRequest()->getPost();
 
-        // Checks security token
+        // Check security token
         $tokenCheck = $this->tokenManager->isValid('addBlogPost', $data->get('token'));
         if ($tokenCheck !== true) {
             return $this->redirectToRoute(
@@ -115,6 +119,7 @@ class BlogPostController extends AbstractController
             );
         }
 
+        // Set blog post
         $post = new BlogPost();
         $now  = (new DateTime('NOW'))->format('Y-m-d');
         $post->setUser($this->getUser());
@@ -123,6 +128,7 @@ class BlogPostController extends AbstractController
         $data->remove('token');
         $this->formManager->setEntityFormData($post, $data->getAll());
 
+        // Insert blog post
         $manager = $this->getOrm()->getManager('App');
         $postId  = $manager->insertOne($post);
 
@@ -157,15 +163,18 @@ class BlogPostController extends AbstractController
         $comments           = null;
         $user               = $this->getUser();
 
+        // If visitor: approved comments
         if ($user === null) {
             $comments = $commentsRepository->findByPostAndStatus(
                 $post->getKey(),
                 BlogPostCommentStatus::STATUS_APPROVED
             );
         }
+        // If member: approved comments and member own comments (approved or not)
         if ($user && $this->getUser()->isGranted(User::ROLE_MEMBER)) {
             $comments = $commentsRepository->findByPostAndMember($post->getKey(), $this->getUser()->getKey());
         }
+        // If Admin: all comments (approved or not)
         if ($user && $this->getUser()->isGranted(User::ROLE_ADMIN)) {
             $comments = $commentsRepository->findByPost($post->getKey());
         }
@@ -252,7 +261,7 @@ class BlogPostController extends AbstractController
         $post    = $manager->getRepository(BlogPost::class)->findOne($key);
         $data    = $this->getRequest()->getPost();
 
-        // Checks security token
+        // Check security token
         $tokenCheck = $this->tokenManager->isValid('editBlogPost', $data->get('token'));
         if ($tokenCheck !== true) {
             return $this->redirectToRoute(
@@ -276,6 +285,7 @@ class BlogPostController extends AbstractController
         $user    = $manager->getRepository(User::class)->findOne($data->get('user'));
         $now     = (new DateTime('NOW'))->format('Y-m-d');
 
+        // Update post
         $post->setLastUpdateTime($now);
         $data->remove('token');
         $data->remove('user');
@@ -309,6 +319,7 @@ class BlogPostController extends AbstractController
         $manager = $this->getOrm()->getManager('App');
         $post    = $manager->getRepository(BlogPost::class)->findOne($key);
 
+        // Delete post
         $manager->deleteOne($post);
 
         $response = new RedirectResponse($this->getRoutePath('blog'));
