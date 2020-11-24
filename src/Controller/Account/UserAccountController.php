@@ -150,6 +150,7 @@ class UserAccountController extends AbstractController
                 );
             }
 
+            // Set temp user session and dispatch security code
             $this->userSecurity->setSessionLogin($data->get('email'));
             $this->codeManager->dispatchSecurityCode($data->get('email'));
 
@@ -163,7 +164,7 @@ class UserAccountController extends AbstractController
             );
         }
 
-        // Update user name
+        // Update user name & user session
         $data->remove('token');
         $this->formManager->setEntityFormData($user, $data->getAll());
         $manager->updateOne($user);
