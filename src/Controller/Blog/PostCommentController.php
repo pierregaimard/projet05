@@ -31,6 +31,11 @@ class PostCommentController extends AbstractController
      */
     private BlogPostCommentManager $commentManager;
 
+    /**
+     * @param FormTokenManager       $tokenManager
+     * @param EntityFormDataManager  $formManager
+     * @param BlogPostCommentManager $commentManager
+     */
     public function __construct(
         FormTokenManager $tokenManager,
         EntityFormDataManager $formManager,
@@ -57,7 +62,7 @@ class PostCommentController extends AbstractController
         $post    = $manager->getRepository(BlogPost::class)->findOne($postKey);
         $data    = $this->getRequest()->getPost();
 
-        // Checks security token
+        // Check security token
         $tokenCheck = $this->tokenManager->isValid('BlogPostComment', $data->get('token'));
         if ($tokenCheck !== true) {
             return $this->redirectToRoute(
@@ -77,6 +82,7 @@ class PostCommentController extends AbstractController
             );
         }
 
+        // Set comment
         $status  = $manager->getRepository(BlogPostCommentStatus::class)->findOne(
             BlogPostCommentStatus::STATUS_VALIDATION
         );
@@ -89,6 +95,7 @@ class PostCommentController extends AbstractController
         $data->remove('token');
         $this->formManager->setEntityFormData($comment, $data->getAll());
 
+        // Insert comment
         $manager->insertOne($comment);
 
         $response = new RedirectResponse($this->getRoutePath('blog_post_view', ['key' => $postKey]));
@@ -131,13 +138,14 @@ class PostCommentController extends AbstractController
                 'message',
                 [
                     'status' => 'danger',
-                    'message' => "you can't delete this post, it's not yours!"
+                    'message' => "you can't delete this comment, it's not yours!"
                 ]
             );
 
             return $response;
         }
 
+        // Delete comment
         $manager->deleteOne($comment);
 
         $response->getFlashes()->add(
