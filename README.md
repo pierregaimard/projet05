@@ -1,7 +1,7 @@
 # projet05
 Study blog project
 
-![bot](https://projet05.pgaimard.fr/public/assets/img/line-robot-black.svg "illustration")
+<img src="https://projet05.pgaimard.fr/public/assets/img/line-robot-black.svg" width="200" alt="blog illustration"/>
 
 ## Project code quality
 -   Blog project:  
