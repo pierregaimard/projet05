@@ -3,17 +3,38 @@
         <!-- first name -->
         {%
             include 'form/_form_input.html.twig'
-            with {'type': 'text', 'id': 'firstName', 'name': 'firstName', 'label': 'First Name', 'error': formCheck['firstName'], 'data': formData['firstName']}
+            with {
+                'type': 'text',
+                'id': 'firstName',
+                'name': 'firstName',
+                'label': 'First Name',
+                'error': formCheck['firstName'],
+                'data': formData['firstName']
+            }
         %}
         <!-- last name -->
         {%
             include 'form/_form_input.html.twig'
-            with {'type': 'text', 'id': 'lastName', 'name': 'lastName', 'label': 'Last Name', 'error': formCheck['lastName'], 'data': formData['lastName']}
+            with {
+                'type': 'text',
+                'id': 'lastName',
+                'name': 'lastName',
+                'label': 'Last Name',
+                'error': formCheck['lastName'],
+                'data': formData['lastName']
+            }
         %}
         <!-- email -->
         {%
             include 'form/_form_input.html.twig'
-            with {'type': 'text', 'id': 'email', 'name': 'email', 'label': 'E-mail', 'error': formCheck['email'], 'data': formData['email']}
+            with {
+                'type': 'text',
+                'id': 'email',
+                'name': 'email',
+                'label': 'E-mail',
+                'error': formCheck['email'],
+                'data': formData['email']
+            }
         %}
     </div>
     <div class="uk-fieldset uk-margin-large-top">
@@ -21,7 +42,7 @@
         <input type="hidden" name="token" value="{{ token }}">
         <!-- submit -->
         <div class="uk-margin">
-            <button type="submit" class="uk-button uk-button-secondary uk-button-large uk-border-rounded uk-width-1-1" >
+            <button type="submit" class="uk-button uk-button-secondary uk-button-large uk-border-rounded uk-width-1-1">
                 Next step
             </button>
         </div>
