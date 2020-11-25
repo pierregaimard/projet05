@@ -3,7 +3,10 @@
         Last blog posts
     </h3>
     {% for post in posts %}
-        <a href="{{ getRoutePath('blog_post_view', {'key': post.key}) }}" class="uk-display-block uk-padding-small uk-background-muted uk-margin app-card-blog-post">
+        <a
+            href="{{ getRoutePath('blog_post_view', {'key': post.key}) }}"
+            class="uk-display-block uk-padding-small uk-background-muted uk-margin app-card-blog-post"
+        >
             <div class="uk-flex">
                 <div class="uk-width-1-1@s uk-width-2-3@m">
                     {{ post.title }}
@@ -18,7 +21,9 @@
         </a>
     {% endfor %}
     <p>
-        <a href="{{ getRoutePath('blog') }}" class="uk-button uk-button-secondary uk-border-rounded"> Read more ...</a>
+        <a href="{{ getRoutePath('blog') }}" class="uk-button uk-button-secondary uk-border-rounded">
+            Read more ...
+        </a>
     </p>
 {% else %}
     <h3 class="uk-h3 uk-text-bolde uk-margin-large-top">
