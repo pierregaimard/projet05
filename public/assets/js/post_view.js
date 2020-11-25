@@ -18,4 +18,4 @@ $(document).ready(function () {
         $confirmAction.attr("class", actionClass);
         $confirmAction.html(actionText);
     });
-})
+});
