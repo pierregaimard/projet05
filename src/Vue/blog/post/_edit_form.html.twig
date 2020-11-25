@@ -10,25 +10,52 @@
     <!-- Title -->
     {%
         include 'form/_form_input.html.twig'
-        with {'type': 'text', 'id': 'title', 'name': 'title', 'label': 'Title', 'error': formCheck['title'], 'data': formData['title']}
+        with {
+            'type': 'text',
+            'id': 'title',
+            'name': 'title',
+            'label': 'Title',
+            'error': formCheck['title'],
+            'data': formData['title']
+        }
     %}
     <!-- Chapo -->
     {%
         include 'form/_form_textarea.html.twig'
-        with {'id': 'chapo', 'name': 'chapo', 'label': 'Chapo', 'rows': 3, 'error': formCheck['chapo'], 'data': formData['chapo']}
+        with {
+            'id': 'chapo',
+            'name': 'chapo',
+            'label': 'Chapo',
+            'rows': 3,
+            'error': formCheck['chapo'],
+            'data': formData['chapo']
+        }
     %}
     <!-- Author -->
     {% if action == 'edit' %}
         {%
             include 'form/_form_select.html.twig'
-            with {'id': 'user', 'name': 'user', 'label': 'Author', 'options': usersOptions, 'error': formCheck['user'], 'data': formData['user']}
+            with {
+                'id': 'user',
+                'name': 'user',
+                'label': 'Author',
+                'options': usersOptions,
+                'error': formCheck['user'],
+                'data': formData['user']
+            }
         %}
     {% endif %}
     <div>&nbsp;</div>
     <!-- Content -->
     {%
         include 'form/_form_textarea.html.twig'
-        with {'id': 'content', 'name': 'content', 'label': 'Content', 'error': formCheck['content'], 'data': formData['content']}
+        with {
+            'id': 'content',
+            'name': 'content',
+            'label': 'Content',
+            'error': formCheck['content'],
+            'data': formData['content']
+        }
     %}
     <input type="hidden" name="token" value="{{ token }}">
     <div class="uk-text-center uk-margin-medium-top">
