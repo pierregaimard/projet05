@@ -1,7 +1,7 @@
 {% extends "core.html.twig" %}
 
 {% block Stylesheet %}
-    <link rel="stylesheet" href="public/assets/css/blog_post_view.css" />
+    <link rel="stylesheet" href="/public/assets/css/blog_post_view.css" />
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.3.2/styles/atom-one-dark.min.css">
 {% endblock %}
 
@@ -18,8 +18,16 @@
         <div class="uk-padding-small uk-padding-remove-vertical">
             <div class="uk-card uk-card-body uk-background-muted uk-padding-small uk-border-rounded uk-margin-medium-top">
                 <ul class="uk-breadcrumb uk-margin-left">
-                    <li><a href="{{ getRoutePath('blog') }}">Blog</a></li>
-                    <li><span>{{ post.title }}</span></li>
+                    <li>
+                        <a href="{{ getRoutePath('blog') }}">
+                            Blog
+                        </a>
+                    </li>
+                    <li>
+                        <span>
+                            {{ post.title }}
+                        </span>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -27,31 +35,14 @@
         {% include "blog/post/_article.html.twig" %}
         {% include "blog/comment/comments.html.twig" %}
         <div class="uk-text-center uk-margin uk-padding">
-            <a href="{{ getRoutePath('blog') }}" class="uk-button uk-button-default uk-width-1-1 uk-border-rounded">Return</a>
+            <a href="{{ getRoutePath('blog') }}" class="uk-button uk-button-default uk-width-1-1 uk-border-rounded">
+                Return
+            </a>
         </div>
     </div>
 {% endblock %}
 
 {% block Javascript %}
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.3.2/highlight.min.js"></script>
-    <script>
-        hljs.initHighlightingOnLoad();
-        $(document).ready(function (){
-            let $action = $('.app-comment-actions a');
-            let $confirmText = $('#post-comment-action-confirm .app-confirm-action');
-            let $confirmAction = $('#post-comment-action-confirm a');
-
-            $action.on('click', function (){
-                let text = $(this).data('text');
-                let actionText = $(this).data('action');
-                let actionHref = $(this).data('action-href');
-                let actionClass = $(this).data('action-class');
-
-                $confirmText.html(text);
-                $confirmAction.attr('href', actionHref);
-                $confirmAction.attr('class', actionClass);
-                $confirmAction.html(actionText);
-            });
-        })
-    </script>
+    <script src="/public/assets/js/post_view.js"></script>
 {% endblock %}
