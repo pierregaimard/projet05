@@ -34,9 +34,13 @@
         </h3>
         {% if user == null %}
             <p class="uk-margin-remove uk-text-lead">
-                <a href="{{ getRoutePath('sign_up', {'step': 'stepOne'}) }}">Sign-up</a>
+                <a href="{{ getRoutePath('sign_up', {'step': 'stepOne'}) }}">
+                    Sign-up
+                </a>
                 or
-                <a href="{{ getRoutePath('login') }}">login</a>
+                <a href="{{ getRoutePath('login') }}">
+                    login
+                </a>
                 to add one!
             </p>
         {% elseif user.isGranted('MEMBER') %}
