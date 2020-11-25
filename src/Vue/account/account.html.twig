@@ -29,11 +29,18 @@
         </div>
         <div class="uk-margin-large-bottom">
             {% if user.isGranted('MEMBER') %}
-                <a href="{{ getRoutePath('account_home') }}" class="uk-button uk-button-default uk-border-rounded uk-margin uk-width-1-1">
+                <a
+                    href="{{ getRoutePath('account_home') }}"
+                    class="uk-button uk-button-default uk-border-rounded uk-margin uk-width-1-1"
+                >
                     <span uk-icon="refresh"></span>
                     Reset
                 </a>
-                <a href="#app-account-delete-confirm" class="uk-button uk-button-danger uk-border-rounded uk-width-1-1" uk-toggle>
+                <a
+                    href="#app-account-delete-confirm"
+                    class="uk-button uk-button-danger uk-border-rounded uk-width-1-1"
+                    uk-toggle
+                >
                     <span uk-icon="trash"></span>
                     Delete my account
                 </a>
