@@ -1,6 +1,9 @@
 {% if user.isGranted('ADMIN') %}
     <div class="uk-text-center uk-margin-large-top">
-        <a href="{{ getRoutePath('blog_post_edit', {'key': post.key}) }}" class="uk-button uk-button-secondary uk-margin-small-right uk-border-rounded">
+        <a
+            href="{{ getRoutePath('blog_post_edit', {'key': post.key}) }}"
+            class="uk-button uk-button-secondary uk-margin-small-right uk-border-rounded"
+        >
             <span uk-icon="pencil"></span>
             Edit
         </a>
