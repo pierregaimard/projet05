@@ -1,7 +1,10 @@
 <div class="uk-container-expand uk-background-secondary uk-text-center uk-light uk-padding">
     <div class="uk-margin-large">
         {% if user.isGranted('ADMIN') %}
-            <a href="{{ getRoutePath('blog_post_add') }}" class="uk-button uk-button-large uk-button-secondary uk-border-rounded uk-box-shadow-small">
+            <a
+                href="{{ getRoutePath('blog_post_add') }}"
+                class="uk-button uk-button-large uk-button-secondary uk-border-rounded uk-box-shadow-small"
+            >
                 <span uk-icon="plus"></span>
                 Add a new blog post
             </a>
