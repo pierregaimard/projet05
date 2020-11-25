@@ -5,12 +5,23 @@
 {% endblock %}
 
 {% block Body %}
-    <div class="uk-container-xsmall uk-margin-auto app-admin-list-container uk-padding-small" uk-height-viewport="expand: true">
+    <div
+        class="uk-container-xsmall uk-margin-auto app-admin-list-container uk-padding-small"
+        uk-height-viewport="expand: true"
+    >
         <!-- Breadcrumb -->
         <div class="uk-card uk-card-body uk-background-muted uk-padding-small uk-border-rounded">
             <ul class="uk-breadcrumb uk-margin-left">
-                <li><a href="{{ getRoutePath('admin_home') }}">Admin</a></li>
-                <li><span>Members</span></li>
+                <li>
+                    <a href="{{ getRoutePath('admin_home') }}">
+                        Admin
+                    </a>
+                </li>
+                <li>
+                    <span>
+                        Members
+                    </span>
+                </li>
             </ul>
         </div>
         {% if members is not empty %}
@@ -46,6 +57,5 @@
 {% endblock %}
 
 {% block Javascript %}
-    <!-- List -->
     <script src="/public/assets/js/user_list.js"></script>
 {% endblock %}
