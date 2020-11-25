@@ -1,7 +1,7 @@
 {% extends "core.html.twig" %}
 
 {% block Stylesheet %}
-    <link rel="stylesheet" href="public/assets/css/blog.css" />
+    <link rel="stylesheet" href="/public/assets/css/blog.css" />
 {% endblock %}
 
 {% block Body %}
@@ -42,13 +42,5 @@
 {% endblock %}
 
 {% block Javascript %}
-    <!-- List -->
-    <script>
-        $(document).ready(function(){
-            let options = {
-                valueNames: [ 'title', 'date' ]
-            };
-            let usersList = new List('blog-posts-list', options);
-        });
-    </script>
+    <script src="/public/assets/js/blog.js"></script>
 {% endblock %}
