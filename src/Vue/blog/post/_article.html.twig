@@ -2,9 +2,13 @@
 <article class="uk-article uk-margin-medium-top uk-padding-small">
     <p class="uk-article-meta">
         Written by
-        <a href="#">{{ post.user.formattedName('large') }}</a>
+        <a href="#">
+            {{ post.user.formattedName('large') }}
+        </a>
         on {{ date(post.creationTime)|date('d F Y') }}.<br>
-        <small>Last update on {{ date(post.lastUpdateTime)|date('d F Y') }}.</small>
+        <small>
+            Last update on {{ date(post.lastUpdateTime)|date('d F Y') }}.
+        </small>
     </p>
     <p class="uk-text-lead uk-margin-medium">
         {{ post.chapo }}
