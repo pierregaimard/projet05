@@ -1,5 +1,10 @@
-<a href="{{ getRoutePath('blog_post_view', {'key': post.key}) }}" class="uk-display-block uk-margin-top app-card-blog-post-large">
-    <h2 class="title uk-margin-small">{{ post.title }}</h2>
+<a
+    href="{{ getRoutePath('blog_post_view', {'key': post.key}) }}"
+    class="uk-display-block uk-margin-top app-card-blog-post-large"
+>
+    <h2 class="title uk-margin-small">
+        {{ post.title }}
+    </h2>
     <h3 class="app-chapo uk-text-lighter uk-margin-small-top">
         {{ post.chapo }}
     </h3>
