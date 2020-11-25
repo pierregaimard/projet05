@@ -3,36 +3,44 @@
         <li>
             <div class="uk-padding-small uk-flex uk-flex-column" uk-grid>
                 <div class="uk-margin-auto-vertical uk-width-expand">
-                    <h3 class="post uk-margin-remove">{{ comment.blogPost.title }}</h3>
-                    <p class="author uk-margin-small-top">By {{ comment.user.formattedName('large') }}</p>
+                    <h3 class="post uk-margin-remove">
+                        {{ comment.blogPost.title }}
+                    </h3>
+                    <p class="author uk-margin-small-top">
+                        By {{ comment.user.formattedName('large') }}
+                    </p>
                     <p class="uk-margin-small-top">
                         {{ comment.comment }}
                     </p>
                 </div>
                 <div class="uk-margin-right@s uk-width-auto">
                     <a
-                            href="#app-comment-action-confirm"
-                            class="uk-button uk-button-small uk-button-danger uk-border-rounded uk-margin-small-right"
-                            data-validation-text="reject"
-                            data-action-text="Reject"
-                            data-action-class="uk-button uk-button-danger"
-                            data-action-link="{{ getRoutePath('admin_comment_rejection', {'key': comment.key}) }}"
-                            uk-toggle
+                        href="#app-comment-action-confirm"
+                        class="uk-button uk-button-small uk-button-danger uk-border-rounded uk-margin-small-right"
+                        data-validation-text="reject"
+                        data-action-text="Reject"
+                        data-action-class="uk-button uk-button-danger"
+                        data-action-link="{{ getRoutePath('admin_comment_rejection', {'key': comment.key}) }}"
+                        uk-toggle
                     >
                         <span class="uk-hidden@s" uk-icon="close"></span>
-                        <span class="uk-visible@s">Reject</span>
+                        <span class="uk-visible@s">
+                            Reject
+                        </span>
                     </a>
                     <a
-                            href="#app-comment-action-confirm"
-                            class="uk-button uk-button-small uk-button-default app-button-success uk-border-rounded"
-                            data-validation-text="approve"
-                            data-action-text="Approve"
-                            data-action-class="uk-button uk-button-default app-button-success"
-                            data-action-link="{{ getRoutePath('admin_comment_validation', {'key': comment.key}) }}"
-                            uk-toggle
+                        href="#app-comment-action-confirm"
+                        class="uk-button uk-button-small uk-button-default app-button-success uk-border-rounded"
+                        data-validation-text="approve"
+                        data-action-text="Approve"
+                        data-action-class="uk-button uk-button-default app-button-success"
+                        data-action-link="{{ getRoutePath('admin_comment_validation', {'key': comment.key}) }}"
+                        uk-toggle
                     >
                         <span class="uk-hidden@s" uk-icon="check"></span>
-                        <span class="uk-visible@s">Approve</span>
+                        <span class="uk-visible@s">
+                            Approve
+                        </span>
                     </a>
                 </div>
             </div>
