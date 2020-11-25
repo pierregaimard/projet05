@@ -1,6 +1,8 @@
 # projet05
 Study blog project
 
+![bot](https://projet05.pgaimard.fr/public/assets/img/line-robot-black.svg "illustration")
+
 ## Project code quality
 -   Blog project:  
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/fb086120a32c48b898f0c3b0a967c5cc)](https://www.codacy.com/gh/pierregaimard/projet05/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=pierregaimard/projet05&amp;utm_campaign=Badge_Grade)
@@ -12,7 +14,7 @@ Study blog project
 
 ## Installation
 ### Step one: Get project code
-At first: you will need to retrieve the blog code and to put it in your server document root.
+At first: you will need to retrieve the blog code and to put it in your web server document root.
 
 If you use git, get a terminal, go into your web server document root and
 executes the following command:  
