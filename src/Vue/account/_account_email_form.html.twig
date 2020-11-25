@@ -7,10 +7,19 @@
     <!-- email -->
     {%
         include 'form/_form_input.html.twig'
-        with {'type': 'text', 'id': 'email', 'name': 'email', 'label': 'E-mail', 'error': formCheck['email'], 'data': dataEmail}
+        with {
+            'type': 'text',
+            'id': 'email',
+            'name': 'email',
+            'label':'E-mail',
+            'error': formCheck['email'],
+            'data': dataEmail
+        }
     %}
     <input type="hidden" name="token" value="{{ token }}">
     <div>
-        <button id="emailButton" type="submit" class="uk-button uk-button-secondary uk-border-rounded uk-width-1-1">Save changes</button>
+        <button id="emailButton" type="submit" class="uk-button uk-button-secondary uk-border-rounded uk-width-1-1">
+            Save changes
+        </button>
     </div>
 </form>
