@@ -13,8 +13,7 @@ Study blog project
 [![Maintainability](https://api.codeclimate.com/v1/badges/515362bf623805575542/maintainability)](https://codeclimate.com/github/pierregaimard/climb/maintainability)
 
 ## Installation
-### Step one: Get project code
-At first: you will need to retrieve the blog code and put it in your web server document root.
+### Step one: get project code
 
 If you use git, in a terminal, go into your web server document root and
 run the following command:
@@ -26,13 +25,13 @@ To install git see the [official documentation](https://git-scm.com/book/en/v2/G
 If you don't use git, you can easily download source code from this repository:
 Click on `code` button and select `Download Zip`.
 
-### Step two: Install PHP dependencies
-Next, you need to install project php dependencies.  
-For that, you will need **Composer**.  
+### Step two: install PHP dependencies
+project dependencies are managed with composer.
+
 In a terminal go to project directory.
 
 If **Composer** is not installed, you will need to install it.
-See the [official documentation](https://getcomposer.org/download/)
+See [official documentation](https://getcomposer.org/download/)
 
 If **Composer** is installed globally, run the following command:  
 `composer update`
@@ -42,8 +41,8 @@ If you have installed **Composer** locally, run the following command:
 
 This will install project dependencies and the Composer autoload.
 
-### Step three: Sets .env file configuration
-Then, rename `.env.example` to `.env` and changes the example information
+### Step three: set .env file configuration
+At the root of the project, select `.env.example` and rename it to `.env` and changes the example information
 by your server configuration.
 
 #### List of variables to set in .env file
@@ -75,15 +74,13 @@ VAR | DETAIL
 `APP_EMAIL_PASSWORD` | email account password
 `APP_EMAIL_ADDRESS` | email account address
 
-### Step four: Changes your admin account information
+### Step four: change your admin account information
 Finally, in a web browser, go to the blog address.
 
 The application will automatically execute the database structure and flush a generic
 admin user.
 
-Then, you will be redirect to the admin account page, and you will be
+Then, you will be redirected to the admin account page, and
 asked to change your admin account information.
-
-Changes admin account information
 
 **Done!**
