@@ -14,32 +14,31 @@ Study blog project
 
 ## Installation
 ### Step one: Get project code
-At first: you will need to retrieve the blog code and to put it in your web server document root.
+At first: you will need to retrieve the blog code and put it in your web server document root.
 
-If you use git, get a terminal, go into your web server document root and
-executes the following command:  
+If you use git, in a terminal, go into your web server document root and
+run the following command:
+
 `git clone https://github.com/pierregaimard/projet05.git`
 
 To install git see the [official documentation](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 
-If you don't use git, you can download source code from this repository.
-Download the code and put it into your web server document root.
-
-Then, in a Terminal, go into to the project directory:  
-`cd projet05`
+If you don't use git, you can easily download source code from this repository:
+Click on `code` button and select `Download Zip`.
 
 ### Step two: Install PHP dependencies
 Next, you need to install project php dependencies.  
-For that, you will need **Composer**.
-
-If **Composer** is installed globally, uses the following command:  
-`composer update`
-
-If you have installed **Composer** locally, uses the following command:  
-`php composer.phar update`
+For that, you will need **Composer**.  
+In a terminal go to project directory.
 
 If **Composer** is not installed, you will need to install it.
 See the [official documentation](https://getcomposer.org/download/)
+
+If **Composer** is installed globally, run the following command:  
+`composer update`
+
+If you have installed **Composer** locally, run the following command:  
+`php composer.phar update`
 
 This will install project dependencies and the Composer autoload.
 
@@ -77,12 +76,14 @@ VAR | DETAIL
 `APP_EMAIL_ADDRESS` | email account address
 
 ### Step four: Changes your admin account information
-Finally, in a web browser, goto the blog address.
+Finally, in a web browser, go to the blog address.
 
-The blog will automatically execute the database structure and flush a generic
+The application will automatically execute the database structure and flush a generic
 admin user.
 
 Then, you will be redirect to the admin account page, and you will be
 asked to change your admin account information.
+
+Changes admin account information
 
 **Done!**
