@@ -5,7 +5,7 @@ $(document).ready(function () {
     let options = {
         valueNames: [ "author", "post" ]
     };
-    let usersList = new List("users-list", options);
+    let usersList = new List("comments-list", options);
 
     let $validationText = $("#app-comment-action-confirm .text");
     let $action = $("#app-comment-action-confirm #action");
