@@ -1,0 +1,48 @@
+{% extends "core.html.twig" %}
+
+{% block Stylesheet %}
+    <link rel="stylesheet" href="/public/assets/css/blog_post_view.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.3.2/styles/atom-one-dark.min.css">
+{% endblock %}
+
+{% block Body %}
+    <div class="uk-container-expand uk-background-secondary uk-text-center uk-light uk-padding">
+        <div class="uk-margin-large">
+            <h1 class="uk-text-lighter">
+                {{ post.title }}
+            </h1>
+        </div>
+    </div>
+    <div class="uk-container-small uk-margin-auto" uk-height-viewport="expand: true">
+        <!-- Breadcrumb -->
+        <div class="uk-padding-small uk-padding-remove-vertical">
+            <div class="uk-card uk-card-body uk-background-muted uk-padding-small uk-border-rounded uk-margin-medium-top">
+                <ul class="uk-breadcrumb uk-margin-left">
+                    <li>
+                        <a href="{{ getRoutePath('blog') }}">
+                            Blog
+                        </a>
+                    </li>
+                    <li>
+                        <span>
+                            {{ post.title }}
+                        </span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        {% include "blog/post/_admin_buttons.html.twig" %}
+        {% include "blog/post/_article.html.twig" %}
+        {% include "blog/comment/comments.html.twig" %}
+        <div class="uk-text-center uk-margin uk-padding">
+            <a href="{{ getRoutePath('blog') }}" class="uk-button uk-button-default uk-width-1-1 uk-border-rounded">
+                Return
+            </a>
+        </div>
+    </div>
+{% endblock %}
+
+{% block Javascript %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.3.2/highlight.min.js"></script>
+    <script src="/public/assets/js/post_view.js"></script>
+{% endblock %}

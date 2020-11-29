@@ -1,0 +1,25 @@
+{% if formData is not empty %}
+    {% set dataEmail = formData["email"] %}
+{% else %}
+    {% set dataEmail = user.email %}
+{% endif %}
+<form id="app-email-change" method="post" action="{{ getRoutePath('account_change', {'type': 'email'}) }}">
+    <!-- email -->
+    {%
+        include 'form/_form_input.html.twig'
+        with {
+            'type': 'text',
+            'id': 'email',
+            'name': 'email',
+            'label':'E-mail',
+            'error': formCheck['email'],
+            'data': dataEmail
+        }
+    %}
+    <input type="hidden" name="token" value="{{ token }}">
+    <div>
+        <button id="emailButton" type="submit" class="uk-button uk-button-secondary uk-border-rounded uk-width-1-1">
+            Save changes
+        </button>
+    </div>
+</form>

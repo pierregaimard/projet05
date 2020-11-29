@@ -1,0 +1,42 @@
+{% extends "core.html.twig" %}
+
+{% block Stylesheet %}
+    <link rel="stylesheet" href="/public/assets/css/login.css" />
+{% endblock %}
+
+{% block Body %}
+    <div class="uk-container app-login-container uk-background-muted" uk-height-viewport="expand: true">
+        <!-- robot drawing -->
+        <div class="uk-text-center uk-margin-top">
+            <img class="uk-visible@s" src="/public/assets/img/line-robot-black.svg" width="200" alt="robot-drawing">
+            <img class="uk-hidden@s" src="/public/assets/img/line-robot-black.svg" width="150" alt="robot-drawing">
+        </div>
+        <!-- form box -->
+        <div class="app-login-box uk-padding-small uk-box-shadow-small">
+            <h1 class="uk-text-center">Login</h1>
+            {% include "form/_form_message.html.twig" %}
+            {% if message["form"] is not defined %}
+                {% if securityCode == true %}
+                    {% include "security/authentication/_login_security_code_form.html.twig" %}
+                {% else %}
+                    {% include "security/authentication/_login_form.html.twig" %}
+                {% endif %}
+            {% else %}
+                <div class="uk-margin uk-margin-large-top">
+                    <a
+                        href="{{ getRoutePath('home') }}"
+                        class="uk-button uk-button-secondary uk-button-large uk-border-rounded uk-width-1-1"
+                    >
+                        Home
+                    </a>
+                </div>
+            {% endif %}
+        </div>
+        <a
+            href="{{ getRoutePath("forgot_password", {"step": "stepOne"}) }}"
+            class="uk-button uk-button-text uk-width-1-1 uk-text-center uk-margin"
+        >
+            forgot password
+        </a>
+    </div>
+{% endblock %}

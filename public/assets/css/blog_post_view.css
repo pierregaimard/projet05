@@ -1,0 +1,77 @@
+article pre code.hljs {
+  border-radius: 10px;
+  padding: 20px;
+  background-color: #343334;
+}
+
+article code {
+  padding: 3px 6px;
+  background-color: #f3f3f3;
+  border-radius: 5px;
+}
+
+article p.uk-text-lead { font-size: 32px; }
+
+article h2,
+article h3,
+article h4 {
+  margin-bottom: 10px;
+  font-weight: 500;
+  color: #3e3d3e;
+}
+
+article h2 { margin-top: 55px; }
+
+article h3 { margin-top: 50px; }
+
+article h4 { margin-top: 45px; }
+
+article h5 { margin-top: 40px; }
+
+article p {
+  font-size: 18px;
+  margin-top: 10px;
+  margin-bottom: 18px;
+}
+
+article blockquote p {
+  border-left: 8px solid #cfcdcd;
+  margin: 40px 0;
+  padding: 20px 5px 20px 15px;
+  background-color: #f6f6f6;
+  border-radius: 5px;
+  font-size: 22px;
+}
+
+.app-comment-form form textarea {
+  padding: 20px;
+  border: 1px solid #c8c5c5;
+  background-color: white;
+  resize: none;
+  margin-top: 5px;
+}
+
+.app-comment-form form textarea:focus {
+  background-color: #393737;
+  color: white;
+}
+
+.app-comments-list .app-comment-actions {
+  height: 0;
+  overflow: hidden;
+  transition: all 0.4s;
+}
+
+.app-comments-list li:hover .app-comment-actions {
+  height: 40px;
+  transition: all 0.4s;
+}
+
+.app-comments-list .app-comment-actions .uk-button-default,
+#post-comment-action-confirm .app-button-success {
+  background-color: #32d296;
+  color: white;
+}
+
+.app-comments-list .app-comment-actions .uk-button-default:hover,
+#post-comment-action-confirm .app-button-success:hover { background-color: #27c48a; }

@@ -1,0 +1,22 @@
+{% extends "email/core.html.twig" %}
+
+{% block Body %}
+    <div class="uk-container-xsmall uk-margin-auto">
+        <section class="uk-section uk-background-secondary uk-padding">
+            <div class="uk-background-secondary">&nbsp;</div>
+            <img class="uk-visible@s" src="http://projet05.pgaimard.fr/public/assets/img/title-mail.svg" width="400">
+            <img class="uk-hidden@s" src="http://projet05.pgaimard.fr/public/assets/img/title-mail.svg" width="300">
+            <div class="uk-background-secondary">&nbsp;</div>
+        </section>
+        <section class="uk-section uk-background-muted uk-padding">
+            {{ content|raw }}
+            <div class="uk-background-muted uk-padding-large uk-padding-remove-bottom uk-padding-remove-horizontal uk-margin-large-top">
+                <p class="uk-text-center">
+                    <a class="uk-button uk-button-text uk-border-rounded" href="http://projet05.pgaimard.fr">
+                        pG blog
+                    </a>
+                </p>
+            </div>
+        </section>
+    </div>
+{% endblock %}

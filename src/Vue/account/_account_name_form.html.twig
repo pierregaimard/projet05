@@ -1,0 +1,39 @@
+{% if formData is not empty %}
+    {% set firstName = formData["firstName"] %}
+    {% set lastName = formData["lastName"] %}
+{% else %}
+    {% set firstName = user.firstName %}
+    {% set lastName = user.lastName %}
+{% endif %}
+<form method="post" action="{{ getRoutePath('account_change', {'type': 'name'}) }}">
+    <!-- first name -->
+    {%
+        include 'form/_form_input.html.twig'
+        with {
+            'type': 'text',
+            'id': 'firstName',
+            'name': 'firstName',
+            'label': 'First Name',
+            'error': formCheck['firstName'],
+            'data': firstName
+        }
+    %}
+    <!-- last name -->
+    {%
+        include 'form/_form_input.html.twig'
+        with {
+            'type': 'text',
+            'id': 'lastName',
+            'name': 'lastName',
+            'label': 'Last name',
+            'error': formCheck['lastName'],
+            'data': lastName
+        }
+    %}
+    <input type="hidden" name="token" value="{{ token }}">
+    <div>
+        <button id="nameButton" type="submit" class="uk-button uk-button-secondary uk-border-rounded uk-width-1-1">
+            Save changes
+        </button>
+    </div>
+</form>

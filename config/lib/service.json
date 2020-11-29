@@ -1,0 +1,199 @@
+{
+  "App\\Service\\Form\\EntityFormDataManager": {
+    "argument": [
+      "@Climb\\Annotation\\ReaderManager",
+      "@App\\Service\\Form\\DataChecker\\DataChecker",
+      "@App\\Service\\Form\\DataFilter\\DataFilter"
+    ]
+  },
+  "App\\Service\\Form\\DataChecker\\DataChecker": {
+    "argument": [
+      "@App\\Service\\Form\\DataChecker\\NullDataChecker",
+      "@App\\Service\\Form\\DataChecker\\MinLengthDataChecker",
+      "@App\\Service\\Form\\DataChecker\\MaxLengthDataChecker"
+    ]
+  },
+  "App\\Service\\Security\\FormTokenManager": {
+    "argument": [
+      "@Climb\\Security\\TokenManager"
+    ]
+  },
+  "App\\Service\\Security\\UserAuthenticationChecker": {
+    "argument": [
+      "@Climb\\Orm\\Orm",
+      "@Climb\\Security\\UserPasswordManager",
+      "@App\\Service\\Security\\FormTokenManager",
+      "@App\\Service\\Security\\UserSecurityManager"
+    ]
+  },
+  "App\\Service\\Security\\UserSecurityManager": {
+    "argument": [
+      "@Climb\\Orm\\Orm",
+      "@Climb\\Security\\UserManager",
+      "@Climb\\Http\\Session\\Session",
+      "@App\\Service\\Email\\EmailManager",
+      "@Climb\\Security\\UserPasswordManager"
+    ]
+  },
+  "App\\Service\\Security\\UserSecurityCodeManager": {
+    "argument": [
+      "@App\\Service\\Email\\EmailManager",
+      "@App\\Service\\Security\\SecurityCodeManager",
+      "@App\\Service\\Security\\UserSecurityManager",
+      "@Climb\\Security\\TokenManager",
+      "@Climb\\Http\\Session\\Session"
+    ]
+  },
+  "App\\Service\\Security\\SecurityFormDataManager": {
+    "argument": [
+      "@App\\Service\\Form\\EntityFormDataManager"
+    ]
+  },
+  "App\\Service\\Security\\UserSignUpManager": {
+    "argument": [
+      "@Climb\\Orm\\Orm",
+      "@Climb\\Http\\Session\\Session",
+      "@Climb\\Security\\UserPasswordManager",
+      "@App\\Service\\Email\\EmailManager",
+      "@App\\Service\\Security\\UserSecurityManager"
+    ]
+  },
+  "App\\Service\\Email\\MailerManager": {
+    "argument": [
+      "$env(APP_EMAIL_SERVER)",
+      "$env(APP_EMAIL_PORT)",
+      "$env(APP_EMAIL_PROTOCOLE)",
+      "$env(APP_EMAIL_USERNAME)",
+      "$env(APP_EMAIL_PASSWORD)"
+    ]
+  },
+  "App\\Service\\Email\\EmailManager": {
+    "argument": [
+      "@App\\Service\\Email\\MailerManager",
+      "@App\\Service\\Templating\\TemplatingManager",
+      "$env(APP_EMAIL_ADDRESS)"
+    ]
+  },
+  "App\\Service\\Templating\\TemplatingManager": {
+    "argument": [
+      "@Climb\\Templating\\Twig\\TemplatingManager"
+    ]
+  },
+  "App\\Service\\Comment\\BlogPostCommentManager": {
+    "argument": [
+      "@App\\Service\\Email\\EmailManager",
+      "@Climb\\Orm\\Orm"
+    ]
+  },
+  "App\\Service\\Init\\InitializationManager": {
+    "argument": [
+      "@Climb\\Orm\\DbConnectionManager",
+      "@Climb\\Filesystem\\FileReader",
+      "@App\\Service\\Security\\UserSecurityManager",
+      "@Climb\\Orm\\Orm",
+      "$env(BASE_DIR)",
+      "$env(APP_DB_DBNAME)"
+    ]
+  },
+  "App\\Controller\\HomeController": {
+    "argument": [
+      "@App\\Service\\Security\\FormTokenManager",
+      "@App\\Service\\Form\\EntityFormDataManager",
+      "@App\\Service\\Email\\EmailManager",
+      "@App\\Service\\Security\\UserSecurityManager"
+    ]
+  },
+  "App\\Controller\\Security\\AuthenticationController": {
+    "argument": [
+      "@App\\Service\\Security\\FormTokenManager",
+      "@App\\Service\\Form\\EntityFormDataManager",
+      "@App\\Service\\Security\\UserAuthenticationChecker",
+      "@App\\Service\\Security\\UserSecurityCodeManager",
+      "@App\\Service\\Security\\UserSecurityManager"
+    ]
+  },
+  "App\\Controller\\Security\\SecurityCodeController": {
+    "argument": [
+      "@App\\Service\\Security\\FormTokenManager",
+      "@App\\Service\\Security\\UserAuthenticationChecker",
+      "@App\\Service\\Security\\UserSecurityCodeManager",
+      "@App\\Service\\Security\\UserSecurityManager",
+      "@App\\Service\\Security\\SecurityFormDataManager",
+      "@App\\Service\\Security\\UserSignUpManager"
+    ]
+  },
+  "App\\Controller\\Security\\SignUpController": {
+    "argument": [
+      "@App\\Service\\Security\\FormTokenManager",
+      "@App\\Service\\Form\\EntityFormDataManager",
+      "@App\\Service\\Security\\UserSignUpManager",
+      "@App\\Service\\Security\\UserSecurityCodeManager",
+      "@App\\Service\\Security\\SecurityFormDataManager",
+      "@App\\Service\\Security\\UserPasswordChecker"
+    ]
+  },
+  "App\\Controller\\Security\\ForgotPasswordController": {
+    "argument": [
+      "@App\\Service\\Security\\FormTokenManager",
+      "@App\\Service\\Form\\EntityFormDataManager",
+      "@App\\Service\\Security\\UserAuthenticationChecker",
+      "@App\\Service\\Security\\UserSecurityManager",
+      "@App\\Service\\Security\\UserSecurityCodeManager",
+      "@App\\Service\\Security\\SecurityFormDataManager",
+      "@App\\Service\\Security\\UserPasswordChecker"
+    ]
+  },
+  "App\\Controller\\Admin\\AdminUserController": {
+    "argument": [
+      "@App\\Service\\Email\\EmailManager"
+    ]
+  },
+  "App\\Controller\\Admin\\AdminMemberValidationController": {
+    "argument": [
+      "@App\\Service\\Email\\EmailManager"
+    ]
+  },
+  "App\\Controller\\Account\\UserAccountController": {
+    "argument": [
+      "@App\\Service\\Security\\FormTokenManager",
+      "@App\\Service\\Form\\EntityFormDataManager",
+      "@Climb\\Security\\UserManager",
+      "@App\\Service\\Security\\UserSecurityManager",
+      "@App\\Service\\Security\\UserSecurityCodeManager"
+    ]
+  },
+  "App\\Controller\\Account\\UserAccountPasswordController": {
+    "argument": [
+      "@App\\Service\\Security\\FormTokenManager",
+      "@App\\Service\\Form\\EntityFormDataManager",
+      "@Climb\\Security\\UserManager",
+      "@App\\Service\\Security\\UserSecurityManager",
+      "@App\\Service\\Security\\UserSecurityCodeManager",
+      "@App\\Service\\Security\\UserPasswordChecker",
+      "@Climb\\Security\\UserPasswordManager"
+    ]
+  },
+  "App\\Controller\\Blog\\BlogPostController": {
+    "argument": [
+      "@App\\Service\\Security\\FormTokenManager",
+      "@App\\Service\\Form\\EntityFormDataManager"
+    ]
+  },
+  "App\\Controller\\Blog\\PostCommentController": {
+    "argument": [
+      "@App\\Service\\Security\\FormTokenManager",
+      "@App\\Service\\Form\\EntityFormDataManager",
+      "@App\\Service\\Comment\\BlogPostCommentManager"
+    ]
+  },
+  "App\\Controller\\Admin\\AdminCommentController": {
+    "argument": [
+      "@App\\Service\\Comment\\BlogPostCommentManager"
+    ]
+  },
+  "App\\Controller\\Init\\InitializationController": {
+    "argument": [
+      "@App\\Service\\Init\\InitializationManager"
+    ]
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "password": {
+    "algorithm": "PASSWORD_ARGON2I",
+    "option": {
+    }
+  }
+}

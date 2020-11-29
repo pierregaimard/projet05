@@ -1,0 +1,15 @@
+<h1 class="uk-margin-remove-bottom">
+    Message
+</h1>
+<h6 class="uk-margin-small-top">
+    Time: {{ "now"|date("d/m/Y H:m:s") }}
+</h6>
+<h4 class="uk-margin-remove-bottom">
+    {{ message.firstName|capitalize }} {{ message.lastName|capitalize }}
+</h4>
+<h5 class="uk-margin-small-top">
+    {{ message.email }}
+</h5>
+<p>
+    {{ message.message|nl2br }}
+</p>

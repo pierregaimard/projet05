@@ -1,0 +1,16 @@
+{
+  "STATUS_PAGES": {
+    "404": {
+      "controller": "App\\Controller\\Security\\StatusPagesController",
+      "method": "notFound"
+    },
+    "403": {
+      "controller": "App\\Controller\\Security\\StatusPagesController",
+      "method": "forbidden"
+    },
+    "401": {
+      "controller": "App\\Controller\\Security\\StatusPagesController",
+      "method": "unauthorized"
+    }
+  }
+}

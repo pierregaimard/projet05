@@ -1,0 +1,29 @@
+.uk-container.app-login-container {
+  max-width: 500px;
+}
+
+.app-login-box {
+  margin-top: 0;
+  border: 1px solid #d4d4d4;
+  border-radius: 10px;
+  background-color: white;
+}
+
+.app-login-box input {
+  border: 1px solid #d4d4d4;
+  background-color: white;
+}
+
+.app-login-box input.uk-form-danger {
+  border-color: #f0506e;
+}
+
+.app-login-box input:focus {
+  background-color: #444242;
+  color: white;
+}
+
+.app-login-box button[type="submit"]:hover {
+  background-color: #444242;
+  color: white;
+}

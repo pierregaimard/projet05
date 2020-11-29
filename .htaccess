@@ -1,0 +1,16 @@
+RewriteEngine On
+RewriteCond %{HTTPS} !=on
+RewriteRule ^/?(.*) https://%{SERVER_NAME}/$1 [R,L]
+
+FallbackResource /public/index.php
+ErrorDocument 401 /public/index.php
+ErrorDocument 403 /public/index.php
+ErrorDocument 404 /public/index.php
+
+<If "%{REQUEST_URI} =~ m#^/([a-zA-Z\-_])*\.([a-zA-Z])+$#">
+    Require all denied
+</If>
+
+<If "%{REQUEST_URI} =~ m#^/(vendor|src|Diagram|config)/(.)*$#">
+    Require all denied
+</If>

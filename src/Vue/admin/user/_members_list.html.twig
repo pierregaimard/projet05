@@ -1,0 +1,32 @@
+<ul class="uk-list list">
+    {% for member in members %}
+        <li class="">
+            <a
+                href="{{ getRoutePath('admin_user_view', {'key': member.key}) }}"
+                class="uk-padding-small uk-flex uk-flex-between"
+            >
+                <div>
+                    <span class="name">
+                        {{ member.formattedName('large') }}
+                    </span>
+                    <span class="email uk-visible@s">
+                        - {{ member.email }}
+                    </span>
+                </div>
+                <div class="uk-margin-right">
+                    <span
+                        class="status uk-label
+                        {% if member.status.status == 'ACTIVE' %}
+                            uk-label-success
+                        {% elseif member.status.status == 'LOCKED' %}
+                            uk-label-danger
+                        {% endif %}
+                        "
+                    >
+                        {{ member.status.status }}
+                    </span>
+                </div>
+            </a>
+        </li>
+    {% endfor %}
+</ul>

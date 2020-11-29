@@ -1,0 +1,19 @@
+<div id="app-account-delete-confirm" class="uk-flex-top uk-border-rounded" uk-modal>
+    <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+        <h2 class="uk-modal-title uk-text-danger">
+            Confirmation
+        </h2>
+        <p class="uk-margin-medium-bottom">
+            Are you sure you want to delete your account ?<br>
+            All your comments will be deleted.
+        </p>
+        <p class="uk-text-right">
+            <button class="uk-button uk-button-default uk-modal-close uk-margin-small-right" type="button">
+                Cancel
+            </button>
+            <a href="{{ getRoutePath('account_delete') }}" class="uk-button uk-button-danger">
+                Delete my account
+            </a>
+        </p>
+    </div>
+</div>

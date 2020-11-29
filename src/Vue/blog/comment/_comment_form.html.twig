@@ -1,0 +1,13 @@
+<form method="post" action="{{ getRoutePath('post_comment_add', {'postKey': post.key}) }}">
+    <!-- Message -->
+    {%
+        include 'form/_form_textarea.html.twig'
+        with {'id': 'comment', 'name': 'comment', 'rows': 3, 'error': formCheck['comment'], 'data': formData['comment']}
+    %}
+    <input type="hidden" name="token" value="{{ token }}">
+    <div class="uk-margin-small">
+        <button type="submit" class="uk-button uk-button-secondary uk-width-1-1 uk-border-rounded">
+            Send my comment
+        </button>
+    </div>
+</form>

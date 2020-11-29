@@ -1,0 +1,13 @@
+<form method="post" action="{{ getRoutePath('account_email_code_check') }}">
+    <!-- security code -->
+    {%
+        include 'form/_form_input.html.twig'
+        with {'type': 'number', 'id': 'code', 'name': 'code', 'label': 'Security code', 'error': formCheck['code']}
+    %}
+    <input type="hidden" name="token" value="{{ token }}">
+    <div>
+        <button type="submit" class="uk-button uk-button-secondary uk-border-rounded uk-width-1-1">
+            Save new email
+        </button>
+    </div>
+</form>

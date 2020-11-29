@@ -1,0 +1,38 @@
+<header>
+    <!-- blog stick navbar -->
+    <div uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky;">
+        <nav class="uk-navbar-container uk-light">
+            <div class="uk-container">
+                <div uk-navbar="mode: click">
+                    <!-- left navbar section -->
+                    <div class="uk-navbar-left">
+                        <a class="uk-navbar-item uk-logo uk-visible@l" href="/">
+                            {% include "header/_navbar_logo_mini.html.twig" %}
+                        </a>
+                        <a class="uk-navbar-item uk-logo uk-hidden@m" href="/">
+                            {% include "header/_navbar_logo_mini.html.twig" %}
+                        </a>
+                        <a class="uk-navbar-item uk-logo uk-visible@m uk-hidden@l" href="/">
+                            {% include "header/_navbar_blog_title.html.twig" %}
+                        </a>
+                    </div>
+                    <!-- center navbar section -->
+                    <div class="uk-navbar-center uk-visible@l app-navbar-title">
+                        {% include "header/_navbar_blog_title.html.twig" %}
+                    </div>
+                    <!-- right navbar section -->
+                    <div class="uk-navbar-right">
+                        <!-- menu for larges devices -->
+                        <div class="uk-visible@s">
+                            {% include "header/_navbar_large_nav.html.twig" %}
+                        </div>
+                        <!-- menu for small devices -->
+                        <div class="uk-hidden@s">
+                            {% include "header/_navbar_small_nav.html.twig" %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+</header>

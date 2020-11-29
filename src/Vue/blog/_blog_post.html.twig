@@ -1,0 +1,19 @@
+<a
+    href="{{ getRoutePath('blog_post_view', {'key': post.key}) }}"
+    class="uk-display-block uk-margin-top app-card-blog-post-large"
+>
+    <h2 class="title uk-margin-small">
+        {{ post.title }}
+    </h2>
+    <h3 class="app-chapo uk-text-lighter uk-margin-small-top">
+        {{ post.chapo }}
+    </h3>
+    <p class="date uk-text-muted uk-text-small">
+        Written by {{ post.user.formattedName('large') }} on {{ date(post.creationTime)|date("d F Y") }}<br>
+        <i class="uk-text-small">Updated on {{ date(post.lastUpdateTime)|date("d F Y") }}</i>
+    </p>
+    <p class="uk-text-muted uk-text-small uk-text-bold uk-margin-small-top">
+        <span class="uk-margin-small-right" uk-icon="comment"></span>
+        {% if post.comments is empty %}NO{% else %}{{ post.comments|length }}{% endif %} COMMENTS
+    </p>
+</a>

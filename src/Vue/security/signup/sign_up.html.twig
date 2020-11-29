@@ -1,0 +1,49 @@
+{% extends "core.html.twig" %}
+
+{% block Stylesheet %}
+    <link rel="stylesheet" href="/public/assets/css/sign_up.css" />
+{% endblock %}
+
+{% block Body %}
+    <div class="uk-container app-signup-container" uk-height-viewport="expand: true">
+        <h1 class="uk-text-center uk-margin-large-top uk-margin-remove-bottom">Sign-Up</h1>
+        <h4 class="uk-text-center uk-margin-small-top">
+            {% if step == 'stepOne' %}
+                Step 1: - Enter your account informations
+            {% elseif step == 'stepTwo' %}
+                Step 2: - E-mail address validation
+            {% elseif step == 'stepThree' %}
+                Step 3: - Account password
+            {% elseif step == 'stepFour' %}
+                Success!
+            {% endif %}
+        </h4>
+        {% include "form/_form_message.html.twig" %}
+        {% if step == 'stepOne' %}
+            {% include "security/signup/_sign_up_form_1.html.twig" %}
+        {% elseif step == 'stepTwo' %}
+            {% include "security/signup/_sign_up_form_2.html.twig" %}
+        {% elseif step == 'stepThree' %}
+            {% include "security/signup/_sign_up_form_3.html.twig" %}
+        {% elseif step == 'stepFour' %}
+            <h3>
+                Thanks you for your registration {{ firstName }}.
+            </h3>
+            <p>
+                Your account must now be validated by the administrator.
+                You will be notified of its validation by email shortly.
+            </p>
+            <p class="uk-margin-large-bottom uk-text-lead">
+                See you soon
+            </p>
+            <div class="uk-margin">
+                <a
+                    href="{{ getRoutePath('home') }}"
+                    class="uk-button uk-button-secondary uk-button-large uk-border-rounded uk-width-1-1"
+                >
+                    Home
+                </a>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

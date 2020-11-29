@@ -1,0 +1,55 @@
+<ul class="uk-navbar-nav">
+    <li>
+        <a href="{{ getRoutePath('blog') }}">
+            blog
+        </a>
+    </li>
+    <!-- menu for logged users -->
+    {% if user is not null %}
+        <li>
+            <a href="{{ getRoutePath('admin_home') }}">
+                admin
+            </a>
+        </li>
+        <li>
+            <a href="/">
+                <span class="uk-button uk-text-large app-user-dropdown-button">
+                    {{ user.formattedName('navbar') }}
+                </span>
+            </a>
+            <div class="uk-navbar-dropdown">
+                <ul class="uk-nav uk-navbar-dropdown-nav">
+                    <li class="uk-nav-header">
+                        {{ user.formattedName() }}
+                    </li>
+                    <li>
+                        <a href="{{ getRoutePath('account_home') }}">
+                            My account
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ getRoutePath('logout') }}">
+                            logout
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </li>
+        <!-- menu for visitors -->
+    {% else %}
+        <li>
+            <a href="{{ getRoutePath("login") }}">
+                <span class="uk-button uk-border-rounded app-navbar-button app-navbar-inverse-button">
+                    login
+                </span>
+            </a>
+        </li>
+        <li>
+            <a href="{{ getRoutePath('sign_up', {'step': 'stepOne'}) }}">
+                <span class="uk-button uk-button-default app-navbar-button">
+                    Sign-Up
+                </span>
+            </a>
+        </li>
+    {% endif %}
+</ul>

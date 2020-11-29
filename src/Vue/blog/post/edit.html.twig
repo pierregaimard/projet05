@@ -1,0 +1,24 @@
+{% extends "core.html.twig" %}
+
+{% block Stylesheet %}
+    <link rel="stylesheet" href="/public/assets/css/blog_post_edit.css" />
+{% endblock %}
+
+{% block Body %}
+    <div class="uk-container" uk-height-viewport="expand: true" style="max-width: 800px">
+        <h1 class="uk-h2 uk-margin-medium-top uk-margin-medium-bottom uk-text-center">
+            {% if action == 'add' %}
+                Add a blog post
+            {% else %}
+                Blog post edit
+            {% endif %}
+        </h1>
+        {% include "form/_form_message.html.twig" %}
+        {% include "blog/post/_edit_form.html.twig" %}
+    </div>
+{% endblock %}
+
+{% block Javascript %}
+    <script src="https://cdn.pgaimard.fr/projet05/js/ckeditor.js"></script>
+    <script src="/public/assets/js/blog_post_add.js"></script>
+{% endblock %}

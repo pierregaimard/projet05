@@ -1,0 +1,80 @@
+<form
+    class="app-blog-post-form"
+    method="post"
+    {% if action == 'add' %}
+        action="{{ getRoutePath('blog_post_add_check') }}"
+    {% else %}
+        action="{{ getRoutePath('blog_post_edit_check', {'key': post.key}) }}"
+    {% endif %}
+>
+    <!-- Title -->
+    {%
+        include 'form/_form_input.html.twig'
+        with {
+            'type': 'text',
+            'id': 'title',
+            'name': 'title',
+            'label': 'Title',
+            'error': formCheck['title'],
+            'data': formData['title']
+        }
+    %}
+    <!-- Chapo -->
+    {%
+        include 'form/_form_textarea.html.twig'
+        with {
+            'id': 'chapo',
+            'name': 'chapo',
+            'label': 'Chapo',
+            'rows': 3,
+            'error': formCheck['chapo'],
+            'data': formData['chapo']
+        }
+    %}
+    <!-- Author -->
+    {% if action == 'edit' %}
+        {%
+            include 'form/_form_select.html.twig'
+            with {
+                'id': 'user',
+                'name': 'user',
+                'label': 'Author',
+                'options': usersOptions,
+                'error': formCheck['user'],
+                'data': formData['user']
+            }
+        %}
+    {% endif %}
+    <div>&nbsp;</div>
+    <!-- Content -->
+    {%
+        include 'form/_form_textarea.html.twig'
+        with {
+            'id': 'content',
+            'name': 'content',
+            'label': 'Content',
+            'error': formCheck['content'],
+            'data': formData['content']
+        }
+    %}
+    <input type="hidden" name="token" value="{{ token }}">
+    <div class="uk-text-center uk-margin-medium-top">
+        <button
+            id="blog-add-action"
+            class="uk-button uk-button-large uk-button-secondary uk-border-rounded uk-width-1-1 uk-margin"
+            type="submit"
+        >
+            Save
+        </button>
+        <a
+            {% if action == 'add' %}
+                href="{{ getRoutePath('blog') }}"
+            {% else %}
+                href="{{ getRoutePath('blog_post_view', {'key': post.key}) }}"
+            {% endif %}
+            class="uk-button uk-button-default uk-border-rounded uk-width-1-1 uk-margin-large-bottom"
+        >
+            Cancel
+        </a>
+    </div>
+</form>
