@@ -4,12 +4,6 @@
 
     require_once __DIR__ . "/../vendor/autoload.php";
 
-    // Error Handeler
-
-    // Todo: Delete Error handeler when blog is in production.
-    error_reporting(E_ALL);
-    ini_set("display_errors", 1);
-
     // Use
 
     use Climb\Controller\FrontController;
